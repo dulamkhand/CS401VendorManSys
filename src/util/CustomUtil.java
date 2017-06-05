@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package database;
+package util;
 
 /**
  *
  * @author Rafael
  */
-public class Controller {
+public class CustomUtil {
     public static void main(String[] arsg) {
         
     }

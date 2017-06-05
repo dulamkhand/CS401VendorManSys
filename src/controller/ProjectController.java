@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package database.controller;
+package controller;
 
-import database.entity.dao.EmployeeDAO;
-import database.entity.Employee;
-import database.entity.Project;
-import database.entity.dao.ProjectDAO;
+import model.EmployeeDAO;
+import model.Employee;
+import model.Project;
+import model.ProjectDAO;
 import java.sql.Date;
 import java.sql.SQLException;
 import javafx.collections.FXCollections;

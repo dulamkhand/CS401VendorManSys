@@ -1,4 +1,4 @@
-package database.entity.dao;
+package model;
 
 /**
  *

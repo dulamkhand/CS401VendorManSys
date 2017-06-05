@@ -1,7 +1,7 @@
-package database.entity.dao;
+package model;
 
-import database.entity.Project;
-import database.DBUtil;
+import model.Project;
+import util.DBUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -114,7 +114,5 @@ public class ProjectDAO {
             throw e;
         }
     }
-
-    
 
 }
