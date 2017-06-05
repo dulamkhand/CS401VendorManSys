@@ -23,9 +23,11 @@ public class ProjectDAO {
             if (rs.next()) {
                 p = new Project();
                 p.setId(rs.getInt("ID"));
-                p.setName(rs.getString("NAME"));
-                p.setEmployeeId(rs.getInt("EMPLOYEE_ID"));
+                p.setTitle(rs.getString("TITLE"));
+                p.setAmount(rs.getDouble("AMOUNT"));
+                p.setCurrency(rs.getString("CURRENCY"));
                 p.setVendorId(rs.getInt("VENDOR_ID"));
+                p.setEmployeeId(rs.getInt("EMPLOYEE_ID"));
                 //p.setCreatedDate(new SimpleIntegerProperty(rs.getDate("CREATED_DATE")));
             }
             return p;
@@ -47,9 +49,11 @@ public class ProjectDAO {
             while (rs.next()) {
                 p = new Project();
                 p.setId(rs.getInt("ID"));
-                p.setName(rs.getString("NAME"));
-                p.setEmployeeId(rs.getInt("EMPLOYEE_ID"));
+                p.setTitle(rs.getString("TITLE"));
+                p.setAmount(rs.getDouble("AMOUNT"));
+                p.setCurrency(rs.getString("CURRENCY"));
                 p.setVendorId(rs.getInt("VENDOR_ID"));
+                p.setEmployeeId(rs.getInt("EMPLOYEE_ID"));                
                 list.add(p);
             }
             return list;
@@ -59,13 +63,13 @@ public class ProjectDAO {
         }
     }
     
-    public static void insert(String name, Integer employeeId, Integer vendorId) 
+    public static void insert(String title, Integer employeeId, Integer vendorId) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
             "BEGIN\n" +
                 "INSERT INTO project\n" +
-                "(NAME, EMPLOYEE_ID, PROJECT_ID, VENDOR_ID)\n" +
-                "VALUES('"+name+"', '"+employeeId+"','"+vendorId+"');\n" +
+                "(TITLE, EMPLOYEE_ID, PROJECT_ID, VENDOR_ID)\n" +
+                "VALUES('"+title+"', '"+employeeId+"','"+vendorId+"');\n" +
                 "END;";
 
         try {
@@ -76,12 +80,12 @@ public class ProjectDAO {
         }
     }
    
-    public static void update (String id, String name, Integer employeeId, Integer vendorId) 
+    public static void update (String id, String title, Integer employeeId, Integer vendorId) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
             "BEGIN\n" +
                 "   UPDATE project\n" +
-                "      SET name = '" + name + "'\n" +
+                "      SET title = '" + title + "'\n" +
                 "      SET EMPLOYEE_ID = '" + employeeId + "'\n" +
                 "      SET VENDOR_ID = '" + vendorId + "'\n" +
                 "    WHERE ID = " + id + ";\n" +
