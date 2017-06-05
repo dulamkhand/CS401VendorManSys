@@ -10,7 +10,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -19,12 +21,27 @@ import javafx.scene.control.Label;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
+    private TextField loginTF;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World 2!");
+    private PasswordField passwordPF;
+    
+    @FXML
+    private DialogPane loginErrorDP;
+    
+    @FXML
+    private void handleResetButtonAction(ActionEvent event) {
+        loginTF.clear();
+        passwordPF.clear();
+    }
+    
+     @FXML
+    private void handleLoginButtonAction(ActionEvent event) {
+        if (loginTF.getCharacters().length() == 0) {
+            loginErrorDP.setVisible(true);
+        }
+        
+        // calls next screen.
     }
     
     @Override
