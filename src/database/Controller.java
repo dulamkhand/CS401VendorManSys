@@ -10,5 +10,7 @@ package database;
  * @author Rafael
  */
 public class Controller {
-    
+    public static void main(String[] arsg) {
+        
+    }
 }
