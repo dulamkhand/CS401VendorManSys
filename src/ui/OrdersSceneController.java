@@ -80,9 +80,9 @@ public class OrdersSceneController implements Initializable {
     private void populateOrder (Order o) throws ClassNotFoundException {
         //Declare and ObservableList for table view
         ObservableList<Order> list = FXCollections.observableArrayList();
-        //Add employee to the ObservableList
+        //Add order to the ObservableList
         list.add(o);
-        //Set items to the employeeTable
+        //Set items to the orderTable
         orderTable.setItems(list);
     }
 
