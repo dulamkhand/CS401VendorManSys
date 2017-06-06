@@ -1,7 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Maharishi University Of Management, MSCS, April 2017 Entry
+ * MPP Course, Professor Shafqat, Group 1:
+ * Bek
+ * Khandaa
+ * Rafael
+ * 
+ * Vendor Management System
+ * June of 2017
  */
 package ui;
 
@@ -12,14 +17,15 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
- * @author Khandaa
+ * Vendor Management System.
+ * 
+ * @author Group 1.
  */
 public class VendorManagementSystem extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
         
         Scene scene = new Scene(root);
         
@@ -33,5 +39,4 @@ public class VendorManagementSystem extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
 }

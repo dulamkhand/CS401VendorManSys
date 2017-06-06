@@ -75,7 +75,7 @@ public class ProjectController {
         must have an additional asObject():
         */
         //idColumn.setCellValueFactory(cellData -> cellData.getValue().employeeIdProperty().asObject());
-        nameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        //nameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         //employeeIdColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
         //vendorIdColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
     }
