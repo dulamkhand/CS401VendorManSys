@@ -18,7 +18,6 @@ public class Project {
     private DoubleProperty amount;
     private StringProperty currency;
     private IntegerProperty vendorId;
-    private IntegerProperty employeeId;
     private StringProperty createdDate;
 
     public Project() {
@@ -27,7 +26,6 @@ public class Project {
         this.amount = new SimpleDoubleProperty();
         this.currency = new SimpleStringProperty();
         this.vendorId = new SimpleIntegerProperty();
-        this.employeeId = new SimpleIntegerProperty();
         this.createdDate = new SimpleStringProperty();
     }
 
@@ -45,14 +43,6 @@ public class Project {
 
     public void setTitle(String title) {
         this.title.set(title);
-    }
-
-    public IntegerProperty getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Integer employeeId) {
-        this.employeeId.set(employeeId);
     }
 
     public IntegerProperty getVendorId() {

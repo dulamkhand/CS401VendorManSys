@@ -27,7 +27,6 @@ public class ProjectDAO {
                 p.setAmount(rs.getDouble("AMOUNT"));
                 p.setCurrency(rs.getString("CURRENCY"));
                 p.setVendorId(rs.getInt("VENDOR_ID"));
-                p.setEmployeeId(rs.getInt("EMPLOYEE_ID"));
                 //p.setCreatedDate(new SimpleIntegerProperty(rs.getDate("CREATED_DATE")));
             }
             return p;
@@ -38,7 +37,7 @@ public class ProjectDAO {
         }
     }
 
-    public static ObservableList<Project> getList () throws SQLException, 
+    public static ObservableList<Project> list() throws SQLException, 
             ClassNotFoundException {
         String selectStmt = "SELECT * FROM project";
         try {
@@ -52,8 +51,7 @@ public class ProjectDAO {
                 p.setTitle(rs.getString("TITLE"));
                 p.setAmount(rs.getDouble("AMOUNT"));
                 p.setCurrency(rs.getString("CURRENCY"));
-                p.setVendorId(rs.getInt("VENDOR_ID"));
-                p.setEmployeeId(rs.getInt("EMPLOYEE_ID"));                
+                p.setVendorId(rs.getInt("VENDOR_ID"));              
                 list.add(p);
             }
             return list;
@@ -63,31 +61,32 @@ public class ProjectDAO {
         }
     }
     
-    public static void insert(String title, Integer employeeId, Integer vendorId) 
+    public static void insert(String title, Double amount, String currency, Integer vendorId) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
             "BEGIN\n" +
                 "INSERT INTO project\n" +
-                "(TITLE, EMPLOYEE_ID, PROJECT_ID, VENDOR_ID)\n" +
-                "VALUES('"+title+"', '"+employeeId+"','"+vendorId+"');\n" +
+                "(TITLE, AMOUNT, CURRENCY, VENDOR_ID)\n" +
+                "VALUES('"+title+"', "+amount+", '"+currency+"', "+vendorId+");\n" +
                 "END;";
 
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
-            System.out.print("Error occurred while DELETE Operation: " + e);
+            System.out.print("Error occurred while INSERT Operation: " + e);
             throw e;
         }
     }
    
-    public static void update (String id, String title, Integer employeeId, Integer vendorId) 
+    public static void update (String id, String title, Double amount, String currency, Integer vendorId) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
             "BEGIN\n" +
                 "   UPDATE project\n" +
                 "      SET title = '" + title + "'\n" +
-                "      SET EMPLOYEE_ID = '" + employeeId + "'\n" +
-                "      SET VENDOR_ID = '" + vendorId + "'\n" +
+                "      SET amount = " + amount + "\n" +
+                "      SET currency = '" + currency + "'\n" +
+                "      SET VENDOR_ID = " + vendorId + "\n" +
                 "    WHERE ID = " + id + ";\n" +
                 "   COMMIT;\n" +
                 "END;";

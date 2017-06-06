@@ -40,7 +40,7 @@ public class ProjectController {
     private void getList(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         try {
             //Get all Employees information
-            ObservableList<Project> projects = ProjectDAO.getList();
+            ObservableList<Project> projects = ProjectDAO.list();
             //Populate Employees on TableView
             populate(projects);
         } catch (SQLException e){
