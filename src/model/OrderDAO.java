@@ -35,7 +35,7 @@ public class OrderDAO {
 
     public static ObservableList<Order> list() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT * FROM order";
+        String selectStmt = "SELECT * FROM orders";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableList<Order> list = FXCollections.observableArrayList();

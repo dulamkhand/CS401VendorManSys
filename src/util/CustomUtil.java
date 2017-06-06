@@ -10,7 +10,5 @@ package util;
  * @author Rafael
  */
 public class CustomUtil {
-    public static void main(String[] arsg) {
-        
-    }
+   
 }

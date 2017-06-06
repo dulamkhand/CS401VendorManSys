@@ -46,6 +46,23 @@ public class EmployeeSceneController implements Initializable {
     }
     
     /**
+     * Handle Login Button Action.
+     * 
+     * @param event - ActionEvent
+     */
+     @FXML
+    private void handleOrdersButtonAction(ActionEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("OrdersScene.fxml"));
+
+        Scene scene = new Scene(root);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    /**
      * Handle Close Button Action.
      * 
      * @param event - ActionEvent

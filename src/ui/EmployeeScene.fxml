@@ -13,6 +13,7 @@
         <buttons>
           <Button fx:id="projectsB" mnemonicParsing="false" onAction="#handleProjectsButtonAction" text="Projects" />
             <Button mnemonicParsing="false" text="Items" />
+			<Button fx:id="ordersB" mnemonicParsing="false" onAction="#handleOrdersButtonAction" text="Orders" />
             <Button mnemonicParsing="false" text="Vendors" />
         </buttons>
       </ButtonBar>

@@ -1,15 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+ * To change this license header, choose License Headers in Order Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package controller;
 
-import model.EmployeeDAO;
 import model.Employee;
-import model.Project;
-import model.ProjectDAO;
-import java.sql.Date;
+import model.Order;
+import model.OrderDAO;
 import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,19 +28,17 @@ public class OrderController {
     @FXML
     private TextArea resultArea;
     @FXML
-    private TableView projectTable;
+    private TableView orderTable;
     
-
-  
-
-    //Search all employees
+    
+    //List all orders
     @FXML
     private void getList(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         try {
             //Get all Employees information
-            ObservableList<Project> projects = ProjectDAO.list();
+            ObservableList<Order> orders = OrderDAO.list();
             //Populate Employees on TableView
-            populate(projects);
+            populate(orders);
         } catch (SQLException e){
             System.out.println("Error occurred while getting employees information from DB.\n" + e);
             throw e;
@@ -51,13 +47,13 @@ public class OrderController {
 
     //Populate Employee
     @FXML
-    private void populate (Project p) throws ClassNotFoundException {
+    private void populate (Order p) throws ClassNotFoundException {
         //Declare and ObservableList for table view
-        ObservableList<Project> projects = FXCollections.observableArrayList();
+        ObservableList<Order> orders = FXCollections.observableArrayList();
         //Add employee to the ObservableList
-        projects.add(p);
-        //Set items to the projectTable
-        projectTable.setItems(projects);
+        orders.add(p);
+        //Set items to the orderTable
+        orderTable.setItems(orders);
     }
     
     //Initializing the controller class.
@@ -91,7 +87,7 @@ public class OrderController {
 
     //Populate Employee for TableView and Display Employee on TextArea
     @FXML
-    private void populateAndShow(Project p) throws ClassNotFoundException {
+    private void populateAndShow(Order p) throws ClassNotFoundException {
         if (p != null) {
             populate(p);
             //setEmpInfoToTextArea(p);
@@ -102,8 +98,8 @@ public class OrderController {
 
     //Populate Employees for TableView
     @FXML
-    private void populate (ObservableList<Project> data) throws ClassNotFoundException {
-        //Set items to the projectTable
-        projectTable.setItems(data);
+    private void populate (ObservableList<Order> data) throws ClassNotFoundException {
+        //Set items to the orderTable
+        orderTable.setItems(data);
     }
 }
