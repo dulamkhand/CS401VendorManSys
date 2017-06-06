@@ -11,11 +11,7 @@
 package ui;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +20,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -34,14 +32,46 @@ import javafx.stage.Stage;
 public class ProjectAddSceneController implements Initializable {
     
     /**
+     * Item Combo Box.
+     */
+    @FXML
+    ComboBox itemCB;
+    
+    /**
      * Vendor Combo Box.
      */
+    @FXML
     ComboBox vendorCB;
     
     /**
-     * Item Combo Box.
+     * Words TextField.
      */
-    ComboBox itemCB;
+    @FXML
+    TextField wordsTF;
+    
+    /**
+     * Words TextField.
+     */
+    @FXML
+    Label messageL;
+    
+    private Boolean validateForm() {
+        Boolean retValue = false;
+        
+        if (itemCB.getSelectionModel().isEmpty()) {
+            messageL.setText("Please, select the item");
+        } else if (wordsTF.getCharacters().length() == 0) {
+            messageL.setText("Please, inform the words quantity");
+        } else if (!wordsTF.getCharacters().toString().matches("[0-9]*")) {
+            messageL.setText("Please, inform just numbers in words field");
+        } else if (vendorCB.getSelectionModel().isEmpty()) {
+            messageL.setText("Please, select the vendor");
+        } else {
+            retValue = true;
+        }
+        
+        return retValue;
+    }
     
     /**
      * Handle Item Combo Box Action.
@@ -50,14 +80,12 @@ public class ProjectAddSceneController implements Initializable {
      */
      @FXML
     private void handleItemComboBoxAction(ActionEvent event) throws Exception {
-        // searches all vendors of the selected item and load the vendor combobox with it.
-        List<String> itemList = new ArrayList<String>();
         
-        itemList.add("Bek");
-        itemList.add("Khandaa");
-        itemList.add("Rafael");
-        
-        vendorCB.getItems().addAll(itemList);
+        // searches all vendors of the selected item on database and load the vendor combobox with it.
+        vendorCB.getItems().addAll(
+                "Bek",
+                "Khandaa",
+                "Rafael");
     }
     
     /**
@@ -67,14 +95,19 @@ public class ProjectAddSceneController implements Initializable {
      */
      @FXML
     private void handleConfirmButtonAction(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("ProjectsScene.fxml"));
+        if (validateForm()) {
+            
+            // inserts the new Project on database.
+            
+            Parent root = FXMLLoader.load(getClass().getResource("ProjectsScene.fxml"));
+            
+            Scene scene = new Scene(root);
 
-        Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
+            stage.setScene(scene);
+            stage.show();
+        }
     }
     
     /**
@@ -99,13 +132,12 @@ public class ProjectAddSceneController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // searches all vendors of the selected item and load the vendor combobox with it.
-        ObservableList<String> itemList = FXCollections.observableArrayList(
+        
+        // searches all items on database and load the item combobox with them.
+        itemCB.getItems().addAll(
                 "Mongolian to Russian",
                 "Russian to Mongolian",
                 "English to Russian",
                 "Russian to English");
-        
-        itemCB = new ComboBox(itemList);
-    }   
+    }
 }

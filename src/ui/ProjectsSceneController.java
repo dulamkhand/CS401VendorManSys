@@ -19,6 +19,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 /**
@@ -27,6 +29,30 @@ import javafx.stage.Stage;
  * @author Group 1.
  */
 public class ProjectsSceneController implements Initializable {
+    
+    /**
+     * Projects Table View.
+     */
+    @FXML
+    private TableView<String> projectsTV;
+    
+    /**
+     * Project Table Column.
+     */
+    @FXML
+    private TableColumn projectTC;
+    
+    /**
+     * Item Table Column.
+     */
+    @FXML
+    private TableColumn itemTC;
+    
+    /**
+     * Status Table Column.
+     */
+    @FXML
+    private TableColumn statusTC;
     
     /**
      * Handle New Button Action.
@@ -67,6 +93,10 @@ public class ProjectsSceneController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       
+        // searches all projects on database and loads the table view with them.
+        projectsTV.getItems().addAll(
+                "Mongolian to Russian",
+                "Russian to Mongolian");
     }
 }
