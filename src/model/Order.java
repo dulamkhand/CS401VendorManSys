@@ -22,6 +22,12 @@ public class Order {
         this.amount = new SimpleDoubleProperty();
         this.currency = new SimpleStringProperty();
     }
+    
+    @Override
+    public String toString() {
+        return String.format("Order(%s): amount(%s), currency(%s).", this.id.getValue(), 
+                this.amount.getValue(), this.currency.getValue());
+    }
 
     public IntegerProperty getId() {
         return id;

@@ -37,6 +37,7 @@ public class DBUtil {
         try {
             if (conn != null && !conn.isClosed()) {
                 conn.close();
+                System.out.println("Database connection is closed");
             }
         } catch (SQLException e){
            throw e;

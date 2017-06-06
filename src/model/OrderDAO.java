@@ -40,16 +40,14 @@ public class OrderDAO {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableList<Order> list = FXCollections.observableArrayList();
 
-            Order p;
+            Order o;
             while (rs.next()) {
-                p = new Order();
-                p.setId(rs.getInt("ID"));
-                //System.out.println(rs.getString("ID"));
-                p.setAmount(rs.getDouble("AMOUNT"));
-                //System.out.println(rs.getString("AMOUNT"));
-                p.setCurrency(rs.getString("CURRENCY"));        
-                //System.out.println(rs.getString("CURRENCY"));
-                list.add(p);
+                o = new Order();
+                o.setId(rs.getInt("ID"));
+                o.setAmount(rs.getDouble("AMOUNT"));
+                o.setCurrency(rs.getString("CURRENCY"));
+                list.add(o);
+                System.out.println(o.toString());
             }
             return list;
         } catch (SQLException e) {
