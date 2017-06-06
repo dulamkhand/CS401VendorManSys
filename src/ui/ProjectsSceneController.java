@@ -34,8 +34,8 @@ public class ProjectsSceneController implements Initializable {
      * @param event - ActionEvent
      */
      @FXML
-    private void handleNewButtonAction(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
+    private void handleAddButtonAction(ActionEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("ProjectAddScene.fxml"));
 
         Scene scene = new Scene(root);
 
