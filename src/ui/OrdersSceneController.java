@@ -22,10 +22,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import model.Employee;
-import model.EmployeeDAO;
 import model.Order;
 import model.OrderDAO;
 
@@ -38,6 +38,21 @@ public class OrdersSceneController implements Initializable {
     
     @FXML
     private TableView orderTable;
+    @FXML
+    private TableColumn<Order, Integer> idColumn;
+    @FXML
+    private TableColumn<Order, Double> amountColumn;
+    @FXML
+    private TableColumn<Order, String> currencyColumn;
+    
+    //Initializing the controller class.
+    //This method is automatically called after the fxml file has been loaded.
+    @FXML
+    private void initialize () {
+        idColumn.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
+        amountColumn.setCellValueFactory(cellData -> cellData.getValue().getAmount().asObject());
+        currencyColumn.setCellValueFactory(cellData -> cellData.getValue().getCurrency());
+    }
     
     //List all orders
     @FXML

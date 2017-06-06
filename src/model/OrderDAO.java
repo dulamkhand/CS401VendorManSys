@@ -35,7 +35,7 @@ public class OrderDAO {
 
     public static ObservableList<Order> list() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT * FROM orders";
+        String selectStmt = "SELECT * FROM orders WHERE 1;";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableList<Order> list = FXCollections.observableArrayList();
@@ -44,8 +44,11 @@ public class OrderDAO {
             while (rs.next()) {
                 p = new Order();
                 p.setId(rs.getInt("ID"));
+                //System.out.println(rs.getString("ID"));
                 p.setAmount(rs.getDouble("AMOUNT"));
-                p.setCurrency(rs.getString("CURRENCY"));           
+                //System.out.println(rs.getString("AMOUNT"));
+                p.setCurrency(rs.getString("CURRENCY"));        
+                //System.out.println(rs.getString("CURRENCY"));
                 list.add(p);
             }
             return list;
