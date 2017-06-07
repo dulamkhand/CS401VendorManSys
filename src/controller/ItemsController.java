@@ -22,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import model.Project;
+import model.project.Project;
 
 /**
  * Projects Scene Controller.
