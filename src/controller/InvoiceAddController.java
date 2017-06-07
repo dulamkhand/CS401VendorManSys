@@ -8,7 +8,7 @@
  * Vendor Management System
  * June of 2017
  */
-package ui;
+package controller;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ import javafx.stage.Stage;
  * 
  * @author Group 1.
  */
-public class OrderAddSceneController implements Initializable {
+public class InvoiceAddController implements Initializable {
     
     /**
      * Vendor Combo Box.
@@ -67,7 +67,7 @@ public class OrderAddSceneController implements Initializable {
      */
      @FXML
     private void handleConfirmButtonAction(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("ProjectsScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/Projects.fxml"));
 
         Scene scene = new Scene(root);
 
@@ -84,7 +84,7 @@ public class OrderAddSceneController implements Initializable {
      */
      @FXML
     private void handleCloseButtonAction(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
 
         Scene scene = new Scene(root);
 

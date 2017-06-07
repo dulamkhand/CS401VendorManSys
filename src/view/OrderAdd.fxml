@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ProjectAddSceneController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controller.OrderAddController">
     <children>
       <Label layoutX="323.0" layoutY="14.0" text="Vendor Management System" />
       <ButtonBar layoutX="268.0" layoutY="58.0" prefHeight="40.0" prefWidth="242.0">
@@ -30,11 +30,6 @@
       <ComboBox fx:id="vendorCB" layoutX="295.0" layoutY="298.0" prefHeight="25.0" prefWidth="265.0" />
       <Label layoutX="248.0" layoutY="256.0" text="Words" />
       <TextField fx:id="wordsTF" layoutX="296.0" layoutY="252.0" prefHeight="25.0" prefWidth="87.0" />
-      <Button fx:id="confirmB" layoutX="371.0" layoutY="380.0" mnemonicParsing="false" onAction="#handleConfirmButtonAction" text="Confirm" />
-      <Label fx:id="messageL" layoutX="292.0" layoutY="437.0" textFill="RED">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Label>
+      <Button fx:id="confirmB" layoutX="371.0" layoutY="380.0" mnemonicParsing="false" text="Confirm" />
    </children>
 </AnchorPane>

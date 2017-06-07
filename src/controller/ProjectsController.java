@@ -8,9 +8,11 @@
  * Vendor Management System
  * June of 2017
  */
-package ui;
+package controller;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +30,7 @@ import javafx.stage.Stage;
  * 
  * @author Group 1.
  */
-public class ProjectsSceneController implements Initializable {
+public class ProjectsController implements Initializable {
     
     /**
      * Projects Table View.
@@ -53,6 +55,7 @@ public class ProjectsSceneController implements Initializable {
      */
     @FXML
     private TableColumn statusTC;
+   
     
     /**
      * Handle New Button Action.
@@ -60,8 +63,8 @@ public class ProjectsSceneController implements Initializable {
      * @param event - ActionEvent
      */
      @FXML
-    private void handleAddButtonAction(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("ProjectAddScene.fxml"));
+    private void handleAdd(ActionEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/ProjectAdd.fxml"));
 
         Scene scene = new Scene(root);
 
@@ -70,24 +73,7 @@ public class ProjectsSceneController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    
-    /**
-     * Handle Close Button Action.
-     * 
-     * @param event - ActionEvent
-     */
-     @FXML
-    private void handleCloseButtonAction(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
-
-        Scene scene = new Scene(root);
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
-    }
-
+  
     /**
      * Initializes the controller class.
      */

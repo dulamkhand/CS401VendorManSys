@@ -5,25 +5,105 @@
  */
 package controller;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  *
  * @author Khandaa
  */
 public class RootLayoutController {
-    //Exit the program
-    public void handleExit(ActionEvent actionEvent) {
+
+    // static member will be used in other controllers
+    static public BorderPane borderPane;
+    
+    // instances for all controllers will be created at the same time as RootLayoutController
+    private OrdersController ordersController;
+    private OrderAddController orderAddController;
+    private ProjectsController projectsController;
+    private OrderAddController projectAddController;
+    
+    public RootLayoutController() {
+        this.ordersController = new OrdersController();
+        this.projectsController = new ProjectsController();
+        this.projectAddController = new OrderAddController();
+        this.orderAddController = new OrderAddController();
+        //this.vendorsController = new VendorsController();
+    }
+
+    public void go2homepage(ActionEvent event)  {
+        try {
+            // load rootLayout
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("view/RootLayout.fxml"));
+            RootLayoutController.borderPane = (BorderPane) loader.load();
+            
+            //show the scene containing the borderPane
+            Scene scene = new Scene(RootLayoutController.borderPane); //We are sending borderPane to the Scene.
+            Main.primaryStage.setScene(scene); //Set the scene in primary stage.
+ 
+            //show the primary stage
+            Main.primaryStage.show(); //Display the primary stage
+            
+            // now redirects to projects/orders index page
+            this.go2orders(event);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(RootLayoutController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+        
+    @FXML
+    private void go2projects(ActionEvent event) throws Exception {
+        //this.projectsController.index(event);
+    }
+    
+    @FXML
+    private void go2items(ActionEvent event) throws Exception {
+        //this.itemsControl-ler.index(event);
+    }
+    
+    @FXML
+    private void go2orders(ActionEvent event) throws Exception {
+        this.ordersController.index(event);
+    }
+    
+    @FXML
+    private void go2vendors(ActionEvent event) throws Exception {
+        //this.vendorsController.index(event);
+    }
+    
+    @FXML
+    private void logout(ActionEvent event) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/LoginScene.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    public void exit(ActionEvent actionEvent) {
         System.exit(0);
     }
  
-    //Help Menu button behavior
-    public void handleHelp(ActionEvent actionEvent) {
+    public void help(ActionEvent actionEvent) {
         Alert alert = new Alert (Alert.AlertType.INFORMATION);
         alert.setTitle("Program Information");
-        alert.setHeaderText("This is a sample JAVAFX application for SWTESTACADEMY!");
-        alert.setContentText("You can search, delete, update, insert a new employee with this program.");
+        alert.setHeaderText("");
+        alert.setContentText("");
         alert.show();
     }
+    
 }

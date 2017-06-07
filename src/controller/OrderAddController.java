@@ -8,7 +8,7 @@
  * Vendor Management System
  * June of 2017
  */
-package ui;
+package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,7 +29,7 @@ import javafx.stage.Stage;
  * 
  * @author Group 1.
  */
-public class ProjectAddSceneController implements Initializable {
+public class OrderAddController implements Initializable {
     
     /**
      * Item Combo Box.
@@ -99,7 +99,7 @@ public class ProjectAddSceneController implements Initializable {
             
             // inserts the new Project on database.
             
-            Parent root = FXMLLoader.load(getClass().getResource("ProjectsScene.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("view/Projects.fxml"));
             
             Scene scene = new Scene(root);
 
@@ -110,22 +110,6 @@ public class ProjectAddSceneController implements Initializable {
         }
     }
     
-    /**
-     * Handle Close Button Action.
-     * 
-     * @param event - ActionEvent
-     */
-     @FXML
-    private void handleCloseButtonAction(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
-
-        Scene scene = new Scene(root);
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
-    }
 
     /**
      * Initializes the controller class.

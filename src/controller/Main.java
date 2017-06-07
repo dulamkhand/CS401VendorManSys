@@ -4,11 +4,11 @@
  * Bek
  * Khandaa
  * Rafael
- * 
+ *
  * Vendor Management System
  * June of 2017
  */
-package ui;
+package controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,17 +18,23 @@ import javafx.stage.Stage;
 
 /**
  * Vendor Management System.
- * 
+ *
  * @author Group 1.
  */
-public class VendorManagementSystem extends Application {
-    
+public class Main extends Application {
+
+    // static member will be used in RootLayoutController
+    public static Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
-        
+        Main.primaryStage = stage;
+        Main.primaryStage.setTitle("Vendor Management System");
+
+        // load login page
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/LoginScene.fxml"));
+
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
         stage.show();
     }
