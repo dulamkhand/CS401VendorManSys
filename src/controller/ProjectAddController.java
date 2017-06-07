@@ -16,13 +16,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * Projects Scene Controller.
@@ -98,33 +95,12 @@ public class ProjectAddController implements Initializable {
         if (validateForm()) {
             
             // inserts the new Project on database.
-            
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Projects.fxml"));
-            
-            Scene scene = new Scene(root);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("view/Projects.fxml"));  
+            AnchorPane achorPane = (AnchorPane) loader.load();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            stage.setScene(scene);
-            stage.show();
+            RootLayoutController.borderPane.setCenter(achorPane);
         }
-    }
-    
-    /**
-     * Handle Close Button Action.
-     * 
-     * @param event - ActionEvent
-     */
-     @FXML
-    private void handleCloseButtonAction(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("LoginScene.fxml"));
-
-        Scene scene = new Scene(root);
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
     }
 
     /**
@@ -132,12 +108,5 @@ public class ProjectAddController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        // searches all items on database and load the item combobox with them.
-        itemCB.getItems().addAll(
-                "Mongolian to Russian",
-                "Russian to Mongolian",
-                "English to Russian",
-                "Russian to English");
     }
 }

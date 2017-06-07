@@ -14,9 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 /**
@@ -33,13 +31,14 @@ public class RootLayoutController {
     private OrderAddController orderAddController;
     private ProjectsController projectsController;
     private OrderAddController projectAddController;
+    private ItemsController itemsController;
     
     public RootLayoutController() {
         this.ordersController = new OrdersController();
         this.projectsController = new ProjectsController();
         this.projectAddController = new OrderAddController();
         this.orderAddController = new OrderAddController();
-        //this.vendorsController = new VendorsController();
+        this.itemsController = new ItemsController();
     }
  
     public void go2homepage(ActionEvent event)  {
@@ -72,7 +71,7 @@ public class RootLayoutController {
     
     @FXML
     public void go2items(ActionEvent event) throws Exception {
-        //this.itemsControl-ler.index(event);
+        this.itemsController.index(event);
     }
     
     @FXML

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ItemsController">
+    <children>
+		<Button fx:id="newB" layoutX="2.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleAdd" text="+">
+         <font><Font name="System Bold" /></font>
+      </Button>
+	  
+      <TableView fx:id="projectsTV" prefWidth="790.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="0.0">
+        <columns>
+          <TableColumn fx:id="itemTC" prefWidth="190.0" text="Item" />
+          <TableColumn fx:id="numberWordsTC" minWidth="0.0" prefWidth="195.0" text="Number of Words" />
+            <TableColumn prefWidth="91.0" text="Actions" />
+        </columns>
+      </TableView>
+	 
+	  
+   </children>
+</AnchorPane>

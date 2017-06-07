@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,14 +22,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import model.Project;
-import model.ProjectDAO;
 
 /**
  * Projects Scene Controller.
  * 
  * @author Group 1.
  */
-public class ProjectsController implements Initializable {
+public class ItemsController implements Initializable {
     
     /**
      * Projects Table View.
@@ -60,10 +57,10 @@ public class ProjectsController implements Initializable {
     
     @FXML
     public void index(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-       
+        System.out.println("asfasf");
         
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getClassLoader().getResource("view/Projects.fxml"));  
+        loader.setLocation(getClass().getClassLoader().getResource("view/Items.fxml"));
         AnchorPane achorPane = (AnchorPane) loader.load();
 
         RootLayoutController.borderPane.setCenter(achorPane);
@@ -75,12 +72,12 @@ public class ProjectsController implements Initializable {
      * @param event - ActionEvent
      */
      @FXML
-    private void handleAdd(ActionEvent event) throws Exception {
+    private void handleAdd(ActionEvent event) throws Exception {/*
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("view/ProjectAdd.fxml"));  
         AnchorPane achorPane = (AnchorPane) loader.load();
 
-        RootLayoutController.borderPane.setCenter(achorPane);
+        RootLayoutController.borderPane.setCenter(achorPane);*/
     }
   
     /**
@@ -88,18 +85,5 @@ public class ProjectsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       projectTC.setCellValueFactory(cellData -> cellData.getValue().getTitle());
-       
-       //Get all Order information
-        try {
-            
-            //Populate Order on TableView
-            this.projectsTV.setItems(ProjectDAO.list());
-            
-            //System.out.debug("OrdersSceneController is initialized");
-            //System.out.debug("this.orderTable: " + this.orderTable);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 }
