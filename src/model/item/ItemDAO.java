@@ -22,7 +22,7 @@ public class ItemDAO {
             if (rs.next()) {
                 i = new Item();
                 i.setId(rs.getInt("ID"));
-                i.setProjectId(rs.getInt("PROJECT_ID"));
+                //i.setProjectId(rs.getInt("PROJECT_ID"));
                 i.setName(rs.getString("NAME"));
                 i.setNumberWords(rs.getInt("NB_WORDS"));
             }
@@ -45,7 +45,7 @@ public class ItemDAO {
             while (rs.next()) {
                 i = new Item();
                 i.setId(rs.getInt("ID"));
-                i.setProjectId(rs.getInt("PROJECT_ID"));
+                //i.setProjectId(rs.getInt("PROJECT_ID"));
                 i.setName(rs.getString("NAME"));
                 i.setNumberWords(rs.getInt("NB_WORDS"));
                 list.add(i);

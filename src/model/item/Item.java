@@ -19,19 +19,15 @@ import model.servicetype.ServiceType;
 public class Item {
     private IntegerProperty id;
     private Project project;
-    private IntegerProperty projectId;
     private StringProperty name;
-    private IntegerProperty numberOfWords;
+    private IntegerProperty numberWords;
     private ServiceType serviceType;
-    private DateProperty createdDate;
-  
+	
     public Item() {
         this.id = new SimpleIntegerProperty();
         this.name = new SimpleStringProperty();
-        this.numberOfWords = new SimpleIntegerProperty();
-        this.createdDate = new SimpleStringProperty();
+        this.numberWords = new SimpleIntegerProperty();
     }
-
     public IntegerProperty getId() {
         return id;
     }
@@ -57,19 +53,18 @@ public class Item {
     }
     
     public IntegerProperty getNumberWords() {
-        return numberOfWords;
+        return numberWords;
     }
 
     public void setNumberWords(Integer numberWords) {
-        this.numberOfWords.set(numberWords);
+        this.numberWords.set(numberWords);
     }
     
-    public StringProperty getCreatedDate() {
-        return createdDate;
+    public ServiceType getServiceType() {
+        return serviceType;
     }
 
-    public void setCreatedDate(StringProperty createdDate) {
-        this.createdDate = createdDate;
+    public void setServiceType(ServiceType serviceType) {
+        this.serviceType = serviceType;
     }
-  
 }
