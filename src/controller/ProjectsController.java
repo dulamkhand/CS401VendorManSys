@@ -55,7 +55,7 @@ public class ProjectsController implements Initializable {
      * Item Table Column.
      */
     @FXML
-    private TableColumn<Project, String> itemTC;
+    private TableColumn<Project, String> serviceTC;
     
     /**
      * Amount Table Column.
@@ -111,7 +111,7 @@ public class ProjectsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
        titleTC.setCellValueFactory(cellData -> cellData.getValue().getTitle());
-       //itemTC.setCellValueFactory(cellData -> cellData.getValue().getItemList());
+       serviceTC.setCellValueFactory(cellData -> cellData.getValue().getServiceName());
        amountTC.setCellValueFactory(cellData -> cellData.getValue().getAmount().asObject());
        currencyTC.setCellValueFactory(cellData -> cellData.getValue().getCurrency());
        //vendorTC.setCellValueFactory(cellData -> cellData.getValue().getVendor());

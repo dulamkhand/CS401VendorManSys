@@ -14,4 +14,8 @@ import javafx.beans.property.StringProperty;
 public class ServiceType {
     private StringProperty name;
     private StringProperty description;
+    
+    public StringProperty getName() {
+        return name;
+    }
 }

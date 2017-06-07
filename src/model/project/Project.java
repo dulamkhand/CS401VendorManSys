@@ -104,4 +104,14 @@ public class Project {
     public void setProjectStatus(ProjectStatus projectStatus) {
         this.projectStatus = projectStatus;
     }
+    
+    public StringProperty getServiceName() {
+        StringProperty serviceName = null;
+        
+        if (itemList != null && itemList.size() > 0) {
+            serviceName = itemList.get(0).getServiceType().getName();
+        }
+        
+        return serviceName;
+    }
 }
