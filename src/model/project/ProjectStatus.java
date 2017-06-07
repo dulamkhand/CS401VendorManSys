@@ -13,7 +13,14 @@ import javafx.beans.property.StringProperty;
  * @author bek
  */
 public class ProjectStatus {
-
     private IntegerProperty id;
     private StringProperty status;
+    
+    public StringProperty getStatus() {
+        return status;
+    }
+
+    public void setProjectStatus(StringProperty status) {
+        this.status = status;
+    }
 }

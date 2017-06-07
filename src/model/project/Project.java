@@ -16,30 +16,23 @@ import model.order.Order;
  * @author Khandaa
  */
 public class Project {
-
     private IntegerProperty id;
-    private StringProperty number;
     private StringProperty title;
     private DoubleProperty amount;
     private StringProperty currency;
     private Date created;
     private Vendor vendor;
-    private ProjectStatus status;
-    private ListProperty<Item> items;
-    //optional(0..1)
+    private ProjectStatus projectStatus;
+    private ListProperty<Item> itemList;
     private Order order;
     
     public Project() {
         this.id = new SimpleIntegerProperty();
-        this.number = new SimpleStringProperty();
         this.title = new SimpleStringProperty();
         this.amount = new SimpleDoubleProperty();
         this.currency = new SimpleStringProperty();
-       
         this.created = new Date();
-        //this.vendor = new Vendor();
-        this.status = new ProjectStatus();
-        //this.items = 
+        this.projectStatus = new ProjectStatus();
         this.order = null;
     }
     
@@ -54,14 +47,6 @@ public class Project {
 
     public void setId(Integer id) {
         this.id.set(id);
-    }
-
-    public StringProperty getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number.set(number);
     }
 
     public StringProperty getTitle() {
@@ -95,6 +80,14 @@ public class Project {
     public void setCreated(Date created) {
         this.created = created;
     }
+    
+    public ListProperty getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(ListProperty<Item> itemList) {
+        this.itemList = itemList;
+    }
 
     public Vendor getVendor() {
         return vendor;
@@ -104,5 +97,11 @@ public class Project {
         this.vendor = vendor;
     }
     
+    public ProjectStatus getProjectStatus() {
+        return projectStatus;
+    }
 
+    public void setProjectStatus(ProjectStatus projectStatus) {
+        this.projectStatus = projectStatus;
+    }
 }

@@ -40,28 +40,49 @@ public class ProjectsController implements Initializable {
     private TableView<Project> projectsTV;
     
     /**
-     * Project Table Column.
+     * ID Table Column.
      */
     @FXML
-    private TableColumn<Project, String> projectTC;
+    private TableColumn<Project, Integer> idTC;
+    
+    /**
+     * Title Table Column.
+     */
+    @FXML
+    private TableColumn<Project, String> titleTC;
     
     /**
      * Item Table Column.
      */
     @FXML
-    private TableColumn itemTC;
+    private TableColumn<Project, String> itemTC;
+    
+    /**
+     * Amount Table Column.
+     */
+    @FXML
+    private TableColumn<Project, Double> amountTC;
+    
+    /**
+     * Currency Table Column.
+     */
+    @FXML
+    private TableColumn<Project, String> currencyTC;
+    
+    /**
+     * Vendor Table Column.
+     */
+    @FXML
+    private TableColumn<Project, String> vendorTC;
     
     /**
      * Status Table Column.
      */
     @FXML
-    private TableColumn statusTC;
-   
+    private TableColumn<Project, String> statusTC;
     
     @FXML
     public void index(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-       
-        
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("view/Projects.fxml"));  
         AnchorPane achorPane = (AnchorPane) loader.load();
@@ -75,7 +96,7 @@ public class ProjectsController implements Initializable {
      * @param event - ActionEvent
      */
      @FXML
-    private void handleAdd(ActionEvent event) throws Exception {
+    private void handleAddButtonAction(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("view/ProjectAdd.fxml"));  
         AnchorPane achorPane = (AnchorPane) loader.load();
@@ -88,16 +109,16 @@ public class ProjectsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       projectTC.setCellValueFactory(cellData -> cellData.getValue().getTitle());
+       idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
+       titleTC.setCellValueFactory(cellData -> cellData.getValue().getTitle());
+       //itemTC.setCellValueFactory(cellData -> cellData.getValue().getItemList());
+       amountTC.setCellValueFactory(cellData -> cellData.getValue().getAmount().asObject());
+       currencyTC.setCellValueFactory(cellData -> cellData.getValue().getCurrency());
+       //vendorTC.setCellValueFactory(cellData -> cellData.getValue().getVendor());
+       statusTC.setCellValueFactory(cellData -> cellData.getValue().getProjectStatus().getStatus());
        
-       //Get all Order information
         try {
-            
-            //Populate Order on TableView
             this.projectsTV.setItems(ProjectDAO.list());
-            
-            //System.out.debug("OrdersSceneController is initialized");
-            //System.out.debug("this.orderTable: " + this.orderTable);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
         }

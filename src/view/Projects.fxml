@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,16 +8,19 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProjectsController">
     <children>
-		<Button fx:id="newB" layoutX="2.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleAdd" text="+">
+		<Button fx:id="addB" layoutX="14.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleAddButtonAction" text="+">
          <font><Font name="System Bold" /></font>
       </Button>
 	  
-      <TableView fx:id="projectsTV" prefWidth="790.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="projectsTV" layoutX="-7.0" prefHeight="398.0" prefWidth="800.0" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
-          <TableColumn fx:id="projectTC" prefWidth="190.0" text="Project" />
-          <TableColumn fx:id="itemTC" minWidth="0.0" prefWidth="195.0" text="Item" />
-            <TableColumn fx:id="statusTC" prefWidth="99.0" text="Status" />
-            <TableColumn prefWidth="91.0" text="Actions" />
+          <TableColumn fx:id="idTC" prefWidth="47.0" text="ID" />
+          <TableColumn fx:id="titleTC" minWidth="0.0" prefWidth="202.0" text="Title" />
+            <TableColumn fx:id="serviceTC" prefWidth="176.0" text="Service" />
+            <TableColumn fx:id="amountTC" prefWidth="78.0" text="Amount" />
+            <TableColumn fx:id="currencyTC" prefWidth="61.0" text="Currency" />
+            <TableColumn fx:id="vendorTC" prefWidth="145.0" text="Vendor" />
+            <TableColumn fx:id="statusTC" prefWidth="90.0" text="Status" />
         </columns>
       </TableView>
 	 
