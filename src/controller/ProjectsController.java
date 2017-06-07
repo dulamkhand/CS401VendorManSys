@@ -23,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
@@ -57,6 +58,17 @@ public class ProjectsController implements Initializable {
     private TableColumn statusTC;
    
     
+    @FXML
+    public void index(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        System.out.println("asfasf");
+        
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("view/Projects.fxml"));  
+        AnchorPane achorPane = (AnchorPane) loader.load();
+
+        RootLayoutController.borderPane.setCenter(achorPane);
+    }
+    
     /**
      * Handle New Button Action.
      * 
@@ -79,6 +91,7 @@ public class ProjectsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       System.out.println("erwe");
        
         // searches all projects on database and loads the table view with them.
         projectsTV.getItems().addAll(

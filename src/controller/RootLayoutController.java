@@ -5,7 +5,6 @@
  */
 package controller;
 
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -15,7 +14,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
 /**
@@ -40,7 +41,7 @@ public class RootLayoutController {
         this.orderAddController = new OrderAddController();
         //this.vendorsController = new VendorsController();
     }
-
+ 
     public void go2homepage(ActionEvent event)  {
         try {
             // load rootLayout
@@ -66,7 +67,7 @@ public class RootLayoutController {
         
     @FXML
     private void go2projects(ActionEvent event) throws Exception {
-        //this.projectsController.index(event);
+        this.projectsController.index(event);
     }
     
     @FXML

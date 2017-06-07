@@ -10,7 +10,11 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProjectsController">
     <children>
-      <TableView fx:id="projectsTV" layoutX="3.0" layoutY="100.0" prefWidth="790.0">
+		<Button fx:id="newB" layoutX="2.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleAdd" text="+">
+         <font><Font name="System Bold" /></font>
+      </Button>
+	  
+      <TableView fx:id="projectsTV" prefWidth="790.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="0.0">
         <columns>
           <TableColumn fx:id="projectTC" prefWidth="190.0" text="Project" />
           <TableColumn fx:id="itemTC" minWidth="0.0" prefWidth="195.0" text="Item" />
@@ -18,11 +22,7 @@
             <TableColumn prefWidth="91.0" text="Actions" />
         </columns>
       </TableView>
-	  
-	  <Button fx:id="backB" layoutX="2.0" layoutY="520.0" mnemonicParsing="false" text="back"/>
-      <Button fx:id="newB" layoutX="50.0" layoutY="520.0" mnemonicParsing="false" onAction="#handleAdd" text="+">
-         <font><Font name="System Bold" /></font>
-      </Button>
+	 
 	  
    </children>
 </AnchorPane>
