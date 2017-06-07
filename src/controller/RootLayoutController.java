@@ -66,42 +66,42 @@ public class RootLayoutController {
     
         
     @FXML
-    private void go2projects(ActionEvent event) throws Exception {
+    public void go2projects(ActionEvent event) throws Exception {
         this.projectsController.index(event);
     }
     
     @FXML
-    private void go2items(ActionEvent event) throws Exception {
+    public void go2items(ActionEvent event) throws Exception {
         //this.itemsControl-ler.index(event);
     }
     
     @FXML
-    private void go2orders(ActionEvent event) throws Exception {
+    public void go2orders(ActionEvent event) throws Exception {
         this.ordersController.index(event);
     }
     
     @FXML
-    private void go2invoice(ActionEvent event) throws Exception {
+    public void go2invoice(ActionEvent event) throws Exception {
         //this.ordersController.index(event);
     }
     
     @FXML
-    private void go2payment(ActionEvent event) throws Exception {
+    public void go2payment(ActionEvent event) throws Exception {
         //this.ordersController.index(event);
     }
         
     @FXML
-    private void go2vendors(ActionEvent event) throws Exception {
+    public void go2vendors(ActionEvent event) throws Exception {
         //this.vendorsController.index(event);
     }
     
     @FXML
-    private void go2emps(ActionEvent event) throws Exception {
+    public void go2emps(ActionEvent event) throws Exception {
         //this.ordersController.index(event);
     }
     
     @FXML
-    private void logout(ActionEvent event) throws Exception {
+    public void logout(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Login.fxml"));
 
         Scene scene = new Scene(root);

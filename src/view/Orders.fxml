@@ -9,17 +9,17 @@
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrdersController">
     <children>
 	
-	  <!--<Button fx:id="backB" layoutX="2.0" layoutY="520.0" mnemonicParsing="false" text="back"/>-->
-      <Button fx:id="newB" layoutX="2.0" layoutY="407.0" mnemonicParsing="false" onAction="#handleAdd" text="+">
+      <Button fx:id="newB" layoutX="2.0" layoutY="407.0" mnemonicParsing="false" onAction="#add" text="+">
          <font><Font name="System Bold" /></font>
       </Button>
 	  
-      <TableView fx:id="orderTV" prefWidth="790.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="orderTV" editable="true" prefWidth="790.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="0.0">
         <columns>
-          <TableColumn fx:id="idTC" prefWidth="50.0" text="ID" />
+          <TableColumn fx:id="idTC" prefWidth="60.0" text="Order ID" />
+		  <TableColumn fx:id="projectTC" minWidth="0.0" prefWidth="100.0" text="Project" />
           <TableColumn fx:id="amountTC" minWidth="0.0" prefWidth="100.0" text="Amount" />
           <TableColumn fx:id="currencyTC" minWidth="0.0" prefWidth="100.0" text="Currency" />
-          <TableColumn prefWidth="100.0" text="Status" />
+          <TableColumn fx:id="statusTC" minWidth="0.0" prefWidth="100.0" text="Status" />
           <TableColumn prefWidth="100.0" text="Actions" />
         </columns>
       </TableView>

@@ -103,7 +103,8 @@ public class LoginController implements Initializable {
         if (validateForm() && validateUser()) {
             if (userType.equals("E")) {
                 //root = FXMLLoader.load(getClass().getResource("view/Employee.fxml"));
-                new RootLayoutController().go2homepage(event); // redirects to homepage once logged in
+                Main.rootLayoutController = new RootLayoutController();
+                Main.rootLayoutController.go2homepage(event); // redirects to homepage once logged in
             } else {
                 //root = FXMLLoader.load(getClass().getResource("view/Vendor.fxml"));
             }

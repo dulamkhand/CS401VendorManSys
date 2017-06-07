@@ -25,6 +25,9 @@ public class Main extends Application {
 
     // static member will be used in RootLayoutController
     public static Stage primaryStage;
+    
+    // static member will be used in other controllers to switch between controllers/pages
+    public static RootLayoutController rootLayoutController;
 
     @Override
     public void start(Stage stage) throws Exception {

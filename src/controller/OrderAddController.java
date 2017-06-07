@@ -11,18 +11,18 @@
 package controller;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import model.Order;
+import model.OrderDAO;
 
 /**
  * Projects Scene Controller.
@@ -30,98 +30,69 @@ import javafx.stage.Stage;
  * @author Group 1.
  */
 public class OrderAddController implements Initializable {
-    
-    /**
-     * Item Combo Box.
-     */
+   
     @FXML
-    ComboBox itemCB;
-    
-    /**
-     * Vendor Combo Box.
-     */
+    ComboBox projectCB;
+   
     @FXML
-    ComboBox vendorCB;
+    TextField amountTF;
     
-    /**
-     * Words TextField.
-     */
     @FXML
-    TextField wordsTF;
+    ComboBox currencyCB;
     
-    /**
-     * Words TextField.
-     */
     @FXML
-    Label messageL;
+    ComboBox statusCB;
+  
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        try {
+            ObservableList<Order> list = OrderDAO.list();
+            projectCB.getItems().addAll(list);
+            
+            currencyCB.getItems().addAll("USD", "MNT", "RUR", "AUD");
+            
+            statusCB.getItems().addAll("Active", "In Progress", "Fully");
+            
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(OrderAddController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     private Boolean validateForm() {
         Boolean retValue = false;
         
-        if (itemCB.getSelectionModel().isEmpty()) {
-            messageL.setText("Please, select the item");
-        } else if (wordsTF.getCharacters().length() == 0) {
-            messageL.setText("Please, inform the words quantity");
-        } else if (!wordsTF.getCharacters().toString().matches("[0-9]*")) {
-            messageL.setText("Please, inform just numbers in words field");
-        } else if (vendorCB.getSelectionModel().isEmpty()) {
-            messageL.setText("Please, select the vendor");
-        } else {
-            retValue = true;
-        }
-        
+//        if (itemCB.getSelectionModel().isEmpty()) {
+//            messageL.setText("Please, select the item");
+//        } else if (wordsTF.getCharacters().length() == 0) {
+//            messageL.setText("Please, inform the words quantity");
+//        } else if (!wordsTF.getCharacters().toString().matches("[0-9]*")) {
+//            messageL.setText("Please, inform just numbers in words field");
+//        } else if (vendorCB.getSelectionModel().isEmpty()) {
+//            messageL.setText("Please, select the vendor");
+//        } else {
+//            retValue = true;
+//        }
         return retValue;
     }
     
-    /**
-     * Handle Item Combo Box Action.
-     * 
-     * @param event - ActionEvent
-     */
-     @FXML
-    private void handleItemComboBoxAction(ActionEvent event) throws Exception {
-        
-        // searches all vendors of the selected item on database and load the vendor combobox with it.
-        vendorCB.getItems().addAll(
-                "Bek",
-                "Khandaa",
-                "Rafael");
+    @FXML
+    private void back(ActionEvent event) throws Exception {
+        Main.rootLayoutController.go2orders(event);
     }
-    
-    /**
-     * Handle Confirm Button Action.
-     * 
-     * @param event - ActionEvent
-     */
-     @FXML
-    private void handleConfirmButtonAction(ActionEvent event) throws Exception {
+   
+    @FXML
+    private void confirm(ActionEvent event) throws Exception {
         if (validateForm()) {
-            
-            // inserts the new Project on database.
-            
-            Parent root = FXMLLoader.load(getClass().getResource("view/Projects.fxml"));
-            
-            Scene scene = new Scene(root);
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            stage.setScene(scene);
-            stage.show();
+            // inserts into db
+//            OrderDAO.insert(projectCB.getValue(), amountTF.getCharacters().toString(), 
+//                    currencyCB.getValue(), statusCB.getValue());
+            OrderDAO.insert(2, Double.parseDouble(amountTF.getCharacters().toString()), 
+                    currencyCB.getValue().toString(), 3);
         }
+        Main.rootLayoutController.go2orders(event);
     }
     
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
-        // searches all items on database and load the item combobox with them.
-        itemCB.getItems().addAll(
-                "Mongolian to Russian",
-                "Russian to Mongolian",
-                "English to Russian",
-                "Russian to English");
-    }
+    
+    
 }

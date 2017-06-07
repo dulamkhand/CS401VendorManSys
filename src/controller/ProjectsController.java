@@ -60,7 +60,7 @@ public class ProjectsController implements Initializable {
     
     @FXML
     public void index(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        System.out.println("asfasf");
+       
         
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("view/Projects.fxml"));  

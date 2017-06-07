@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,6 +26,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import model.Order;
 import model.OrderDAO;
+import model.Project;
 
 /**
  * Orders Scene Controller.
@@ -40,9 +40,13 @@ public class OrdersController implements Initializable {
     @FXML
     private TableColumn<Order, Integer> idTC;
     @FXML
+    private TableColumn<Order, Project> projectTC;
+    @FXML
     private TableColumn<Order, Double> amountTC;
     @FXML
     private TableColumn<Order, String> currencyTC;
+    @FXML
+    private TableColumn<Order, String> statusTC;
     
     //Initializing the controller class.
     //This method is automatically called after the fxml file has been loaded.
@@ -64,7 +68,7 @@ public class OrdersController implements Initializable {
         idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
         amountTC.setCellValueFactory(cellData -> cellData.getValue().getAmount().asObject());
         currencyTC.setCellValueFactory(cellData -> cellData.getValue().getCurrency());
-        
+        //statusTC.setCellValueFactory(cellData -> cellData.getValue().getStatus());
         
         //Get all Order information
         try {
@@ -88,20 +92,14 @@ public class OrdersController implements Initializable {
 
         RootLayoutController.borderPane.setCenter(achorPane);
     }
-   
-    @FXML
-    private void add(Order o) throws ClassNotFoundException {
-        //Declare and ObservableList for table view
-        ObservableList<Order> list = FXCollections.observableArrayList();
-        //Add order to the ObservableList
-        list.add(o);
-        //Set items to the orderTable
-        orderTV.setItems(list);
-    }
 
      @FXML
-    private void handleAdd(ActionEvent event) throws Exception {
-        // 
+    private void add(ActionEvent event) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("view/OrderAdd.fxml"));  
+        AnchorPane achorPane = (AnchorPane) loader.load();
+
+        RootLayoutController.borderPane.setCenter(achorPane);
     }
     
    

@@ -56,13 +56,13 @@ public class OrderDAO {
         }
     }
     
-    public static void insert(Double amount, String currency) 
+    public static void insert(Integer projectId, Double amount, String currency, Integer statusId) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
             "BEGIN\n" +
                 "INSERT INTO order\n" +
-                "(AMOUNT, CURRENCY)\n" +
-                "VALUES(" + amount + ", '" + currency + "');\n" +
+                "(PROJECT_ID, AMOUNT, CURRENCY, STATUS)\n" +
+                "VALUES(" + projectId + ", " + amount + ", '" + currency + "', " + statusId + ");\n" +
                 "END;";
 
         try {
