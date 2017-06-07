@@ -14,5 +14,7 @@ import javafx.beans.property.StringProperty;
  */
 public class OrderStatus {
     private IntegerProperty id;
-    private StringProperty status;
+    private StringProperty name;
+    
+    
 }

@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,7 +22,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.order.OrderDAO;
-import model.project.Project;
 import model.project.ProjectDAO;
 
 /**
@@ -63,19 +61,27 @@ public class OrderAddController implements Initializable {
     }
     
     private Boolean validateForm() {
-        Boolean retValue = false;
+        Boolean retValue = true;
+        StringBuilder sb = new StringBuilder();
         
         if (projectCB.getSelectionModel().isEmpty()) {
-            messageL.setText("Please, select the item");
-        } else if (!amountTF.getCharacters().toString().matches("[0-9]*")) {
-            messageL.setText("Please, inform just numbers in words field");
-        } else if (currencyCB.getSelectionModel().isEmpty()) {
-            messageL.setText("");
-        } else if (statusCB.getSelectionModel().isEmpty()) {
-            messageL.setText("");
-        } else {
-            retValue = true;
+            sb.append("\nProject is required");
+            retValue = false;
         }
+        if (!amountTF.getCharacters().toString().matches("[0-9]*")) {
+            sb.append("\nAmount is required");
+            retValue = false;
+        } 
+        if (currencyCB.getSelectionModel().isEmpty()) {
+            sb.append("\nCurrency is required");
+            retValue = false;
+        } 
+        if (statusCB.getSelectionModel().isEmpty()) {
+            sb.append("\nStatus is required");
+            retValue = false;
+        } 
+        
+        if (!retValue) messageL.setText(sb.toString());
         return retValue;
     }
     
@@ -90,10 +96,16 @@ public class OrderAddController implements Initializable {
             // inserts into db
 //            OrderDAO.insert(projectCB.getValue(), amountTF.getCharacters().toString(), 
 //                    currencyCB.getValue(), statusCB.getValue());
+            System.out.println(projectCB.getSelectionModel().getSelectedIndex());
+            System.out.println(projectCB.getSelectionModel().getSelectedItem());
+            System.out.println(amountTF.getCharacters().toString());
+            System.out.println(currencyCB.getValue().toString());
+        
             OrderDAO.insert(2, Double.parseDouble(amountTF.getCharacters().toString()), 
                     currencyCB.getValue().toString(), 3);
+            Main.rootLayoutController.go2orders(event);
         }
-        Main.rootLayoutController.go2orders(event);
+        
     }
     
     

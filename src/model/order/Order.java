@@ -5,7 +5,7 @@
  */
 package model.order;
 
-import java.util.Date;
+import java.sql.Date;
 import javafx.beans.property.*;
 import model.invoice.Invoice;
 import model.project.Project;
@@ -29,10 +29,9 @@ public class Order {
         this.id = new SimpleIntegerProperty();
         this.amount = new SimpleDoubleProperty();
         this.currency = new SimpleStringProperty();
-        this.created = new Date();
-        this.project = new Project();
-        this.status = new OrderStatus();
-        this.invoice = new Invoice();
+        //this.project = new Project();
+        //this.status = new OrderStatus();
+        //this.invoice = new Invoice();
     }
     
     

@@ -32,9 +32,8 @@
 			<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 			<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
-         <children>
-      		
-      		<Label text="Project" GridPane.rowIndex="1" />
+			 <children>
+			<Label text="Project" GridPane.rowIndex="1" />
       		<ComboBox fx:id="projectCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       		
       		<Label text="Currency" GridPane.rowIndex="2" />
@@ -45,6 +44,8 @@
       
 			<Label text="Status" GridPane.rowIndex="4" />
       		<ComboBox fx:id="statusCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+			
+			<Label fx:id="messageL" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="5" textFill="RED" />
 			
       		<Button fx:id="backB" mnemonicParsing="false" onAction="#back" text="back" GridPane.rowIndex="6" />
       		<Button fx:id="confirmB" mnemonicParsing="false" onAction="#confirm" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="6" />

@@ -15,7 +15,7 @@ import model.project.ProjectDAO;
 public class OrderDAO {
   
     public static Order find(String id) throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT * FROM order WHERE id="+id;
+        String selectStmt = "SELECT * FROM orders WHERE id="+id;
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
           
@@ -23,6 +23,7 @@ public class OrderDAO {
             if (rs.next()) {
                 o = new Order();
                 o.setId(rs.getInt("ID"));
+                o.setProject(ProjectDAO.find(rs.getInt("PROJECT_ID")));
                 o.setAmount(rs.getDouble("AMOUNT"));
                 o.setCurrency(rs.getString("CURRENCY"));
             }
@@ -36,7 +37,8 @@ public class OrderDAO {
 
     public static ObservableList<Order> list() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT * FROM orders WHERE 1;";
+        String selectStmt = "SELECT id, project_id, amount, currency, status"
+                + " FROM orders WHERE 1;";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableList<Order> list = FXCollections.observableArrayList();
@@ -61,11 +63,8 @@ public class OrderDAO {
     public static void insert(Integer projectId, Double amount, String currency, Integer statusId) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
-            "BEGIN\n" +
-                "INSERT INTO order\n" +
-                "(PROJECT_ID, AMOUNT, CURRENCY, STATUS)\n" +
-                "VALUES(" + projectId + ", " + amount + ", '" + currency + "', " + statusId + ");\n" +
-                "END;";
+            "INSERT INTO orders (PROJECT_ID, AMOUNT, CURRENCY, STATUS) "
+            + " VALUES(" + projectId + ", " + amount + ", '" + currency + "', " + statusId + ");";
 
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
@@ -79,7 +78,7 @@ public class OrderDAO {
             throws SQLException, ClassNotFoundException {
         String updateStmt =
             "BEGIN\n" +
-                "   UPDATE order\n" +
+                "   UPDATE orders\n" +
                 "      SET amount = '" + amount + "'\n" +
                 "      SET currency = '" + currency + "'\n" +
                 "    WHERE ID = " + id + ";\n" +
@@ -96,7 +95,7 @@ public class OrderDAO {
     public static void delete(String id) throws SQLException, ClassNotFoundException {
         String updateStmt =
             "BEGIN\n" +
-                "   DELETE FROM order\n" +
+                "   DELETE FROM orders\n" +
                 "         WHERE id ="+ id +";\n" +
                 "   COMMIT;\n" +
                 "END;";
