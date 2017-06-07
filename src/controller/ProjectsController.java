@@ -23,8 +23,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import model.ProjectDAO;
 import model.project.Project;
+import model.project.ProjectDAO;
 
 /**
  * Projects Scene Controller.

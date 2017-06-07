@@ -5,7 +5,6 @@
  */
 package model.order;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import java.util.Date;
 import javafx.beans.property.*;
 import model.invoice.Invoice;
@@ -25,7 +24,16 @@ public class Order {
     private OrderStatus status;
     //optional (0..1)
     private Invoice invoice;
-    
+
+    public Order() {
+        this.id = new SimpleIntegerProperty();
+        this.amount = new SimpleDoubleProperty();
+        this.currency = new SimpleStringProperty();
+        this.created = new Date();
+        this.project = new Project();
+        this.status = new OrderStatus();
+        this.invoice = new Invoice();
+    }
     
     
     @Override
@@ -36,16 +44,27 @@ public class Order {
         //return String.format("Order(%s): amount(%s), currency(%s).", this.id.getValue(), 
         //       this.amount.getValue(), this.currency.getValue());
     }
-  
 
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
+    public String getProjectTitle() {
+        return project.getTitle().getValue();
     }
     
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
     
 
     public DoubleProperty getAmount() {
@@ -64,4 +83,11 @@ public class Order {
         this.currency.set(currency);
     }
 
+    public IntegerProperty getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id.set(id);
+    }
 }

@@ -16,7 +16,8 @@ import model.order.Order;
  * @author Khandaa
  */
 public class Project {
-    
+
+    private IntegerProperty id;
     private StringProperty number;
     private StringProperty title;
     private DoubleProperty amount;
@@ -27,6 +28,33 @@ public class Project {
     private ListProperty<Item> items;
     //optional(0..1)
     private Order order;
+    
+    public Project() {
+        this.id = new SimpleIntegerProperty();
+        this.number = new SimpleStringProperty();
+        this.title = new SimpleStringProperty();
+        this.amount = new SimpleDoubleProperty();
+        this.currency = new SimpleStringProperty();
+       
+        this.created = new Date();
+        //this.vendor = new Vendor();
+        this.status = new ProjectStatus();
+        //this.items = 
+        this.order = null;
+    }
+    
+    @Override
+    public String toString() {
+        return this.title.getValue();
+    }
+    
+    public IntegerProperty getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id.set(id);
+    }
 
     public StringProperty getNumber() {
         return number;

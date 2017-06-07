@@ -13,15 +13,15 @@ import java.sql.SQLException;
  */
 public class ProjectDAO {
   
-    public static Project find(String id) throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT * FROM project WHERE id="+id;
+    public static Project find(Integer id) throws SQLException, ClassNotFoundException {
+        String selectStmt = "SELECT * FROM project WHERE id=" + id + ";";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
           
             Project p = null;
             if (rs.next()) {
                 p = new Project();
-                //p.setId(rs.getInt("ID"));
+                p.setId(rs.getInt("ID"));
                 p.setTitle(rs.getString("TITLE"));
                 p.setAmount(rs.getDouble("AMOUNT"));
                 p.setCurrency(rs.getString("CURRENCY"));
@@ -38,7 +38,7 @@ public class ProjectDAO {
 
     public static ObservableList<Project> list() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT * FROM project";
+        String selectStmt = "SELECT * FROM project;";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableList<Project> list = FXCollections.observableArrayList();
@@ -46,7 +46,7 @@ public class ProjectDAO {
             Project p;
             while (rs.next()) {
                 p = new Project();
-                //p.setId(rs.getInt("ID"));
+                p.setId(rs.getInt("ID"));
                 p.setTitle(rs.getString("TITLE"));
                 p.setAmount(rs.getDouble("AMOUNT"));
                 p.setCurrency(rs.getString("CURRENCY"));

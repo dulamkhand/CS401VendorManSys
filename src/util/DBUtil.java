@@ -26,7 +26,7 @@ public class DBUtil {
         //Establish the connection using connection string
         try {
             conn = DriverManager.getConnection(connStr);
-            System.out.println("Database connection is established");
+            //System.out.println("Database connection is established");
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console" + e);
             throw e;
@@ -37,7 +37,7 @@ public class DBUtil {
         try {
             if (conn != null && !conn.isClosed()) {
                 conn.close();
-                System.out.println("Database connection is closed");
+                //System.out.println("Database connection is closed");
             }
         } catch (SQLException e){
            throw e;

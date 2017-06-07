@@ -20,9 +20,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import model.Order;
-import model.OrderDAO;
+import model.order.OrderDAO;
+import model.project.Project;
+import model.project.ProjectDAO;
 
 /**
  * Projects Scene Controller.
@@ -43,12 +45,13 @@ public class OrderAddController implements Initializable {
     @FXML
     ComboBox statusCB;
   
+    @FXML
+    Label messageL;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            ObservableList<Order> list = OrderDAO.list();
-            projectCB.getItems().addAll(list);
+            projectCB.getItems().addAll(ProjectDAO.list());
             
             currencyCB.getItems().addAll("USD", "MNT", "RUR", "AUD");
             
@@ -62,17 +65,17 @@ public class OrderAddController implements Initializable {
     private Boolean validateForm() {
         Boolean retValue = false;
         
-//        if (itemCB.getSelectionModel().isEmpty()) {
-//            messageL.setText("Please, select the item");
-//        } else if (wordsTF.getCharacters().length() == 0) {
-//            messageL.setText("Please, inform the words quantity");
-//        } else if (!wordsTF.getCharacters().toString().matches("[0-9]*")) {
-//            messageL.setText("Please, inform just numbers in words field");
-//        } else if (vendorCB.getSelectionModel().isEmpty()) {
-//            messageL.setText("Please, select the vendor");
-//        } else {
-//            retValue = true;
-//        }
+        if (projectCB.getSelectionModel().isEmpty()) {
+            messageL.setText("Please, select the item");
+        } else if (!amountTF.getCharacters().toString().matches("[0-9]*")) {
+            messageL.setText("Please, inform just numbers in words field");
+        } else if (currencyCB.getSelectionModel().isEmpty()) {
+            messageL.setText("");
+        } else if (statusCB.getSelectionModel().isEmpty()) {
+            messageL.setText("");
+        } else {
+            retValue = true;
+        }
         return retValue;
     }
     

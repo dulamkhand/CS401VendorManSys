@@ -26,7 +26,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import model.order.Order;
 import model.order.OrderDAO;
-import model.project.Project;
 
 /**
  * Orders Scene Controller.
@@ -40,7 +39,7 @@ public class OrdersController implements Initializable {
     @FXML
     private TableColumn<Order, Integer> idTC;
     @FXML
-    private TableColumn<Order, Project> projectTC;
+    private TableColumn<Order, String> projectTC;
     @FXML
     private TableColumn<Order, Double> amountTC;
     @FXML
@@ -66,6 +65,7 @@ public class OrdersController implements Initializable {
         must have an additional asObject():
         */
         idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
+        projectTC.setCellValueFactory(cellData -> cellData.getValue().getProject().getTitle());
         amountTC.setCellValueFactory(cellData -> cellData.getValue().getAmount().asObject());
         currencyTC.setCellValueFactory(cellData -> cellData.getValue().getCurrency());
         //statusTC.setCellValueFactory(cellData -> cellData.getValue().getStatus());

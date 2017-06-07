@@ -35,16 +35,16 @@
          <children>
       		
       		<Label text="Project" GridPane.rowIndex="1" />
-      		<ComboBox fx:id="projectCB" prefHeight="25.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      		<ComboBox fx:id="projectCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       		
       		<Label text="Currency" GridPane.rowIndex="2" />
-      		<ComboBox fx:id="currencyCB" prefHeight="25.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      		<ComboBox fx:id="currencyCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       		
       		<Label text="Amount" GridPane.rowIndex="3" />
-      		<TextField fx:id="amountTF" prefHeight="25.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      		<TextField fx:id="amountTF" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       
 			<Label text="Status" GridPane.rowIndex="4" />
-      		<ComboBox fx:id="statusCB" prefHeight="25.0" prefWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      		<ComboBox fx:id="statusCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 			
       		<Button fx:id="backB" mnemonicParsing="false" onAction="#back" text="back" GridPane.rowIndex="6" />
       		<Button fx:id="confirmB" mnemonicParsing="false" onAction="#confirm" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="6" />

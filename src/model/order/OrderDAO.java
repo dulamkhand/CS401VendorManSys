@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.project.ProjectDAO;
 
 /**
  *
@@ -44,10 +45,11 @@ public class OrderDAO {
             while (rs.next()) {
                 o = new Order();
                 o.setId(rs.getInt("ID"));
+                o.setProject(ProjectDAO.find(rs.getInt("PROJECT_ID")));
                 o.setAmount(rs.getDouble("AMOUNT"));
                 o.setCurrency(rs.getString("CURRENCY"));
                 list.add(o);
-                System.out.println(o.toString());
+                //System.out.println(o.toString());
             }
             return list;
         } catch (SQLException e) {
