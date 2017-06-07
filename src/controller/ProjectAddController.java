@@ -99,7 +99,7 @@ public class ProjectAddController implements Initializable {
             
             // inserts the new Project on database.
             
-            Parent root = FXMLLoader.load(getClass().getResource("ProjectsScene.fxml"));
+            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Projects.fxml"));
             
             Scene scene = new Scene(root);
 

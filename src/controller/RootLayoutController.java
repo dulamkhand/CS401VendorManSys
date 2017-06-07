@@ -81,13 +81,28 @@ public class RootLayoutController {
     }
     
     @FXML
+    private void go2invoice(ActionEvent event) throws Exception {
+        //this.ordersController.index(event);
+    }
+    
+    @FXML
+    private void go2payment(ActionEvent event) throws Exception {
+        //this.ordersController.index(event);
+    }
+        
+    @FXML
     private void go2vendors(ActionEvent event) throws Exception {
         //this.vendorsController.index(event);
     }
     
     @FXML
+    private void go2emps(ActionEvent event) throws Exception {
+        //this.ordersController.index(event);
+    }
+    
+    @FXML
     private void logout(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/LoginScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Login.fxml"));
 
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

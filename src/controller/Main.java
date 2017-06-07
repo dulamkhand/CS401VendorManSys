@@ -32,7 +32,7 @@ public class Main extends Application {
         Main.primaryStage.setTitle("Vendor Management System");
 
         // load login page
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/LoginScene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Login.fxml"));
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
