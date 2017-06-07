@@ -22,11 +22,11 @@ public class ProjectDAO {
             Project p = null;
             if (rs.next()) {
                 p = new Project();
-                p.setId(rs.getInt("ID"));
+                //p.setId(rs.getInt("ID"));
                 p.setTitle(rs.getString("TITLE"));
                 p.setAmount(rs.getDouble("AMOUNT"));
                 p.setCurrency(rs.getString("CURRENCY"));
-                p.setVendorId(rs.getInt("VENDOR_ID"));
+                //p.setVendorId(rs.getInt("VENDOR_ID"));
                 //p.setCreatedDate(new SimpleIntegerProperty(rs.getDate("CREATED_DATE")));
             }
             return p;
@@ -47,11 +47,11 @@ public class ProjectDAO {
             Project p;
             while (rs.next()) {
                 p = new Project();
-                p.setId(rs.getInt("ID"));
+                //p.setId(rs.getInt("ID"));
                 p.setTitle(rs.getString("TITLE"));
                 p.setAmount(rs.getDouble("AMOUNT"));
                 p.setCurrency(rs.getString("CURRENCY"));
-                p.setVendorId(rs.getInt("VENDOR_ID"));              
+                //p.setVendorId(rs.getInt("VENDOR_ID"));              
                 list.add(p);
             }
             return list;

@@ -26,7 +26,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import model.order.Order;
 import model.order.OrderDAO;
-import model.Project;
+import model.project.Project;
 
 /**
  * Orders Scene Controller.
