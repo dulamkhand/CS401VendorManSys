@@ -23,11 +23,12 @@ public class Item {
     private StringProperty name;
     private IntegerProperty numberOfWords;
     private ServiceType serviceType;
+    private DateProperty createdDate;
   
     public Item() {
         this.id = new SimpleIntegerProperty();
         this.name = new SimpleStringProperty();
-        this.numberWords = new SimpleIntegerProperty();
+        this.numberOfWords = new SimpleIntegerProperty();
         this.createdDate = new SimpleStringProperty();
     }
 
@@ -56,11 +57,11 @@ public class Item {
     }
     
     public IntegerProperty getNumberWords() {
-        return numberWords;
+        return numberOfWords;
     }
 
     public void setNumberWords(Integer numberWords) {
-        this.numberWords.set(numberWords);
+        this.numberOfWords.set(numberWords);
     }
     
     public StringProperty getCreatedDate() {
@@ -71,61 +72,4 @@ public class Item {
         this.createdDate = createdDate;
     }
   
-    public Item() {
-        this.id = new SimpleIntegerProperty();
-        this.projectId = new SimpleIntegerProperty();
-        this.name = new SimpleStringProperty();
-        this.numberWords = new SimpleIntegerProperty();
-        this.createdDate = new SimpleStringProperty();
-    }
-
-    public IntegerProperty getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id.set(id);
-    }
-    
-    public IntegerProperty getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId.set(projectId);
-    }
-    
-    public StringProperty getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name.set(name);
-    }
-    
-    public IntegerProperty getNumberWords() {
-        return numberWords;
-    }
-
-    public void setNumberWords(Integer numberWords) {
-        this.numberWords.set(numberWords);
-    }
-    
-    public StringProperty getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(StringProperty createdDate) {
-        this.createdDate = createdDate;
-    }
-    
-    private Project project;
-    
-    public ServiceType getServiceType() {
-        return serviceType;
-    }
-
-    public void setServiceType(ServiceType serviceType) {
-        this.serviceType = serviceType;
-    }
 }
