@@ -25,7 +25,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import model.Employee;
 import model.Order;
 import model.OrderDAO;
 
@@ -37,7 +36,7 @@ import model.OrderDAO;
 public class OrdersSceneController implements Initializable {
     
     @FXML
-    private TableView orderTable;
+    private TableView<Order> orderTable;
     @FXML
     private TableColumn<Order, Integer> idColumn;
     @FXML
@@ -47,8 +46,11 @@ public class OrdersSceneController implements Initializable {
     
     //Initializing the controller class.
     //This method is automatically called after the fxml file has been loaded.
-    @FXML
-    private void initialize () {
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
         /*
         The setCellValueFactory(...) that we set on the table columns are used to determine
         which field inside the Order objects should be used for the particular column.
@@ -66,26 +68,18 @@ public class OrdersSceneController implements Initializable {
     
     //List all orders
     @FXML
-    private void list(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+    public void listAllOrders(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         try {
             //Get all Order information
             ObservableList<Order> list = OrderDAO.list();
             //Populate Order on TableView
-            populate(list);
+            orderTable.setItems(list);
         } catch (SQLException e){
             System.out.println("Error occurred while getting order information from DB.\n" + e);
             throw e;
         }
     }
-    
-    //Populate Orders for TableView
-    @FXML
-    private void populate(ObservableList<Order> list) throws ClassNotFoundException {
-        //Set items to the orderTable
-        orderTable.setItems(list);
-    }
-    
-    //Populate Order
+   
     @FXML
     private void add(Order o) throws ClassNotFoundException {
         //Declare and ObservableList for table view
@@ -96,7 +90,6 @@ public class OrdersSceneController implements Initializable {
         orderTable.setItems(list);
     }
 
-   
     
     /**
      * Handle New Button Action.
@@ -132,11 +125,8 @@ public class OrdersSceneController implements Initializable {
         stage.show();
     }
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    @FXML
+    private void redirect2projects(ActionEvent event) throws Exception {
+        // 
     }
 }
