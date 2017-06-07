@@ -1,6 +1,5 @@
-package model;
+package model.order;
 
-import model.Project;
 import util.DBUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,47 +11,43 @@ import java.sql.SQLException;
  *
  * @author Khandaa
  */
-public class ProjectDAO {
+public class OrderDAO {
   
-    public static Project find(String id) throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT * FROM project WHERE id="+id;
+    public static Order find(String id) throws SQLException, ClassNotFoundException {
+        String selectStmt = "SELECT * FROM order WHERE id="+id;
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
           
-            Project p = null;
+            Order o = null;
             if (rs.next()) {
-                p = new Project();
-                p.setId(rs.getInt("ID"));
-                p.setTitle(rs.getString("TITLE"));
-                p.setAmount(rs.getDouble("AMOUNT"));
-                p.setCurrency(rs.getString("CURRENCY"));
-                p.setVendorId(rs.getInt("VENDOR_ID"));
-                //p.setCreatedDate(new SimpleIntegerProperty(rs.getDate("CREATED_DATE")));
+                o = new Order();
+                o.setId(rs.getInt("ID"));
+                o.setAmount(rs.getDouble("AMOUNT"));
+                o.setCurrency(rs.getString("CURRENCY"));
             }
-            return p;
+            return o;
         } catch (SQLException e) {
-            System.out.println("While searching a project with " + 
+            System.out.println("While searching a order with " + 
                     id + " id, an error occurred: " + e);
             throw e;
         }
     }
 
-    public static ObservableList<Project> list() throws SQLException, 
+    public static ObservableList<Order> list() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT * FROM project";
+        String selectStmt = "SELECT * FROM orders WHERE 1;";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
-            ObservableList<Project> list = FXCollections.observableArrayList();
+            ObservableList<Order> list = FXCollections.observableArrayList();
 
-            Project p;
+            Order o;
             while (rs.next()) {
-                p = new Project();
-                p.setId(rs.getInt("ID"));
-                p.setTitle(rs.getString("TITLE"));
-                p.setAmount(rs.getDouble("AMOUNT"));
-                p.setCurrency(rs.getString("CURRENCY"));
-                p.setVendorId(rs.getInt("VENDOR_ID"));              
-                list.add(p);
+                o = new Order();
+                o.setId(rs.getInt("ID"));
+                o.setAmount(rs.getDouble("AMOUNT"));
+                o.setCurrency(rs.getString("CURRENCY"));
+                list.add(o);
+                System.out.println(o.toString());
             }
             return list;
         } catch (SQLException e) {
@@ -61,13 +56,13 @@ public class ProjectDAO {
         }
     }
     
-    public static void insert(String title, Double amount, String currency, Integer vendorId) 
+    public static void insert(Integer projectId, Double amount, String currency, Integer statusId) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
             "BEGIN\n" +
-                "INSERT INTO project\n" +
-                "(TITLE, AMOUNT, CURRENCY, VENDOR_ID)\n" +
-                "VALUES('"+title+"', "+amount+", '"+currency+"', "+vendorId+");\n" +
+                "INSERT INTO order\n" +
+                "(PROJECT_ID, AMOUNT, CURRENCY, STATUS)\n" +
+                "VALUES(" + projectId + ", " + amount + ", '" + currency + "', " + statusId + ");\n" +
                 "END;";
 
         try {
@@ -78,15 +73,13 @@ public class ProjectDAO {
         }
     }
    
-    public static void update (String id, String title, Double amount, String currency, Integer vendorId) 
+    public static void update (String id, String amount, Integer currency) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
             "BEGIN\n" +
-                "   UPDATE project\n" +
-                "      SET title = '" + title + "'\n" +
-                "      SET amount = " + amount + "\n" +
+                "   UPDATE order\n" +
+                "      SET amount = '" + amount + "'\n" +
                 "      SET currency = '" + currency + "'\n" +
-                "      SET VENDOR_ID = " + vendorId + "\n" +
                 "    WHERE ID = " + id + ";\n" +
                 "   COMMIT;\n" +
                 "END;";
@@ -101,7 +94,7 @@ public class ProjectDAO {
     public static void delete(String id) throws SQLException, ClassNotFoundException {
         String updateStmt =
             "BEGIN\n" +
-                "   DELETE FROM project\n" +
+                "   DELETE FROM order\n" +
                 "         WHERE id ="+ id +";\n" +
                 "   COMMIT;\n" +
                 "END;";

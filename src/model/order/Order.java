@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.order;
 
+import com.sun.xml.internal.bind.v2.TODO;
+import java.util.Date;
 import javafx.beans.property.*;
+import model.invoice.Invoice;
+import model.project.Project;
 
 /**
  *
@@ -16,29 +20,33 @@ public class Order {
     private IntegerProperty id;
     private DoubleProperty amount;
     private StringProperty currency;
-
-    public Order() {
-        this.id = new SimpleIntegerProperty();
-        this.amount = new SimpleDoubleProperty();
-        this.currency = new SimpleStringProperty();
-    }
+    private Date created;
+    private Project project;
+    private OrderStatus status;
+    //optional (0..1)
+    private Invoice invoice;
+    
+    
     
     @Override
     public String toString() {
-        return String.format("Order(%s): amount(%s), currency(%s).", this.id.getValue(), 
-                this.amount.getValue(), this.currency.getValue());
+        return String.format("Order(%s): amount(%s), currency(%s), created(%s), project(%s).", this.id.getValue(), 
+                this.amount.getValue(), this.currency.getValue(), this.created.toString(), this.project.toString());
+        //to-do revise this implementation
         //return String.format("Order(%s): amount(%s), currency(%s).", this.id.getValue(), 
         //       this.amount.getValue(), this.currency.getValue());
     }
   
 
-    public IntegerProperty getId() {
-        return id;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setId(Integer id) {
-        this.id.set(id);
+    public void setCreated(Date created) {
+        this.created = created;
     }
+    
+    
 
     public DoubleProperty getAmount() {
         return amount;
