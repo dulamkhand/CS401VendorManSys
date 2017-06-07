@@ -5,10 +5,14 @@
  */
 package model.invoice;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author bek
  */
 public class InvoiceStatus {
-    
+    private IntegerProperty id;
+    private StringProperty status;
 }
