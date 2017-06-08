@@ -17,29 +17,27 @@ import javafx.beans.property.StringProperty;
  */
 public class Account {
 
-    private IntegerProperty id;
+    private StringProperty number;
     private StringProperty loginName;
     private StringProperty password;
-    private Date created;
-    private AccountType type;
+    private StringProperty accountType;
     private VendorEmployee vendorEmployee;
 
-    Account(IntegerProperty id, StringProperty loginName, StringProperty password, Date created, AccountType type) {
-        this.id = id;
+    Account(StringProperty number, StringProperty loginName, StringProperty password, StringProperty type) {
+        this.number = number;
         this.loginName = loginName;
         this.password = password;
-        this.created = created;
-        this.type = type;
+        this.accountType = type;
     }
 
     
 
-    public IntegerProperty getId() {
-        return id;
+    public StringProperty getNumber() {
+        return number;
     }
 
-    void setId(IntegerProperty id) {
-        this.id = id;
+    void setNumber(StringProperty number) {
+        this.number = number;
     }
 
     public StringProperty getLoginName() {
@@ -58,27 +56,19 @@ public class Account {
         this.password = password;
     }
 
-    public Date getCreated() {
-        return created;
-    }
-
-    void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public AccountType getType() {
-        return type;
-    }
-
-    void setType(AccountType type) {
-        this.type = type;
-    }
-
     public VendorEmployee getVendorEmployee() {
         return vendorEmployee;
     }
 
     void setVendorEmployee(VendorEmployee vendorEmployee) {
         this.vendorEmployee = vendorEmployee;
+    }
+
+    public StringProperty getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(StringProperty accountType) {
+        this.accountType = accountType;
     }
 }

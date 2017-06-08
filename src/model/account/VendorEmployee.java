@@ -13,12 +13,10 @@ import java.util.Date;
  */
 public abstract class VendorEmployee {
 
-    private Date created;
     private Account account;
 
-    VendorEmployee(Account acc, Date created) {
+    VendorEmployee(Account acc) {
         this.account = acc;
-        this.created = created;
     }
 
     public Account getAccount() {
@@ -28,13 +26,4 @@ public abstract class VendorEmployee {
     void setAccount(Account account) {
         this.account = account;
     }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    void setCreated(Date created) {
-        this.created = created;
-    }
-  
 }

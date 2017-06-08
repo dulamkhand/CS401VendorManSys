@@ -19,8 +19,8 @@ public class Company extends Vendor {
     private StringProperty name;
     private StringProperty companyRepresentative;
 
-    public Company(StringProperty compRegNumber, StringProperty name, StringProperty companyRepresentative, Account acc, Date date, IntegerProperty id) {
-        super(acc, date, id);
+    public Company(StringProperty compRegNumber, StringProperty name, StringProperty companyRepresentative, Account acc, StringProperty number) {
+        super(acc, number);
         this.compRegNumber = compRegNumber;
         this.name = name;
         this.companyRepresentative = companyRepresentative;

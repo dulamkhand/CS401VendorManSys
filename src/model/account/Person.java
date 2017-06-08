@@ -19,8 +19,8 @@ public class Person extends Vendor {
     private StringProperty SSN;
     private StringProperty nationality;
 
-    public Person(StringProperty firstName, StringProperty lastName, StringProperty SSN, StringProperty nationality, Account acc, Date date, IntegerProperty id) {
-        super(acc, date, id);
+    public Person(StringProperty firstName, StringProperty lastName, StringProperty SSN, StringProperty nationality, Account acc, StringProperty number) {
+        super(acc, number);
         this.firstName = firstName;
         this.lastName = lastName;
         this.SSN = SSN;

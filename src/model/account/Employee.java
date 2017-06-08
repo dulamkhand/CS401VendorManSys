@@ -14,29 +14,31 @@ import javafx.beans.property.*;
  */
 public class Employee extends VendorEmployee {
 
-    private IntegerProperty employeeId;
+    private StringProperty number;
     private StringProperty firstName;
     private StringProperty lastName;
 
-    Employee(IntegerProperty employeeId, StringProperty firstName, StringProperty lastName, Account acc, Date created) {
-        super(acc, created);
-        this.employeeId = employeeId;
+    Employee(StringProperty number, StringProperty firstName, StringProperty lastName, Account acc) {
+        super(acc);
+        this.number = number;
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
     
-
-    public int getEmployeeId() {
-        return employeeId.get();
+    Employee(Account acc, Date created) {
+        super(acc);
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId.set(employeeId);
+    public StringProperty getNumber() {
+        return number;
     }
 
-    public IntegerProperty employeeIdProperty() {
-        return employeeId;
+    public void setNumber(StringProperty number) {
+        this.number = number;
+    }
+    
+    public StringProperty numberProperty() {
+        return number;
     }
 
     public String getFirstName() {

@@ -18,16 +18,16 @@ public class VendorAccountFactory {
     private VendorAccountFactory() {
     }
 
-    public static VendorAccount createVendorCompany(int accId, int empId, String login, String password, Date created, String compRegNumber, String name, String compRep, int vendorId) {
-        Account account = new Account(new SimpleIntegerProperty(accId), new SimpleStringProperty(login), new SimpleStringProperty(password), created, AccountType.getEmployeeAccountType());
-        Company company = new Company(new SimpleStringProperty(compRegNumber), new SimpleStringProperty(name), new SimpleStringProperty(compRep), account, created, new SimpleIntegerProperty(vendorId));
+    public static VendorAccount createVendorCompany(String number, int empId, String login, String password, String compRegNumber, String name, String compRep, String vendorNumber) {
+        Account account = new Account(new SimpleStringProperty(number), new SimpleStringProperty(login), new SimpleStringProperty(password), new SimpleStringProperty(AccountTypeEnum.COMPANY.toString()));
+        Company company = new Company(new SimpleStringProperty(compRegNumber), new SimpleStringProperty(name), new SimpleStringProperty(compRep), account, new SimpleStringProperty(vendorNumber));
         account.setVendorEmployee(company);
         return new VendorAccountImpl(company, account);
     }
-    
-    public static VendorAccount createVendorPerson(int accId, int empId, String login, String password, Date created, String firstName, String lastName, String SSN, String nationality, int vendorId) {
-        Account account = new Account(new SimpleIntegerProperty(accId), new SimpleStringProperty(login), new SimpleStringProperty(password), created, AccountType.getEmployeeAccountType());
-        Person person = new Person(new SimpleStringProperty(firstName), new SimpleStringProperty(lastName), new SimpleStringProperty(SSN), new SimpleStringProperty(nationality), account, created, new SimpleIntegerProperty(vendorId));
+
+    public static VendorAccount createVendorPerson(String number, int empId, String login, String password, Date created, String firstName, String lastName, String SSN, String nationality, String vendorNumber) {
+        Account account = new Account(new SimpleStringProperty(number), new SimpleStringProperty(login), new SimpleStringProperty(password), new SimpleStringProperty(AccountTypeEnum.PERSON.toString()));
+        Person person = new Person(new SimpleStringProperty(firstName), new SimpleStringProperty(lastName), new SimpleStringProperty(SSN), new SimpleStringProperty(nationality), account, new SimpleStringProperty(vendorNumber));
         account.setVendorEmployee(person);
         return new VendorAccountImpl(person, account);
     }
