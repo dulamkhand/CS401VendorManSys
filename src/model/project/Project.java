@@ -109,7 +109,7 @@ public class Project {
         StringProperty serviceName = null;
         
         if (itemList != null && itemList.size() > 0) {
-            serviceName = itemList.get(0).getServiceType().getName();
+            //serviceName = itemList.get(0).getServiceType().getName();
         }
         
         return serviceName;

@@ -57,6 +57,31 @@ public class ItemDAO {
         }
     }
     
+    public static ObservableList<Item> listAvailable(String serviceName) throws SQLException, 
+            ClassNotFoundException {
+        String selectStmt = "SELECT * FROM item "
+                + "INNER JOIN service ON service.id = item.service_id "
+                + "WHERE item.project_id IS NULL and service.name = '" + serviceName + "'";
+        try {
+            ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
+            ObservableList<Item> list = FXCollections.observableArrayList();
+
+            Item i;
+            while (rs.next()) {
+                i = new Item();
+                i.setId(rs.getInt("ID"));
+                //i.setProjectId(rs.getInt("PROJECT_ID"));
+                i.setName(rs.getString("NAME"));
+                i.setNumberWords(rs.getInt("NB_WORDS"));
+                list.add(i);
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println("SQL select operation has been failed: " + e);
+            throw e;
+        }
+    }
+    
     public static void insert(Integer projectId, String name, Integer numberWords) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =

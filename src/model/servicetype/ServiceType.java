@@ -5,17 +5,27 @@
  */
 package model.servicetype;
 
-import javafx.beans.property.StringProperty;
-
 /**
  *
  * @author bek
  */
 public class ServiceType {
-    private StringProperty name;
-    private StringProperty description;
+    private Integer id;
+    private String name;
     
-    public StringProperty getName() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
+    public Integer getId() {
+        return id;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getName() {
         return name;
     }
 }

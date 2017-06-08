@@ -11,7 +11,14 @@
 package controller;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +27,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import model.item.Item;
+import model.item.ItemDAO;
+import model.servicetype.ServiceType;
+import model.servicetype.ServiceTypeDAO;
 
 /**
  * Projects Scene Controller.
@@ -33,6 +44,12 @@ public class ProjectAddController implements Initializable {
      */
     @FXML
     TextField titleTF;
+    
+    /**
+     * Service Combo Box.
+     */
+    @FXML
+    ComboBox serviceCB;
     
     /**
      * Item Combo Box.
@@ -49,8 +66,8 @@ public class ProjectAddController implements Initializable {
     /**
      * Words TextField.
      */
-    @FXML
-    TextField wordsTF;
+    //@FXML
+    //TextField wordsTF;
     
     /**
      * Words TextField.
@@ -63,14 +80,14 @@ public class ProjectAddController implements Initializable {
         
         if (titleTF.getCharacters().length() == 0) {
             messageL.setText("Please, inform the title");
-        } else if (itemCB.getSelectionModel().isEmpty()) {
+        } else if (serviceCB.getSelectionModel().isEmpty()) {
             messageL.setText("Please, select the item");
-        } else if (wordsTF.getCharacters().length() == 0) {
+        /*} else if (wordsTF.getCharacters().length() == 0) {
             messageL.setText("Please, inform the words quantity");
         } else if (!wordsTF.getCharacters().toString().matches("[0-9]*")) {
             messageL.setText("Please, inform just numbers in words field");
         } else if (vendorCB.getSelectionModel().isEmpty()) {
-            messageL.setText("Please, select the vendor");
+            messageL.setText("Please, select the vendor");*/
         } else {
             retValue = true;
         }
@@ -84,13 +101,22 @@ public class ProjectAddController implements Initializable {
      * @param event - ActionEvent
      */
      @FXML
-    private void handleItemComboBoxAction(ActionEvent event) throws Exception {
+    private void handleServiceComboBoxAction(ActionEvent event) throws Exception {
+        List<String> itemNameList = new ArrayList<String>();
+        ObservableList<Item> itemOL = null;
         
-        // searches all vendors of the selected item on database and load the vendor combobox with it.
-        vendorCB.getItems().addAll(
-                "Bek",
-                "Khandaa",
-                "Rafael");
+        try {
+            itemOL = FXCollections.observableList(ItemDAO.listAvailable((String) serviceCB.getSelectionModel().getSelectedItem()));
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        for (Item item : itemOL) {
+            itemNameList.add(item.getName().getValue());
+        }
+        
+        itemCB.getItems().clear();
+        itemCB.getItems().addAll(itemNameList);
     }
     
     /**
@@ -116,5 +142,19 @@ public class ProjectAddController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        List<String> serviceNameList = new ArrayList<String>();
+        ObservableList<ServiceType> serviceOL = null;
+        
+        try {
+            serviceOL = FXCollections.observableList(ServiceTypeDAO.list());
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        for (ServiceType service : serviceOL) {
+            serviceNameList.add(service.getName());
+        }
+        
+        serviceCB.getItems().addAll(serviceNameList);
     }
 }
