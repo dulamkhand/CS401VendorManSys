@@ -57,7 +57,6 @@ public class InvoicesController implements Initializable  {
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(InvoicesController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
     
     @FXML

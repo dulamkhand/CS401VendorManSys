@@ -51,6 +51,7 @@ public class DBUtil {
         CachedRowSetImpl crs = null;
         try {
             dbConnect();
+            System.out.println("----------");
             System.out.println(queryStmt+"\n");
             stmt = conn.createStatement();
             resultSet = stmt.executeQuery(queryStmt);
@@ -81,6 +82,7 @@ public class DBUtil {
         Integer id = null;
         try {
             dbConnect();
+            System.out.println("----------");
             System.out.println(sqlStmt+"\n");
             stmt = conn.createStatement();
             stmt.executeUpdate(sqlStmt, Statement.RETURN_GENERATED_KEYS);

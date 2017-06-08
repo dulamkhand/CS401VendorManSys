@@ -16,9 +16,9 @@
       <TableView fx:id="invoiceTV" editable="true" prefWidth="790.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="0.0">
         <columns>
           <TableColumn fx:id="idTC" prefWidth="70.0" text="Invoice ID" />
-		  <TableColumn fx:id="nameTC" minWidth="0.0" prefWidth="300.0" text="Name" />
-		  <TableColumn fx:id="ordersTC" minWidth="0.0" prefWidth="300.0" text="Related orders" />
-          <TableColumn fx:id="amountTC" minWidth="0.0" prefWidth="70.0" text="Amount (SUM)" />
+		  <TableColumn fx:id="nameTC" minWidth="0.0" prefWidth="200.0" text="Name" />
+		  <TableColumn fx:id="ordersTC" minWidth="0.0" prefWidth="200.0" text="Related orders" />
+          <TableColumn fx:id="amountTC" minWidth="0.0" prefWidth="100.0" text="Amount (SUM)" />
           <TableColumn fx:id="currencyTC" minWidth="0.0" prefWidth="70.0" text="Currency" />
           <TableColumn fx:id="statusTC" minWidth="0.0" prefWidth="70.0" text="Status" />
 		  <TableColumn fx:id="approvalStatusTC" minWidth="0.0" prefWidth="100.0" text="Approval status" />
