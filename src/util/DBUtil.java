@@ -51,7 +51,7 @@ public class DBUtil {
         CachedRowSetImpl crs = null;
         try {
             dbConnect();
-            System.out.println("Select statement: " + queryStmt + "\n");
+            //System.out.println(queryStmt);
             stmt = conn.createStatement();
             resultSet = stmt.executeQuery(queryStmt);
  
@@ -76,12 +76,17 @@ public class DBUtil {
     }
  
     //DB Execute Update (For Update/Insert/Delete) Operation
-    public static void dbExecuteUpdate(String sqlStmt) throws SQLException, ClassNotFoundException {
+    public static Integer dbExecuteUpdate(String sqlStmt) throws SQLException, ClassNotFoundException {
         Statement stmt = null;
+        Integer id = null;
         try {
             dbConnect();
+            //System.out.println(sqlStmt);
             stmt = conn.createStatement();
-            stmt.executeUpdate(sqlStmt);
+            stmt.executeUpdate(sqlStmt, Statement.RETURN_GENERATED_KEYS);
+            
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) id = rs.getInt(1);
         } catch (SQLException e) {
             System.out.println("Problem occurred at executeUpdate operation : " + e);
             throw e;
@@ -91,6 +96,7 @@ public class DBUtil {
             }
             dbDisconnect();
         }
+        return id;
     }
 
     

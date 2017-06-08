@@ -24,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import model.invoice.Invoice;
 import model.order.Order;
 import model.order.OrderDAO;
 
@@ -41,6 +42,8 @@ public class OrdersController implements Initializable {
     @FXML
     private TableColumn<Order, String> projectTC;
     @FXML
+    private TableColumn<Order, String> invoiceTC;
+    @FXML
     private TableColumn<Order, Double> amountTC;
     @FXML
     private TableColumn<Order, String> currencyTC;
@@ -51,6 +54,7 @@ public class OrdersController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
         projectTC.setCellValueFactory(cellData -> cellData.getValue().getProject().getTitle());
+        invoiceTC.setCellValueFactory(cellData -> cellData.getValue().getInvoiceName());
         amountTC.setCellValueFactory(cellData -> cellData.getValue().getAmount().asObject());
         currencyTC.setCellValueFactory(cellData -> cellData.getValue().getCurrency());
         statusTC.setCellValueFactory(cellData -> cellData.getValue().getStatus().getName());
@@ -72,7 +76,7 @@ public class OrdersController implements Initializable {
         RootLayoutController.borderPane.setCenter(achorPane);
     }
 
-     @FXML
+    @FXML
     private void add(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("view/OrderAdd.fxml"));  

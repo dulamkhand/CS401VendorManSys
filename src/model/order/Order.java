@@ -29,11 +29,20 @@ public class Order {
         this.id = new SimpleIntegerProperty();
         this.amount = new SimpleDoubleProperty();
         this.currency = new SimpleStringProperty();
+        this.invoiceName = new SimpleStringProperty();
     }
     
     @Override
     public String toString() {
         return this.id.getValue().toString() + " - " + this.project.getTitle().getValue();
+    }
+    
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 
     public String getProjectTitle() {
@@ -79,4 +88,16 @@ public class Order {
     public void setId(Integer id) {
         this.id.set(id);
     }
+    
+    private StringProperty invoiceName;
+
+    public StringProperty getInvoiceName() {
+        return invoiceName;
+    }
+
+    public void setInvoiceName(String invoiceName) {
+        this.invoiceName.set(invoiceName);
+    }
+    
+    
 }

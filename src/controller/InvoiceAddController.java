@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import model.invoice.InvoiceDAO;
 import model.invoice.InvoiceStatus;
 import model.invoice.InvoiceStatusDAO;
 import model.order.Order;
@@ -55,7 +56,7 @@ public class InvoiceAddController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            this.orderList = OrderDAO.listInMap();
+            this.orderList = OrderDAO.listInInvoice();
             ordersLV.getItems().addAll(this.orderList.values());
             ordersLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             
@@ -75,7 +76,7 @@ public class InvoiceAddController implements Initializable {
             retValue = false;
         }
         if (ordersLV.getSelectionModel().isEmpty()) {
-            sb.append("\nOrder is required.");
+            sb.append("\nOrders is required.");
             retValue = false;
         }
         if (statusCB.getSelectionModel().isEmpty()) {
@@ -95,20 +96,26 @@ public class InvoiceAddController implements Initializable {
     @FXML
     private void confirm(ActionEvent event) throws Exception {
         if (validateForm()) {
-            // inserts into db
-            System.out.println(ordersLV.getSelectionModel());
-            System.out.println(ordersLV.getSelectionModel().getSelectedItems().get(0));
-            System.out.println(ordersLV.getSelectionModel().getSelectedItems().get(1));
+            double amount = 0;
+            String ids = "";
+            String currency = "";
+            int i=0;
             
-            ObservableList<String> ordersSelected = ordersLV.getSelectionModel().getSelectedItems();
-            for(String o : ordersSelected) {
-               System.out.println(Integer.parseInt(o.split(" - ")[0]));
+            ObservableList<Order> orders = ordersLV.getSelectionModel().getSelectedItems();
+            for(Order o : orders) {
+                ids += (i++ == 0 ? "" : ", ") + o.getId().getValue();
+                amount += o.getAmount().getValue();
+                currency = o.getCurrency().getValue();
             }
-            
-            //InvoiceDAO.insert(nameTF.getCharacters().toString(), Double.parseDouble(amountTF.getCharacters().toString()),
-            //        nameTF.getCharacters().toString(), 3);
 
-            //Main.rootLayoutController.go2orders(event);
+            InvoiceStatus is = this.statusList.get(statusCB.getSelectionModel().getSelectedIndex());
+
+            // inserts into db
+            Integer invoiceId = InvoiceDAO.insert(nameTF.getCharacters().toString(), amount,
+                    currency, is.getId().getValue());
+            OrderDAO.updateWithInvoiceId(ids, invoiceId);
+            
+            Main.rootLayoutController.go2invoices(event);
         }
         
     }

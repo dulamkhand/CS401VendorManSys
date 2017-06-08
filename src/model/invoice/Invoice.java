@@ -38,6 +38,11 @@ public class Invoice {
         this.currency = new SimpleStringProperty();
     }
     
+    @Override
+    public String toString() {
+        return this.name.getValue();
+    }
+    
     public InvoiceStatus getStatus() {
         return status;
     }

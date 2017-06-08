@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javafx.collections.ObservableMap;
 import model.project.ProjectDAO;
 
@@ -39,8 +40,9 @@ public class OrderDAO {
 
     public static ObservableList<Order> list() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT id, project_id, amount, currency, status"
-                + " FROM orders WHERE 1;";
+        String selectStmt = "SELECT a.id, a.project_id, a.amount, a.currency, "
+                + "a.status, b.name FROM orders a "
+                + "LEFT OUTER JOIN invoice b ON a.invoice_id = b.id";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableList<Order> list = FXCollections.observableArrayList();
@@ -53,6 +55,7 @@ public class OrderDAO {
                 o.setAmount(rs.getDouble("AMOUNT"));
                 o.setCurrency(rs.getString("CURRENCY"));
                 o.setStatus(OrderStatusDAO.find(rs.getInt("STATUS")));
+                o.setInvoiceName(rs.getString("name"));
                 list.add(o);
             }
             return list;
@@ -93,6 +96,20 @@ public class OrderDAO {
             throw e;
         }
     }
+    
+    public static void updateWithInvoiceId(String ids, Integer invoiceId) 
+            throws SQLException, ClassNotFoundException {
+        String updateStmt =
+                "   UPDATE orders SET invoice_id = " + invoiceId +
+                "    WHERE ID in (" + ids + ");";
+        
+        try {
+            DBUtil.dbExecuteUpdate(updateStmt);
+        } catch (SQLException e) {
+            System.out.print("Error occurred while UPDATE Operation: " + e);
+            throw e;
+        }
+    }
 
     public static void delete(String id) throws SQLException, ClassNotFoundException {
         String updateStmt =
@@ -111,9 +128,9 @@ public class OrderDAO {
     }
 
     
-    public static ObservableMap<Integer, Order> listInMap() throws SQLException, 
+    public static ObservableMap<Integer, Order> listInInvoice() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT id, project_id, amount, currency FROM orders;";
+        String selectStmt = "SELECT id, project_id, amount, currency FROM orders WHERE invoice_id = 0;";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableMap<Integer, Order> map = FXCollections.observableHashMap();

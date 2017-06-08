@@ -61,18 +61,20 @@ public class InvoiceDAO {
         }
     }
     
-    public static void insert(String name, Double amount, String currency, Integer statusId) 
+    public static Integer insert(String name, Double amount, String currency, Integer statusId) 
             throws SQLException, ClassNotFoundException {
+        Integer id = null;
         String updateStmt =
             "INSERT INTO invoice (NAME, AMOUNT, CURRENCY, STATUS) "
-            + " VALUES(" + name + ", " + amount + ", '" + currency + "', " + statusId + ");";
+            + " VALUES('" + name + "', " + amount + ", '" + currency + "', " + statusId + ");";
 
         try {
-            DBUtil.dbExecuteUpdate(updateStmt);
+            id = DBUtil.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
             System.out.print("Error occurred while INSERT Operation: " + e);
             throw e;
         }
+        return id;
     }
    
     public static void update (String id, String amount, Integer currency) 
