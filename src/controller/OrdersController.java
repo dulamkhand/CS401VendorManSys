@@ -68,7 +68,7 @@ public class OrdersController implements Initializable {
         projectTC.setCellValueFactory(cellData -> cellData.getValue().getProject().getTitle());
         amountTC.setCellValueFactory(cellData -> cellData.getValue().getAmount().asObject());
         currencyTC.setCellValueFactory(cellData -> cellData.getValue().getCurrency());
-        //statusTC.setCellValueFactory(cellData -> cellData.getValue().getStatus());
+        statusTC.setCellValueFactory(cellData -> cellData.getValue().getStatus().getName());
         
         //Get all Order information
         try {

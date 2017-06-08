@@ -16,7 +16,7 @@
       <TableView fx:id="orderTV" editable="true" prefWidth="790.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="0.0">
         <columns>
           <TableColumn fx:id="idTC" prefWidth="60.0" text="Order ID" />
-		  <TableColumn fx:id="projectTC" minWidth="0.0" prefWidth="400.0" text="Project Title" />
+		  <TableColumn fx:id="projectTC" minWidth="0.0" prefWidth="400.0" text="Project" />
           <TableColumn fx:id="amountTC" minWidth="0.0" prefWidth="60.0" text="Amount" />
           <TableColumn fx:id="currencyTC" minWidth="0.0" prefWidth="60.0" text="Currency" />
           <TableColumn fx:id="statusTC" minWidth="0.0" prefWidth="60.0" text="Status" />

@@ -12,6 +12,7 @@ package controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,9 +21,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import model.order.OrderDAO;
 import model.order.OrderProjectDAO;
+import model.order.OrderStatus;
+import model.project.Project;
 
 /**
  * Projects Scene Controller.
@@ -33,27 +35,24 @@ public class OrderAddController implements Initializable {
    
     @FXML
     ComboBox projectCB;
-   
-    @FXML
-    TextField amountTF;
-    
-    @FXML
-    ComboBox currencyCB;
     
     @FXML
     ComboBox statusCB;
   
     @FXML
     Label messageL;
-    
+
+    private Map<Integer, Project> projectList;
+    private Map<Integer, OrderStatus> statusList;
+            
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            projectCB.getItems().addAll(OrderProjectDAO.getProjectItems());
-            
-            currencyCB.getItems().addAll("USD", "MNT", "RUR", "AUD");
-            
-            statusCB.getItems().addAll("Active", "In Progress", "Fully");
+            this.projectList = OrderProjectDAO.getProjectList();
+            projectCB.getItems().addAll(this.projectList.values());
+           
+            this.statusList = OrderProjectDAO.getOrderStatusList();
+            statusCB.getItems().addAll(this.statusList.values());
             
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(OrderAddController.class.getName()).log(Level.SEVERE, null, ex);
@@ -68,14 +67,7 @@ public class OrderAddController implements Initializable {
             sb.append("\nProject is required.");
             retValue = false;
         }
-//        if (!amountTF.getCharacters().toString().matches("[0-9]*")) {
-//            sb.append("\nAmount is required.");
-//            retValue = false;
-//        } 
-//        if (currencyCB.getSelectionModel().isEmpty()) {
-//            sb.append("\nCurrency is required.");
-//            retValue = false;
-//        } 
+        
         if (statusCB.getSelectionModel().isEmpty()) {
             sb.append("\nStatus is required.");
             retValue = false;
@@ -94,18 +86,15 @@ public class OrderAddController implements Initializable {
     private void confirm(ActionEvent event) throws Exception {
         if (validateForm()) {
             // inserts into db
-            //System.out.println(projectCB.getSelectionModel().getSelectedIndex());
-            //System.out.println(projectCB.getSelectionModel().getSelectedItem());
-            //System.out.println(amountTF.getCharacters().toString());
-            //System.out.println(currencyCB.getValue().toString());
-        
-            OrderDAO.insert(2, Double.parseDouble(amountTF.getCharacters().toString()), 
-                    currencyCB.getValue().toString(), 3);
+            Project p = this.projectList.get(projectCB.getSelectionModel().getSelectedIndex());
+            OrderStatus os = this.statusList.get(statusCB.getSelectionModel().getSelectedIndex());
+
+            OrderDAO.insert(p.getId().getValue(), p.getAmount().getValue(), 
+                    p.getCurrency().getValue(), os.getId().getValue());
+
             Main.rootLayoutController.go2orders(event);
         }
         
     }
-    
-    
-    
+
 }
