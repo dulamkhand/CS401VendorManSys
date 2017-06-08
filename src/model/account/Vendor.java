@@ -6,20 +6,29 @@
 package model.account;
 
 import java.util.Date;
-import java.util.List;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 import model.servicetype.ServiceType;
 
 /**
  *
  * @author bek
  */
-public abstract class Vendor {
+public abstract class Vendor extends VendorEmployee {
+
     private IntegerProperty id;
-    private Date created;
     //optional (0..1) we could add it later
-    private List<ServiceType> services;
-    //must have
-    private Account account;
+    private ListProperty<ServiceType> services;
+
+    Vendor(Account acc, Date date, IntegerProperty id) {
+        super(acc, date);
+        this.id = id;
+        this.services = new SimpleListProperty<>();
+    }
+
+    public void addServiceType(ServiceType s) {
+        this.services.add(s);
+    }
+
 }

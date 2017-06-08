@@ -5,6 +5,8 @@
  */
 package model.account;
 
+import java.util.Date;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -16,4 +18,14 @@ public class Person extends Vendor {
     private StringProperty lastName;
     private StringProperty SSN;
     private StringProperty nationality;
+
+    public Person(StringProperty firstName, StringProperty lastName, StringProperty SSN, StringProperty nationality, Account acc, Date date, IntegerProperty id) {
+        super(acc, date, id);
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.SSN = SSN;
+        this.nationality = nationality;
+    }
+    
+    
 }
