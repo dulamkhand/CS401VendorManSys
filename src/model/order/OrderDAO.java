@@ -6,8 +6,9 @@ import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import javafx.collections.ObservableMap;
+import model.invoice.Invoice;
+import model.project.Project;
 import model.project.ProjectDAO;
 
 /**
@@ -40,9 +41,14 @@ public class OrderDAO {
 
     public static ObservableList<Order> list() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT a.id, a.project_id, a.amount, a.currency, "
-                + "a.status, b.name FROM orders a "
-                + "LEFT OUTER JOIN invoice b ON a.invoice_id = b.id";
+        String selectStmt = "SELECT a.id, a.project_id, a.amount, a.currency,\n" + 
+                "CONCAT(b.name) as INVOICE_NAME,\n" +
+                "CONCAT(c.ID) as STATUSID, CONCAT(c.status) as STATUS,\n" +
+                "CONCAT(d.id) as PROJECT_ID, CONCAT(d.title) as PROJECT_NAME\n" +
+                "FROM orders a\n" +
+                "LEFT JOIN order_status c ON c.id = a.status\n" +
+                "LEFT JOIN project d ON d.id = a.project_id\n" +
+                "LEFT OUTER JOIN invoice b ON b.id = a.invoice_id;";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableList<Order> list = FXCollections.observableArrayList();
@@ -51,11 +57,11 @@ public class OrderDAO {
             while (rs.next()) {
                 o = new Order();
                 o.setId(rs.getInt("ID"));
-                o.setProject(ProjectDAO.find(rs.getInt("PROJECT_ID")));
+                o.setProject(new Project(rs.getInt("PROJECT_ID"), rs.getString("PROJECT_NAME")));
                 o.setAmount(rs.getDouble("AMOUNT"));
                 o.setCurrency(rs.getString("CURRENCY"));
-                o.setStatus(OrderStatusDAO.find(rs.getInt("STATUS")));
-                o.setInvoiceName(rs.getString("name"));
+                o.setStatus(new OrderStatus(rs.getInt("STATUSID"), rs.getString("STATUS")));
+                o.setInvoice(new Invoice(rs.getString("INVOICE_NAME")));
                 list.add(o);
             }
             return list;
@@ -113,11 +119,9 @@ public class OrderDAO {
 
     public static void delete(String id) throws SQLException, ClassNotFoundException {
         String updateStmt =
-            "BEGIN\n" +
                 "   DELETE FROM orders\n" +
                 "         WHERE id ="+ id +";\n" +
-                "   COMMIT;\n" +
-                "END;";
+                "   COMMIT;\n";
 
         try {
             DBUtil.dbExecuteUpdate(updateStmt);

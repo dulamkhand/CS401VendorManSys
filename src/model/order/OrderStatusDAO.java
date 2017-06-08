@@ -22,7 +22,7 @@ public class OrderStatusDAO {
             if (rs.next()) {
                 os = new OrderStatus();
                 os.setId(rs.getInt("ID"));
-                os.setName(rs.getString("NAME"));
+                os.setName(rs.getString("STATUS"));
             }
             return os;
         } catch (SQLException e) {
@@ -34,7 +34,7 @@ public class OrderStatusDAO {
     
     public static ObservableMap<Integer, OrderStatus> list() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT id, name FROM order_status;";
+        String selectStmt = "SELECT * FROM order_status;";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableMap<Integer, OrderStatus> map = FXCollections.observableHashMap();
@@ -42,8 +42,8 @@ public class OrderStatusDAO {
             int i = 0;
             while (rs.next()) {   
                 os = new OrderStatus();
-                os.setId(rs.getInt("id"));
-                os.setName(rs.getString("name"));
+                os.setId(rs.getInt("ID"));
+                os.setName(rs.getString("STATUS"));
                 map.put(i++, os);
             }
             return map;

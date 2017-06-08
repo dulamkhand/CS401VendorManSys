@@ -36,8 +36,14 @@ public class Invoice {
         this.name = new SimpleStringProperty();
         this.amount = new SimpleDoubleProperty();
         this.currency = new SimpleStringProperty();
+        this.orderids = new SimpleStringProperty();
     }
     
+    public Invoice(String name) {
+        this();
+        this.setName(name);
+    }
+     
     @Override
     public String toString() {
         return this.name.getValue();
@@ -93,4 +99,14 @@ public class Invoice {
         this.currency.set(currency);
     }
 
+    
+    private StringProperty orderids;
+    public StringProperty getOrderids() {
+        return orderids;
+    }
+    public void setOrderids(String orderids) {
+        this.orderids.set(orderids);
+    }
+    
+    
 }

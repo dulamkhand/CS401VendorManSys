@@ -22,6 +22,12 @@ public class InvoiceStatus {
         this.id = new SimpleIntegerProperty();
         this.name = new SimpleStringProperty();
     }
+    
+    public InvoiceStatus(Integer id, String name) {
+        this();
+        this.setId(id);
+        this.setName(name);
+    }
         
     @Override
     public String toString() {

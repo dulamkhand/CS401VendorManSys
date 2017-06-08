@@ -36,6 +36,12 @@ public class Project {
         this.order = null;
     }
     
+    public Project(Integer id, String t) {
+        this();
+        this.setId(id);
+        this.setTitle(t);
+    }
+    
     @Override
     public String toString() {
         return this.title.getValue();

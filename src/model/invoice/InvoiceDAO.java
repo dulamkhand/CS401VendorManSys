@@ -15,7 +15,10 @@ import java.sql.SQLException;
 public class InvoiceDAO {
   
     public static Invoice find(String id) throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT * FROM invoice WHERE id="+id;
+        String selectStmt = "SELECT a.*, concat(d.id) as STATUSID, concat(d.STATUS) as STATUS\n"
+                + "FROM invoice a\n"
+                + "JOIN invoice_status d ON a.status = d.id\n"
+                + "WHERE id = " + id + ";";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
           
@@ -26,7 +29,7 @@ public class InvoiceDAO {
                 o.setName(rs.getString("NAME"));
                 o.setAmount(rs.getDouble("AMOUNT"));
                 o.setCurrency(rs.getString("CURRENCY"));
-                o.setStatus(InvoiceStatusDAO.find(rs.getInt("STATUS")));
+                o.setStatus(new InvoiceStatus(rs.getInt("STATUSID"), rs.getString("STATUS")));
             }
             return o;
         } catch (SQLException e) {
@@ -38,8 +41,13 @@ public class InvoiceDAO {
 
     public static ObservableList<Invoice> list() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT id, name, amount, currency, status"
-                + " FROM invoice WHERE 1;";
+        String selectStmt = "SELECT a.id, a.name, a.amount, a.currency,\n" + 
+                "concat(b.id, '-', c.title ) as ORDERS,\n" +
+                "concat(d.id) as STATUSID, concat(d.STATUS) as STATUS\n" +
+                "FROM `invoice` a\n" +
+                "LEFT OUTER JOIN orders b ON a.id = b.invoice_id\n" +
+                "JOIN project c ON b.project_id = c.id\n" +
+                "JOIN invoice_status d ON a.status = d.id";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableList<Invoice> list = FXCollections.observableArrayList();
@@ -51,7 +59,8 @@ public class InvoiceDAO {
                 o.setName(rs.getString("NAME"));
                 o.setAmount(rs.getDouble("AMOUNT"));
                 o.setCurrency(rs.getString("CURRENCY"));
-                o.setStatus(InvoiceStatusDAO.find(rs.getInt("STATUS")));
+                o.setStatus(new InvoiceStatus(rs.getInt("STATUSID"), rs.getString("STATUS")));
+                o.setOrderids(rs.getString("ORDERS"));
                 list.add(o);
             }
             return list;

@@ -14,7 +14,7 @@ import javafx.collections.ObservableMap;
 public class InvoiceStatusDAO {
   
     public static InvoiceStatus find(Integer id) throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT * FROM invoice_status WHERE id="+id;
+        String selectStmt = "SELECT * FROM invoice_status WHERE id=" + id + ";";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
           
@@ -22,7 +22,7 @@ public class InvoiceStatusDAO {
             if (rs.next()) {
                 os = new InvoiceStatus();
                 os.setId(rs.getInt("ID"));
-                os.setName(rs.getString("NAME"));
+                os.setName(rs.getString("STATUS"));
             }
             return os;
         } catch (SQLException e) {
@@ -34,7 +34,7 @@ public class InvoiceStatusDAO {
     
     public static ObservableMap<Integer, InvoiceStatus> list() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT id, name FROM invoice_status;";
+        String selectStmt = "SELECT * FROM invoice_status;";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableMap<Integer, InvoiceStatus> map = FXCollections.observableHashMap();
@@ -42,8 +42,8 @@ public class InvoiceStatusDAO {
             int i = 0;
             while (rs.next()) {   
                 os = new InvoiceStatus();
-                os.setId(rs.getInt("id"));
-                os.setName(rs.getString("name"));
+                os.setId(rs.getInt("ID"));
+                os.setName(rs.getString("STATUS"));
                 map.put(i++, os);
             }
             return map;

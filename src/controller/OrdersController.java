@@ -24,7 +24,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import model.invoice.Invoice;
 import model.order.Order;
 import model.order.OrderDAO;
 
@@ -54,7 +53,7 @@ public class OrdersController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
         projectTC.setCellValueFactory(cellData -> cellData.getValue().getProject().getTitle());
-        invoiceTC.setCellValueFactory(cellData -> cellData.getValue().getInvoiceName());
+        invoiceTC.setCellValueFactory(cellData -> cellData.getValue().getInvoice().getName());
         amountTC.setCellValueFactory(cellData -> cellData.getValue().getAmount().asObject());
         currencyTC.setCellValueFactory(cellData -> cellData.getValue().getCurrency());
         statusTC.setCellValueFactory(cellData -> cellData.getValue().getStatus().getName());

@@ -34,6 +34,8 @@ public class InvoicesController implements Initializable  {
     @FXML
     private TableColumn<Invoice, String> nameTC;
     @FXML
+    private TableColumn<Invoice, String> ordersTC;
+    @FXML
     private TableColumn<Invoice, Double> amountTC;
     @FXML
     private TableColumn<Invoice, String> currencyTC;
@@ -44,6 +46,7 @@ public class InvoicesController implements Initializable  {
     public void initialize(URL url, ResourceBundle rb) {
         idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
         nameTC.setCellValueFactory(cellData -> cellData.getValue().getName());
+        ordersTC.setCellValueFactory(cellData -> cellData.getValue().getOrderids());
         amountTC.setCellValueFactory(cellData -> cellData.getValue().getAmount().asObject());
         currencyTC.setCellValueFactory(cellData -> cellData.getValue().getCurrency());
         statusTC.setCellValueFactory(cellData -> cellData.getValue().getStatus().getName());
