@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrderAddController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InvoiceAddController">
     <children>
 		
 		
-		<Label graphicTextGap="5.0" layoutX="20.0" layoutY="14.0" text="ADD ORDER" />
+		<Label graphicTextGap="5.0" layoutX="20.0" layoutY="14.0" text="ADD INVOICE" />
 		
       <Separator layoutX="19.0" layoutY="42.0" prefHeight="3.0" prefWidth="776.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0" />
 	  
@@ -33,8 +33,8 @@
 			<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
 			 <children>
-			<Label text="Project" GridPane.rowIndex="1" />
-      		<ComboBox fx:id="projectCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+			<Label text="Invoice" GridPane.rowIndex="1" />
+      		<ComboBox fx:id="nameCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       		
       		<!--<Label text="Currency" GridPane.rowIndex="2" />
       		<ComboBox fx:id="currencyCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />

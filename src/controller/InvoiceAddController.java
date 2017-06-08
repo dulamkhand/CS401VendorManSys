@@ -11,20 +11,16 @@
 package controller;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import model.invoice.InvoiceDAO;
 
 /**
  * Projects Scene Controller.
@@ -33,79 +29,65 @@ import javafx.stage.Stage;
  */
 public class InvoiceAddController implements Initializable {
     
-    /**
-     * Vendor Combo Box.
-     */
-    ComboBox vendorCB;
+    @FXML
+    TextField nameTF;
+   
+    @FXML
+    TextField amountTF;
     
-    /**
-     * Item Combo Box.
-     */
-    ComboBox itemCB;
+    @FXML
+    TextField currencyTF;
     
-    /**
-     * Handle Item Combo Box Action.
-     * 
-     * @param event - ActionEvent
-     */
-     @FXML
-    private void handleItemComboBoxAction(ActionEvent event) throws Exception {
-        // searches all vendors of the selected item and load the vendor combobox with it.
-        List<String> itemList = new ArrayList<String>();
-        
-        itemList.add("Bek");
-        itemList.add("Khandaa");
-        itemList.add("Rafael");
-        
-        vendorCB.getItems().addAll(itemList);
-    }
+    @FXML
+    ComboBox statusCB;
+  
+    @FXML
+    Label messageL;
     
-    /**
-     * Handle Confirm Button Action.
-     * 
-     * @param event - ActionEvent
-     */
-     @FXML
-    private void handleConfirmButtonAction(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view/Projects.fxml"));
-
-        Scene scene = new Scene(root);
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
-    }
-    
-    /**
-     * Handle Close Button Action.
-     * 
-     * @param event - ActionEvent
-     */
-     @FXML
-    private void handleCloseButtonAction(ActionEvent event) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
-
-        Scene scene = new Scene(root);
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // searches all vendors of the selected item and load the vendor combobox with it.
-        ObservableList<String> itemList = FXCollections.observableArrayList(
-                "Mongolian to Russian",
-                "Russian to Mongolian",
-                "English to Russian",
-                "Russian to English");
+        try {
+            //projectCB.getItems().addAll(OrderProjectDAO.getProjectItems());
+            
+            //currencyCB.getItems().addAll("USD", "MNT", "RUR", "AUD");
+            
+            statusCB.getItems().addAll("Active", "In Progress", "Fully");
+            
+        } catch (Exception ex) {
+            Logger.getLogger(OrderAddController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private Boolean validateForm() {
+        Boolean retValue = true;
+        StringBuilder sb = new StringBuilder();
         
-        itemCB = new ComboBox(itemList);
-    }   
+        if (nameTF.getCharacters().toString().isEmpty()) {
+            sb.append("\nName is required.");
+            retValue = false;
+        }
+        if (statusCB.getSelectionModel().isEmpty()) {
+            sb.append("\nStatus is required.");
+            retValue = false;
+        } 
+        
+        if (!retValue) messageL.setText(sb.toString());
+        return retValue;
+    }
+    
+    @FXML
+    private void back(ActionEvent event) throws Exception {
+        Main.rootLayoutController.go2invoices(event);
+    }
+   
+    @FXML
+    private void confirm(ActionEvent event) throws Exception {
+        if (validateForm()) {
+            // inserts into db
+            InvoiceDAO.insert(nameTF.getCharacters().toString(), Double.parseDouble(amountTF.getCharacters().toString()),
+                    nameTF.getCharacters().toString(), 3);
+            Main.rootLayoutController.go2orders(event);
+        }
+        
+    }
 }

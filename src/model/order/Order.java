@@ -29,11 +29,7 @@ public class Order {
         this.id = new SimpleIntegerProperty();
         this.amount = new SimpleDoubleProperty();
         this.currency = new SimpleStringProperty();
-        //this.project = new Project();
-        //this.status = new OrderStatus();
-        //this.invoice = new Invoice();
     }
-    
     
     @Override
     public String toString() {

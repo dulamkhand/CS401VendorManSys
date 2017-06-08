@@ -27,18 +27,22 @@ public class RootLayoutController {
     static public BorderPane borderPane;
     
     // instances for all controllers will be created at the same time as RootLayoutController
-    private OrdersController ordersController;
-    private OrderAddController orderAddController;
     private ProjectsController projectsController;
     private OrderAddController projectAddController;
     private ItemsController itemsController;
+    private OrdersController ordersController;
+    private OrderAddController orderAddController;
+    private InvoicesController invoicesController;
+    private InvoiceAddController invoiceAddController;
     
     public RootLayoutController() {
-        this.ordersController = new OrdersController();
         this.projectsController = new ProjectsController();
         this.projectAddController = new OrderAddController();
-        this.orderAddController = new OrderAddController();
         this.itemsController = new ItemsController();
+        this.ordersController = new OrdersController();
+        this.orderAddController = new OrderAddController();
+        this.invoicesController = new InvoicesController();
+        this.invoiceAddController = new InvoiceAddController();
     }
  
     public void go2homepage(ActionEvent event)  {
@@ -63,7 +67,6 @@ public class RootLayoutController {
         }
     }
     
-        
     @FXML
     public void go2projects(ActionEvent event) throws Exception {
         this.projectsController.index(event);
@@ -80,8 +83,8 @@ public class RootLayoutController {
     }
     
     @FXML
-    public void go2invoice(ActionEvent event) throws Exception {
-        //this.ordersController.index(event);
+    public void go2invoices(ActionEvent event) throws Exception {
+        this.invoicesController.index(event);
     }
     
     @FXML

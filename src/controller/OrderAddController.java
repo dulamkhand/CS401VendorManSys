@@ -65,19 +65,19 @@ public class OrderAddController implements Initializable {
         StringBuilder sb = new StringBuilder();
         
         if (projectCB.getSelectionModel().isEmpty()) {
-            sb.append("\nProject is required");
+            sb.append("\nProject is required.");
             retValue = false;
         }
-        if (!amountTF.getCharacters().toString().matches("[0-9]*")) {
-            sb.append("\nAmount is required");
-            retValue = false;
-        } 
-        if (currencyCB.getSelectionModel().isEmpty()) {
-            sb.append("\nCurrency is required");
-            retValue = false;
-        } 
+//        if (!amountTF.getCharacters().toString().matches("[0-9]*")) {
+//            sb.append("\nAmount is required.");
+//            retValue = false;
+//        } 
+//        if (currencyCB.getSelectionModel().isEmpty()) {
+//            sb.append("\nCurrency is required.");
+//            retValue = false;
+//        } 
         if (statusCB.getSelectionModel().isEmpty()) {
-            sb.append("\nStatus is required");
+            sb.append("\nStatus is required.");
             retValue = false;
         } 
         
@@ -94,12 +94,10 @@ public class OrderAddController implements Initializable {
     private void confirm(ActionEvent event) throws Exception {
         if (validateForm()) {
             // inserts into db
-//            OrderDAO.insert(projectCB.getValue(), amountTF.getCharacters().toString(), 
-//                    currencyCB.getValue(), statusCB.getValue());
-            System.out.println(projectCB.getSelectionModel().getSelectedIndex());
-            System.out.println(projectCB.getSelectionModel().getSelectedItem());
-            System.out.println(amountTF.getCharacters().toString());
-            System.out.println(currencyCB.getValue().toString());
+            //System.out.println(projectCB.getSelectionModel().getSelectedIndex());
+            //System.out.println(projectCB.getSelectionModel().getSelectedItem());
+            //System.out.println(amountTF.getCharacters().toString());
+            //System.out.println(currencyCB.getValue().toString());
         
             OrderDAO.insert(2, Double.parseDouble(amountTF.getCharacters().toString()), 
                     currencyCB.getValue().toString(), 3);

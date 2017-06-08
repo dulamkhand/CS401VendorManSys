@@ -12,8 +12,8 @@
 			<Button mnemonicParsing="false" onAction="#go2projects" text="Projects" />
 			<Button mnemonicParsing="false" onAction="#go2items" text="Items" />
 			<Button mnemonicParsing="false" onAction="#go2orders" text="Orders" />
-			<Button mnemonicParsing="false" onAction="#go2invoice" text="Invoice" />
-			<Button mnemonicParsing="false" onAction="#go2payment" text="Payment" />
+			<Button mnemonicParsing="false" onAction="#go2invoices" text="Invoice" />
+			<Button mnemonicParsing="false" onAction="#go2payments" text="Payment" />
 			<Button mnemonicParsing="false" onAction="#go2vendors" text="Vendors" />
 			<Button mnemonicParsing="false" onAction="#go2emps" text="Employees" />
 			<Button mnemonicParsing="false" onAction="#logout" text="Logout" />
