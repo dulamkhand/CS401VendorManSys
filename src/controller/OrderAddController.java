@@ -22,7 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.order.OrderDAO;
-import model.project.ProjectDAO;
+import model.order.OrderProjectDAO;
 
 /**
  * Projects Scene Controller.
@@ -49,7 +49,7 @@ public class OrderAddController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            projectCB.getItems().addAll(ProjectDAO.list());
+            projectCB.getItems().addAll(OrderProjectDAO.getProjectItems());
             
             currencyCB.getItems().addAll("USD", "MNT", "RUR", "AUD");
             

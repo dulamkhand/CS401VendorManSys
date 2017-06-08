@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.project.Project;
 import model.project.ProjectDAO;
 
 /**
