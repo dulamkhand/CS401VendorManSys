@@ -130,14 +130,13 @@ public class ProjectAddController implements Initializable {
         Item item = null;
         
         if (validateForm()) {
-            item = ItemDAO.find((String) itemCB.getSelectionModel().getSelectedItem());
-            
             ProjectDAO.insert(titleTF.getText(), null, null, null);
             
+            item = ItemDAO.find((String) itemCB.getSelectionModel().getSelectedItem());
             item.setProject(ProjectDAO.find(titleTF.getText()));
             
-            ItemDAO.update(item.getId().getValue(), item.getProject().getId().getValue(),
-                       item.getName().toString(), item.getNumberWords().getValue());
+            ItemDAO.update(item.getId().getValue(), item.getProject().getId().intValue(),
+                       item.getName().getValue(), item.getNumberWords().getValue());
             
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getClassLoader().getResource("view/Projects.fxml"));  

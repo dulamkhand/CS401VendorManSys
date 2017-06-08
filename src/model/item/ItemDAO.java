@@ -127,7 +127,7 @@ public class ItemDAO {
                 "      SET PROJECT_ID = " + projectId + "\n" +
                 "      , NAME = '" + name + "'\n" +
                 "      , NB_WORDS = " + numberWords + "\n" +
-                "    WHERE ID = " + id + ";\n";
+                "    WHERE ID = " + id + "\n";
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
