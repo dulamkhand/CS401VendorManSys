@@ -9,18 +9,20 @@
 
 <AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProjectAddController">
     <children>
-      <Label layoutX="364.0" layoutY="139.0" text="Add a Project" />
-      <Label layoutX="261.0" layoutY="216.0" text="Item" />
+      <Label layoutX="364.0" layoutY="123.0" text="Add a Project" />
+      <Label layoutX="247.0" layoutY="215.0" text="Service" />
       <ComboBox fx:id="itemCB" layoutX="295.0" layoutY="211.0" onAction="#handleItemComboBoxAction" prefHeight="25.0" prefWidth="265.0" />
-      <Label layoutX="246.0" layoutY="303.0" text="Vendor" />
-      <ComboBox fx:id="vendorCB" layoutX="295.0" layoutY="298.0" prefHeight="25.0" prefWidth="265.0" />
+      <Label layoutX="246.0" layoutY="297.0" text="Vendor" />
+      <ComboBox fx:id="vendorCB" layoutX="295.0" layoutY="292.0" prefHeight="25.0" prefWidth="265.0" />
       <Label layoutX="248.0" layoutY="256.0" text="Words" />
       <TextField fx:id="wordsTF" layoutX="296.0" layoutY="252.0" prefHeight="25.0" prefWidth="87.0" />
-      <Button fx:id="confirmB" layoutX="371.0" layoutY="380.0" mnemonicParsing="false" onAction="#handleConfirmButtonAction" text="Confirm" />
+      <Button fx:id="confirmB" layoutX="371.0" layoutY="371.0" mnemonicParsing="false" onAction="#handleConfirmButtonAction" text="Confirm" />
       <Label fx:id="messageL" layoutX="292.0" layoutY="437.0" textFill="RED">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
+      <Label layoutX="262.0" layoutY="175.0" text="Title" />
+      <TextField fx:id="titleTF" layoutX="295.0" layoutY="171.0" prefHeight="25.0" prefWidth="265.0" />
    </children>
 </AnchorPane>

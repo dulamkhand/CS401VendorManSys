@@ -29,6 +29,12 @@ import javafx.scene.layout.AnchorPane;
 public class ProjectAddController implements Initializable {
     
     /**
+     * Words TextField.
+     */
+    @FXML
+    TextField titleTF;
+    
+    /**
      * Item Combo Box.
      */
     @FXML
@@ -55,7 +61,9 @@ public class ProjectAddController implements Initializable {
     private Boolean validateForm() {
         Boolean retValue = false;
         
-        if (itemCB.getSelectionModel().isEmpty()) {
+        if (titleTF.getCharacters().length() == 0) {
+            messageL.setText("Please, inform the title");
+        } else if (itemCB.getSelectionModel().isEmpty()) {
             messageL.setText("Please, select the item");
         } else if (wordsTF.getCharacters().length() == 0) {
             messageL.setText("Please, inform the words quantity");
