@@ -33,11 +33,7 @@ public class Order {
     
     @Override
     public String toString() {
-        return String.format("Order(%s): amount(%s), currency(%s), created(%s), project(%s).", this.id.getValue(), 
-                this.amount.getValue(), this.currency.getValue(), this.created.toString(), this.project.toString());
-        //to-do revise this implementation
-        //return String.format("Order(%s): amount(%s), currency(%s).", this.id.getValue(), 
-        //       this.amount.getValue(), this.currency.getValue());
+        return this.id.getValue().toString() + " - " + this.project.getTitle().getValue();
     }
 
     public String getProjectTitle() {
@@ -59,8 +55,6 @@ public class Order {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
-
-    
 
     public DoubleProperty getAmount() {
         return amount;

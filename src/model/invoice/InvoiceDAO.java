@@ -26,6 +26,7 @@ public class InvoiceDAO {
                 o.setName(rs.getString("NAME"));
                 o.setAmount(rs.getDouble("AMOUNT"));
                 o.setCurrency(rs.getString("CURRENCY"));
+                o.setStatus(InvoiceStatusDAO.find(rs.getInt("STATUS")));
             }
             return o;
         } catch (SQLException e) {
@@ -50,6 +51,7 @@ public class InvoiceDAO {
                 o.setName(rs.getString("NAME"));
                 o.setAmount(rs.getDouble("AMOUNT"));
                 o.setCurrency(rs.getString("CURRENCY"));
+                o.setStatus(InvoiceStatusDAO.find(rs.getInt("STATUS")));
                 list.add(o);
             }
             return list;

@@ -60,7 +60,7 @@ public class RootLayoutController {
             Main.primaryStage.show(); //Display the primary stage
             
             // now redirects to projects/orders index page
-            this.go2orders(event);
+            this.go2projects(event);
             
         } catch (Exception ex) {
             Logger.getLogger(RootLayoutController.class.getName()).log(Level.SEVERE, null, ex);

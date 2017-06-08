@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.collections.ObservableMap;
-import model.project.Project;
 import model.project.ProjectDAO;
 
 /**
@@ -114,7 +113,7 @@ public class OrderDAO {
     
     public static ObservableMap<Integer, Order> listInMap() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT id, amount, currency FROM order;";
+        String selectStmt = "SELECT id, project_id, amount, currency FROM orders;";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableMap<Integer, Order> map = FXCollections.observableHashMap();
@@ -123,6 +122,7 @@ public class OrderDAO {
             while (rs.next()) {   
                 o = new Order();
                 o.setId(rs.getInt("id"));
+                o.setProject(ProjectDAO.find(rs.getInt("PROJECT_ID")));
                 o.setAmount(rs.getDouble("amount"));
                 o.setCurrency(rs.getString("currency"));
                 map.put(i++, o);

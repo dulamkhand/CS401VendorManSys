@@ -16,12 +16,14 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import model.invoice.InvoiceStatus;
 import model.invoice.InvoiceStatusDAO;
@@ -39,7 +41,7 @@ public class InvoiceAddController implements Initializable {
     TextField nameTF;
     
     @FXML
-    ChoiceBox ordersCB;
+    ListView ordersLV;
     
     @FXML
     ComboBox statusCB;
@@ -54,7 +56,8 @@ public class InvoiceAddController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             this.orderList = OrderDAO.listInMap();
-            ordersCB.getItems().addAll(this.orderList.values());
+            ordersLV.getItems().addAll(this.orderList.values());
+            ordersLV.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             
             this.statusList = InvoiceStatusDAO.list();
             statusCB.getItems().addAll(this.statusList.values());
@@ -71,7 +74,7 @@ public class InvoiceAddController implements Initializable {
             sb.append("\nName is required.");
             retValue = false;
         }
-        if (ordersCB.getSelectionModel().isEmpty()) {
+        if (ordersLV.getSelectionModel().isEmpty()) {
             sb.append("\nOrder is required.");
             retValue = false;
         }
@@ -93,7 +96,15 @@ public class InvoiceAddController implements Initializable {
     private void confirm(ActionEvent event) throws Exception {
         if (validateForm()) {
             // inserts into db
-            System.out.println(ordersCB.getSelectionModel());
+            System.out.println(ordersLV.getSelectionModel());
+            System.out.println(ordersLV.getSelectionModel().getSelectedItems().get(0));
+            System.out.println(ordersLV.getSelectionModel().getSelectedItems().get(1));
+            
+            ObservableList<String> ordersSelected = ordersLV.getSelectionModel().getSelectedItems();
+            for(String o : ordersSelected) {
+               System.out.println(Integer.parseInt(o.split(" - ")[0]));
+            }
+            
             //InvoiceDAO.insert(nameTF.getCharacters().toString(), Double.parseDouble(amountTF.getCharacters().toString()),
             //        nameTF.getCharacters().toString(), 3);
 
