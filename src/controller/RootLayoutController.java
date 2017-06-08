@@ -105,7 +105,6 @@ public class RootLayoutController {
     @FXML
     public void logout(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("view/Login.fxml"));
-
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);

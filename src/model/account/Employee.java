@@ -25,6 +25,11 @@ public class Employee extends VendorEmployee {
         this.lastName = lastName;
     }
     
+    Employee(StringProperty number, Account acc){
+        super(acc);
+        this.number = number;
+    }
+    
     Employee(Account acc, Date created) {
         super(acc);
     }

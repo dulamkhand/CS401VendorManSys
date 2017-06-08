@@ -25,9 +25,9 @@ public class EmployeeAccountFactory {
         return new EmployeeAccountImpl(employee, account);
     }
     
-    public static EmployeeAccount createSuperUser(String number, String empNumber, String login, String password, Date created, String firstName, String lastName) {
-        Account account = new Account(new SimpleStringProperty(number), new SimpleStringProperty(login), new SimpleStringProperty(password), new SimpleStringProperty(AccountTypeEnum.EMPLOYEE.toString()));
-        Employee employee = new Employee(new SimpleStringProperty(empNumber), new SimpleStringProperty(firstName), new SimpleStringProperty(lastName), account);
+    public static EmployeeAccount createSuperUser(String number, String empNumber, String login, String password) {
+        Account account = new Account(new SimpleStringProperty(number), new SimpleStringProperty(login), new SimpleStringProperty(password), new SimpleStringProperty(AccountTypeEnum.SUPER_USER.toString()));
+        Employee employee = new Employee(new SimpleStringProperty(empNumber), account);
         account.setVendorEmployee(employee);
         return new EmployeeAccountImpl(employee, account);
     }
