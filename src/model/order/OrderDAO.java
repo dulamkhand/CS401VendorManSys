@@ -18,7 +18,11 @@ import model.project.ProjectDAO;
 public class OrderDAO {
   
     public static Order find(String id) throws SQLException, ClassNotFoundException {
-        String selectStmt = "SELECT * FROM orders WHERE id="+id;
+        String selectStmt = "SELECT a.id, a.project_id, a.amount, a.currency,\n"+
+                "concat(b.id) as project_id, concat(b.title) as project_name\n" +
+                "FROM orders a\n" +
+                "JOIN project b on b.id = a.project_id\n" +
+                "WHERE invoice_id = 0 and id = " + id;
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
           
@@ -26,7 +30,7 @@ public class OrderDAO {
             if (rs.next()) {
                 o = new Order();
                 o.setId(rs.getInt("ID"));
-                o.setProject(ProjectDAO.find(rs.getInt("PROJECT_ID")));
+                o.setProject(new Project(rs.getInt("PROJECT_ID"), rs.getString("PROJECT_NAME")));
                 o.setAmount(rs.getDouble("AMOUNT"));
                 o.setCurrency(rs.getString("CURRENCY"));
                 o.setStatus(OrderStatusDAO.find(rs.getInt("STATUS")));
@@ -73,8 +77,7 @@ public class OrderDAO {
     
     public static void insert(Integer projectId, Double amount, String currency, Integer statusId) 
             throws SQLException, ClassNotFoundException {
-        String updateStmt =
-            "INSERT INTO orders (PROJECT_ID, AMOUNT, CURRENCY, STATUS) "
+        String updateStmt = "INSERT INTO orders (PROJECT_ID, AMOUNT, CURRENCY, STATUS) "
             + " VALUES(" + projectId + ", " + amount + ", '" + currency + "', " + statusId + ");";
 
         try {
@@ -88,13 +91,11 @@ public class OrderDAO {
     public static void update (String id, String amount, Integer currency) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
-            "BEGIN\n" +
                 "   UPDATE orders\n" +
                 "      SET amount = '" + amount + "'\n" +
                 "      SET currency = '" + currency + "'\n" +
                 "    WHERE ID = " + id + ";\n" +
-                "   COMMIT;\n" +
-                "END;";
+                "   COMMIT;\n";
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
@@ -105,10 +106,8 @@ public class OrderDAO {
     
     public static void updateWithInvoiceId(String ids, Integer invoiceId) 
             throws SQLException, ClassNotFoundException {
-        String updateStmt =
-                "   UPDATE orders SET invoice_id = " + invoiceId +
-                "    WHERE ID in (" + ids + ");";
-        
+        String updateStmt = "UPDATE orders SET invoice_id = " + invoiceId +
+                " WHERE ID in (" + ids + ");";
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
@@ -134,7 +133,11 @@ public class OrderDAO {
     
     public static ObservableMap<Integer, Order> listInInvoice() throws SQLException, 
             ClassNotFoundException {
-        String selectStmt = "SELECT id, project_id, amount, currency FROM orders WHERE invoice_id = 0;";
+        String selectStmt = "SELECT a.id, a.project_id, a.amount, a.currency,\n"+
+                "concat(b.id) as project_id, concat(b.title) as project_name\n" +
+                "FROM orders a\n" +
+                "JOIN project b on b.id = a.project_id\n" +
+                "WHERE invoice_id = 0;";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
             ObservableMap<Integer, Order> map = FXCollections.observableHashMap();
@@ -143,7 +146,7 @@ public class OrderDAO {
             while (rs.next()) {   
                 o = new Order();
                 o.setId(rs.getInt("id"));
-                o.setProject(ProjectDAO.find(rs.getInt("PROJECT_ID")));
+                o.setProject(new Project(rs.getInt("PROJECT_ID"), rs.getString("PROJECT_NAME")));
                 o.setAmount(rs.getDouble("amount"));
                 o.setCurrency(rs.getString("currency"));
                 map.put(i++, o);
