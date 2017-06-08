@@ -12,7 +12,7 @@
          <font><Font name="System Bold" /></font>
       </Button>
 	  
-      <TableView fx:id="projectsTV" prefWidth="790.0" AnchorPane.leftAnchor="3.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="projectsTV" prefHeight="401.0" prefWidth="800.0" AnchorPane.bottomAnchor="199.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
           <TableColumn fx:id="itemTC" prefWidth="190.0" text="Item" />
           <TableColumn fx:id="numberWordsTC" minWidth="0.0" prefWidth="195.0" text="Number of Words" />
