@@ -88,7 +88,7 @@ public class RootLayoutController {
     }
     
     @FXML
-    public void go2payment(ActionEvent event) throws Exception {
+    public void go2payments(ActionEvent event) throws Exception {
         //this.ordersController.index(event);
     }
         
