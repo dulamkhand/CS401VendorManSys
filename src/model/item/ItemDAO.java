@@ -33,6 +33,27 @@ public class ItemDAO {
             throw e;
         }
     }
+    
+    public static Item find(String name) throws SQLException, ClassNotFoundException {
+        String selectStmt = "SELECT * FROM item WHERE name = '" + name + "'";
+        try {
+            ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
+          
+            Item i = null;
+            if (rs.next()) {
+                i = new Item();
+                i.setId(rs.getInt("ID"));
+                //i.setProjectId(rs.getInt("PROJECT_ID"));
+                i.setName(rs.getString("NAME"));
+                i.setNumberWords(rs.getInt("NB_WORDS"));
+            }
+            return i;
+        } catch (SQLException e) {
+            System.out.println("While searching an item with " + 
+                    name + " name, an error occurred: " + e);
+            throw e;
+        }
+    }
 
     public static ObservableList<Item> list() throws SQLException, 
             ClassNotFoundException {
@@ -99,17 +120,14 @@ public class ItemDAO {
         }
     }
    
-    public static void update (String id, Integer projectId, String name, Integer numberWords) 
+    public static void update (Integer id, Integer projectId, String name, Integer numberWords) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
-            "BEGIN\n" +
                 "   UPDATE item\n" +
                 "      SET PROJECT_ID = " + projectId + "\n" +
-                "      SET NAME = '" + name + "'\n" +
-                "      SET NB_WORDS = " + numberWords + "\n" +
-                "    WHERE ID = " + id + ";\n" +
-                "   COMMIT;\n" +
-                "END;";
+                "      , NAME = '" + name + "'\n" +
+                "      , NB_WORDS = " + numberWords + "\n" +
+                "    WHERE ID = " + id + ";\n";
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {

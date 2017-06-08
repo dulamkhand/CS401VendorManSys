@@ -29,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import model.item.Item;
 import model.item.ItemDAO;
+import model.project.ProjectDAO;
 import model.servicetype.ServiceType;
 import model.servicetype.ServiceTypeDAO;
 
@@ -126,9 +127,18 @@ public class ProjectAddController implements Initializable {
      */
      @FXML
     private void handleConfirmButtonAction(ActionEvent event) throws Exception {
+        Item item = null;
+        
         if (validateForm()) {
+            item = ItemDAO.find((String) itemCB.getSelectionModel().getSelectedItem());
             
-            // inserts the new Project on database.
+            ProjectDAO.insert(titleTF.getText(), null, null, null);
+            
+            item.setProject(ProjectDAO.find(titleTF.getText()));
+            
+            ItemDAO.update(item.getId().getValue(), item.getProject().getId().getValue(),
+                       item.getName().toString(), item.getNumberWords().getValue());
+            
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getClassLoader().getResource("view/Projects.fxml"));  
             AnchorPane achorPane = (AnchorPane) loader.load();

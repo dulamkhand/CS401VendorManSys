@@ -35,6 +35,29 @@ public class ProjectDAO {
             throw e;
         }
     }
+    
+    public static Project find(String title) throws SQLException, ClassNotFoundException {
+        String selectStmt = "SELECT * FROM project WHERE title = '" + title + "';";
+        try {
+            ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
+          
+            Project p = null;
+            if (rs.next()) {
+                p = new Project();
+                p.setId(rs.getInt("ID"));
+                p.setTitle(rs.getString("TITLE"));
+                p.setAmount(rs.getDouble("AMOUNT"));
+                p.setCurrency(rs.getString("CURRENCY"));
+                //p.setVendorId(rs.getInt("VENDOR_ID"));
+                //p.setCreatedDate(new SimpleIntegerProperty(rs.getDate("CREATED_DATE")));
+            }
+            return p;
+        } catch (SQLException e) {
+            System.out.println("While searching a project with " + 
+                    title + " title, an error occurred: " + e);
+            throw e;
+        }
+    }
 
     public static ObservableList<Project> list() throws SQLException, 
             ClassNotFoundException {
@@ -63,12 +86,9 @@ public class ProjectDAO {
     public static void insert(String title, Double amount, String currency, Integer vendorId) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
-            "BEGIN\n" +
                 "INSERT INTO project\n" +
                 "(TITLE, AMOUNT, CURRENCY, VENDOR_ID)\n" +
-                "VALUES('"+title+"', "+amount+", '"+currency+"', "+vendorId+");\n" +
-                "END;";
-
+                "VALUES('"+title+"', "+amount+", '"+currency+"', "+vendorId+")\n";
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {
