@@ -34,23 +34,20 @@
         </rowConstraints>
 			 <children>
 			<Label text="Invoice" GridPane.rowIndex="1" />
-      		<ComboBox fx:id="nameCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      		<TextField fx:id="nameCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       		
-      		<!--<Label text="Currency" GridPane.rowIndex="2" />
-      		<ComboBox fx:id="currencyCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      		
-      		<Label text="Amount" GridPane.rowIndex="3" />
-      		<TextField fx:id="amountTF" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />-->
+      		<Label text="Orders" GridPane.rowIndex="2" />
+      		<ComboBox fx:id="ordersCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       
-			<Label text="Status" GridPane.rowIndex="4" />
-      		<ComboBox fx:id="statusCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+			<Label text="Status" GridPane.rowIndex="3" />
+      		<ComboBox fx:id="statusCB" prefHeight="25.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 			
-      		<Button fx:id="backB" mnemonicParsing="false" onAction="#back" text="back" GridPane.rowIndex="4" />
-      		<Button fx:id="confirmB" mnemonicParsing="false" onAction="#confirm" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      		<Button fx:id="backB" mnemonicParsing="false" onAction="#back" text="back" GridPane.rowIndex="5" />
+      		<Button fx:id="confirmB" mnemonicParsing="false" onAction="#confirm" text="Confirm" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
 			
-			<Label fx:id="messageL" layoutX="461.0" layoutY="67.0" prefHeight="100.0" prefWidth="300.0" textFill="RED" />
+			<Label fx:id="messageL" layoutX="461.0" layoutY="67.0" prefHeight="80.0" prefWidth="300.0" textFill="RED" />
 
    </children>
 </AnchorPane>

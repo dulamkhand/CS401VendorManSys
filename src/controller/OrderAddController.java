@@ -24,6 +24,7 @@ import javafx.scene.control.Label;
 import model.order.OrderDAO;
 import model.order.OrderProjectDAO;
 import model.order.OrderStatus;
+import model.order.OrderStatusDAO;
 import model.project.Project;
 
 /**
@@ -48,10 +49,10 @@ public class OrderAddController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            this.projectList = OrderProjectDAO.getProjectList();
+            this.projectList = OrderProjectDAO.listInMap();
             projectCB.getItems().addAll(this.projectList.values());
            
-            this.statusList = OrderProjectDAO.getOrderStatusList();
+            this.statusList = OrderStatusDAO.list();
             statusCB.getItems().addAll(this.statusList.values());
             
         } catch (SQLException | ClassNotFoundException ex) {

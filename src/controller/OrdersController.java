@@ -47,41 +47,20 @@ public class OrdersController implements Initializable {
     @FXML
     private TableColumn<Order, String> statusTC;
     
-    //Initializing the controller class.
-    //This method is automatically called after the fxml file has been loaded.
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        /*
-        The setCellValueFactory(...) that we set on the table columns are used to determine
-        which field inside the Order objects should be used for the particular column.
-        The arrow -> indicates that we're using a Java 8 feature called Lambdas.
-        (Another option would be to use a PropertyValueFactory, but this is not type-safe
-
-        We're only using StringProperty values for our table columns in this example.
-        When you want to use IntegerProperty or DoubleProperty, the setCellValueFactory(...)
-        must have an additional asObject():
-        */
         idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
         projectTC.setCellValueFactory(cellData -> cellData.getValue().getProject().getTitle());
         amountTC.setCellValueFactory(cellData -> cellData.getValue().getAmount().asObject());
         currencyTC.setCellValueFactory(cellData -> cellData.getValue().getCurrency());
         statusTC.setCellValueFactory(cellData -> cellData.getValue().getStatus().getName());
         
-        //Get all Order information
         try {
             ObservableList<Order> list = OrderDAO.list();
-            //Populate Order on TableView
             this.orderTV.setItems(list);
-            
-            //System.out.debug("OrdersSceneController is initialized");
-            //System.out.debug("this.orderTable: " + this.orderTable);
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(OrdersController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
     
     @FXML

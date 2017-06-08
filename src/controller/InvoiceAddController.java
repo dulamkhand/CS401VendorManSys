@@ -11,16 +11,22 @@
 package controller;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import model.invoice.InvoiceDAO;
+import model.invoice.InvoiceStatus;
+import model.invoice.InvoiceStatusDAO;
+import model.order.Order;
+import model.order.OrderDAO;
 
 /**
  * Projects Scene Controller.
@@ -31,12 +37,9 @@ public class InvoiceAddController implements Initializable {
     
     @FXML
     TextField nameTF;
-   
-    @FXML
-    TextField amountTF;
     
     @FXML
-    TextField currencyTF;
+    ChoiceBox ordersCB;
     
     @FXML
     ComboBox statusCB;
@@ -44,16 +47,18 @@ public class InvoiceAddController implements Initializable {
     @FXML
     Label messageL;
     
+    private Map<Integer, Order> orderList;
+    private Map<Integer, InvoiceStatus> statusList;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            //projectCB.getItems().addAll(OrderProjectDAO.getProjectItems());
+            this.orderList = OrderDAO.listInMap();
+            ordersCB.getItems().addAll(this.orderList.values());
             
-            //currencyCB.getItems().addAll("USD", "MNT", "RUR", "AUD");
-            
-            statusCB.getItems().addAll("Active", "In Progress", "Fully");
-            
-        } catch (Exception ex) {
+            this.statusList = InvoiceStatusDAO.list();
+            statusCB.getItems().addAll(this.statusList.values());
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(OrderAddController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -64,6 +69,10 @@ public class InvoiceAddController implements Initializable {
         
         if (nameTF.getCharacters().toString().isEmpty()) {
             sb.append("\nName is required.");
+            retValue = false;
+        }
+        if (ordersCB.getSelectionModel().isEmpty()) {
+            sb.append("\nOrder is required.");
             retValue = false;
         }
         if (statusCB.getSelectionModel().isEmpty()) {
@@ -84,9 +93,11 @@ public class InvoiceAddController implements Initializable {
     private void confirm(ActionEvent event) throws Exception {
         if (validateForm()) {
             // inserts into db
-            InvoiceDAO.insert(nameTF.getCharacters().toString(), Double.parseDouble(amountTF.getCharacters().toString()),
-                    nameTF.getCharacters().toString(), 3);
-            Main.rootLayoutController.go2orders(event);
+            System.out.println(ordersCB.getSelectionModel());
+            //InvoiceDAO.insert(nameTF.getCharacters().toString(), Double.parseDouble(amountTF.getCharacters().toString()),
+            //        nameTF.getCharacters().toString(), 3);
+
+            //Main.rootLayoutController.go2orders(event);
         }
         
     }
