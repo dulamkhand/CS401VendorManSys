@@ -83,13 +83,13 @@ public class AccountEmployeeVendorDAO {
             if (rs.next()) {
                 String type = rs.getString("TYPE");
                 
-                if(type.equals(AccountTypeEnum.PERSON)){
+                if(type.equals(AccountTypeEnum.PERSON.toString())){
                     String selectPersonStmt = "SELECT * FROM person WHERE vendor_number = '"+rs.getString("vend_emp_id") + "'";
                     ResultSet rsPerson = DBUtil.dbExecuteQuery(selectPersonStmt);
                     if(rsPerson.next()){
                         o = VendorAccountFactory.createVendorPerson(rs.getString("number"), rs.getString("login_name"), rs.getString("password"), rsPerson.getString("first_name"), rsPerson.getString("last_name"), rsPerson.getString("SSN"), rsPerson.getString("nationality"), rsPerson.getString("vendor_number"));
                     }
-                }else if(type.equals(AccountTypeEnum.COMPANY)){
+                }else if(type.equals(AccountTypeEnum.COMPANY.toString())){
                     String selectCompanyStmt = "SELECT * FROM company WHERE vendor_number = '"+rs.getString("vend_emp_id") + "'";
                     ResultSet rsCompany = DBUtil.dbExecuteQuery(selectCompanyStmt);
                     if(rsCompany.next()){
@@ -112,6 +112,38 @@ public class AccountEmployeeVendorDAO {
             + " VALUES ('" + accNumber + "', '" + login + "', '" + password + "', '" + AccountTypeEnum.EMPLOYEE.toString() + "', '" + empId + "')";
         String updateStmt2 = " INSERT INTO `employee` (`number`, `first_name`, `last_name`, `acc_number`) "
                 + " VALUES ('" + empId + "', '" + firstName + "', '" + lastName +  "', '" + accNumber + "')";
+        try {
+            DBUtil.dbExecuteUpdate(updateStmt1);
+            DBUtil.dbExecuteUpdate(updateStmt2);
+        } catch (SQLException e) {
+            System.out.print("Error occurred while INSERT Operation: " + e);
+            throw e;
+        }
+    }
+    
+    public static void insertPerson(String accNumber, String login, String password, String vendor_num, String firstName, String lastName, String ssn, String nationality) 
+            throws SQLException, ClassNotFoundException {
+        String updateStmt1 =
+            "INSERT INTO `account` (`number`, `login_name`, `password`, `type`, `vend_emp_id`) "
+            + " VALUES ('" + accNumber + "', '" + login + "', '" + password + "', '" + AccountTypeEnum.PERSON.toString() + "', '" + vendor_num + "')";
+        String updateStmt2 = " INSERT INTO `person` (`first_name`, `last_name`, `SSN`, `nationality`, `vendor_number`, `acc_number`) "
+                + " VALUES ('" + firstName + "', '" + lastName + "', '" + ssn +  "', '" + nationality + "', '" + vendor_num + "', '" + accNumber + "')";
+        try {
+            DBUtil.dbExecuteUpdate(updateStmt1);
+            DBUtil.dbExecuteUpdate(updateStmt2);
+        } catch (SQLException e) {
+            System.out.print("Error occurred while INSERT Operation: " + e);
+            throw e;
+        }
+    }
+    
+    public static void insertCompany(String accNumber, String login, String password, String vendor_num, String name, String compRegNumber, String companyRep) 
+            throws SQLException, ClassNotFoundException {
+        String updateStmt1 =
+            "INSERT INTO `account` (`number`, `login_name`, `password`, `type`, `vend_emp_id`) "
+            + " VALUES ('" + accNumber + "', '" + login + "', '" + password + "', '" + AccountTypeEnum.COMPANY.toString() + "', '" + vendor_num + "')";
+        String updateStmt2 = " INSERT INTO `company` (`vendor_number`, `comp_reg_number`, `name`, `company_rep`, `acc_number`) "
+                + " VALUES ('" + vendor_num + "', '" + compRegNumber + "', '" + name +  "', '" + companyRep + "', '" + accNumber + "')";
         try {
             DBUtil.dbExecuteUpdate(updateStmt1);
             DBUtil.dbExecuteUpdate(updateStmt2);

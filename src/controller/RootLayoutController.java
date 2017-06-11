@@ -34,6 +34,8 @@ public class RootLayoutController {
     private OrderAddController orderAddController;
     private InvoicesController invoicesController;
     private InvoiceAddController invoiceAddController;
+    private VendorPersonController personController;
+    private VendorCompanyController companyController;
     
     public RootLayoutController() {
         this.projectsController = new ProjectsController();
@@ -43,6 +45,8 @@ public class RootLayoutController {
         this.orderAddController = new OrderAddController();
         this.invoicesController = new InvoicesController();
         this.invoiceAddController = new InvoiceAddController();
+        this.personController = new VendorPersonController();
+        this.companyController = new VendorCompanyController();
     }
  
     public void go2homepage(ActionEvent event)  {
@@ -94,12 +98,12 @@ public class RootLayoutController {
         
     @FXML
     public void go2vendors(ActionEvent event) throws Exception {
-        //this.vendorsController.index(event);
+        this.companyController.index(event);
     }
     
     @FXML
-    public void go2emps(ActionEvent event) throws Exception {
-        //this.ordersController.index(event);
+    public void go2persons(ActionEvent event) throws Exception {
+        this.personController.index(event);
     }
     
     @FXML

@@ -15,7 +15,7 @@
 			<Button mnemonicParsing="false" onAction="#go2invoices" text="Invoice" />
 			<Button mnemonicParsing="false" onAction="#go2payments" text="Payment" />
 			<Button mnemonicParsing="false" onAction="#go2vendors" text="Vendors" />
-			<Button mnemonicParsing="false" onAction="#go2emps" text="Employees" />
+			<Button mnemonicParsing="false" onAction="#go2persons" text="Freelancers" />
 			<Button mnemonicParsing="false" onAction="#logout" text="Logout" />
 		</buttons>
          <BorderPane.margin>

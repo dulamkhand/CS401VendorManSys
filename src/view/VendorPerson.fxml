@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="519.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VendorPersonController">
+   <children>
+      <TextField fx:id="searchEmpNumberText" layoutX="251.0" layoutY="38.0" prefHeight="25.0" prefWidth="127.0" promptText="number" />
+      <Label layoutX="251.0" layoutY="20.0" prefHeight="17.0" prefWidth="127.0" text="Vendor number" />
+      <Button fx:id="addPersonButton" layoutX="103.0" layoutY="319.0" mnemonicParsing="false" onAction="#handleAddPersonButton" prefHeight="25.0" prefWidth="127.0" text="Add Person" />
+      <VBox layoutX="103.0" layoutY="24.0" prefHeight="243.0" prefWidth="127.0" spacing="4.0">
+         <children>
+            <TextField fx:id="nameText" prefHeight="25.0" prefWidth="79.0" promptText="Name" />
+            <TextField fx:id="surnameText" prefHeight="25.0" prefWidth="79.0" promptText="Surname" />
+            <TextField fx:id="numberText" prefHeight="25.0" prefWidth="79.0" promptText="number" />
+            <TextField fx:id="accNumberText" layoutX="10.0" layoutY="68.0" prefHeight="25.0" prefWidth="120.0" promptText="5digits" />
+            <TextField fx:id="loginText" layoutX="10.0" layoutY="97.0" prefHeight="25.0" prefWidth="96.0" promptText="only letters &amp; digits" />
+            <PasswordField fx:id="passwordText" prefWidth="127.0" promptText="password" />
+            <TextField fx:id="ssnText" layoutX="10.0" layoutY="126.0" prefHeight="25.0" prefWidth="96.0" promptText="ssn" />
+            <TextField fx:id="nationalityText" layoutX="10.0" layoutY="126.0" prefHeight="25.0" prefWidth="96.0" promptText="nationality" />
+         </children>
+      </VBox>
+      <VBox layoutX="14.0" layoutY="24.0" prefHeight="243.0" prefWidth="83.0" spacing="12.0">
+         <children>
+            <Label text="name" />
+            <Label text="surname" />
+            <Label prefWidth="42.0" text="number" />
+            <Label text="acc number" />
+            <Label layoutX="10.0" layoutY="97.0" text="login" />
+            <Label layoutX="10.0" layoutY="126.0" text="password" />
+            <Label layoutX="10.0" layoutY="155.0" text="SSN" />
+            <Label layoutX="10.0" layoutY="184.0" text="nationality" />
+         </children>
+      </VBox>
+      <Separator layoutY="17.0" prefHeight="2.0" prefWidth="807.0" />
+      <Separator layoutX="233.0" layoutY="14.0" orientation="VERTICAL" prefHeight="490.0" prefWidth="11.0" />
+      <TableView fx:id="employeeTable" editable="true" layoutX="252.0" layoutY="102.0" prefHeight="400.0" prefWidth="562.0" tableMenuButtonVisible="true">
+        <columns>
+            <TableColumn fx:id="empNumberColumn" prefWidth="68.0" text="number" />
+          <TableColumn fx:id="empAccNumberColumn" prefWidth="79.0" text="acc_number" />
+          <TableColumn fx:id="loginNameColumn" prefWidth="76.0" text="login" />
+            <TableColumn fx:id="empNameColumn" prefWidth="76.0" text="name" />
+            <TableColumn fx:id="empSurnameColumn" prefWidth="74.0" text="surename" />
+            <TableColumn fx:id="empNumberColumn1" prefWidth="91.0" text="ssn" />
+            <TableColumn fx:id="empNumberColumn11" prefWidth="91.0" text="nationality" />
+        </columns>
+      </TableView>
+      <Region layoutX="544.0" layoutY="70.0" prefHeight="25.0" prefWidth="217.0" />
+      <Label fx:id="errorMessage" layoutX="14.0" layoutY="267.0" prefHeight="45.0" prefWidth="217.0" />
+      <Button fx:id="searchEmployeeButton" layoutX="251.0" layoutY="70.0" mnemonicParsing="false" onAction="#handleSearchPersonButton" prefHeight="25.0" prefWidth="127.0" text="Search" />
+   </children>
+</AnchorPane>

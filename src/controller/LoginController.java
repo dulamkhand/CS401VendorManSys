@@ -102,7 +102,6 @@ public class LoginController implements Initializable {
             return false;
         }
         if (Main.employee != null) {
-            System.out.println("SUPER_SUPER");
             Main.userType = Main.employee.getAccount().getAccountType().get();
             boolean password = passwordPF.getText().equals(Main.employee.getAccount().getPassword().get());
             if(!password)
@@ -111,7 +110,7 @@ public class LoginController implements Initializable {
         }
         if (Main.vendor != null) {
             Main.userType = Main.vendor.getAccount().getAccountType().get();
-            return passwordPF.getText().equals(Main.vendor.getAccount().getPassword());
+            return passwordPF.getText().equals(Main.vendor.getAccount().getPassword().get());
         }
         return retValue;
     }
@@ -144,7 +143,9 @@ public class LoginController implements Initializable {
                 Main.superUserController.go2homepage(event);
                 
             } else if (Main.userType.equals(AccountTypeEnum.COMPANY.toString()) || Main.userType.equals(AccountTypeEnum.PERSON.toString())) {
-
+                System.out.println("END BAINA");
+                Main.rootLayoutController = new RootLayoutController();
+                Main.rootLayoutController.go2homepage(event);
             }
         }
     }
