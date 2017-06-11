@@ -30,6 +30,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.account.AccountEmployeeVendorDAO;
 import model.account.EmployeeResult;
+import model.account.PersonResult;
 import util.DBUtil;
 
 /**
@@ -54,21 +55,9 @@ public class VendorPersonController implements Initializable {
     @FXML
     private PasswordField passwordText;
     @FXML
-    private TableView<EmployeeResult> employeeTable;
-    @FXML
-    private TableColumn<EmployeeResult, String> empNameColumn;
-    @FXML
     private Label errorMessage;
     @FXML
-    private TextField searchEmpNumberText;
-    @FXML
-    private TableColumn<EmployeeResult, String> empNumberColumn;
-    @FXML
-    private TableColumn<EmployeeResult, String> empAccNumberColumn;
-    @FXML
-    private TableColumn<EmployeeResult, String> loginNameColumn;
-    @FXML
-    private TableColumn<EmployeeResult, String> empSurnameColumn;
+    private TableColumn<PersonResult, String> loginNameColumn;
     @FXML
     private Button addPersonButton;
     @FXML
@@ -76,11 +65,23 @@ public class VendorPersonController implements Initializable {
     @FXML
     private TextField nationalityText;
     @FXML
-    private TableColumn<?, ?> empNumberColumn1;
+    private TextField searchPersonText;
     @FXML
-    private TableColumn<?, ?> empNumberColumn11;
+    private Button searchPersonButton;
     @FXML
-    private Button searchEmployeeButton;
+    private TableColumn<PersonResult, String> vendorNumberColumn;
+    @FXML
+    private TableColumn<PersonResult, String> accNumberColumn;
+    @FXML
+    private TableColumn<PersonResult, String> nameColumn;
+    @FXML
+    private TableColumn<PersonResult, String> surnameColumn;
+    @FXML
+    private TableColumn<PersonResult, String> ssnColumn;
+    @FXML
+    private TableColumn<PersonResult, String> nationalityColumn;
+    @FXML
+    private TableView<PersonResult> personTV;
 
     /**
      * Initializes the controller class.
@@ -186,20 +187,21 @@ public class VendorPersonController implements Initializable {
 
     @FXML
     private void handleSearchPersonButton(ActionEvent event) {
-        empNumberColumn.setCellValueFactory(cellData -> cellData.getValue().getNumber());
-        empAccNumberColumn.setCellValueFactory(cellData -> cellData.getValue().getAccNumber());
+        vendorNumberColumn.setCellValueFactory(cellData -> cellData.getValue().getNumber());
+        accNumberColumn.setCellValueFactory(cellData -> cellData.getValue().getAccNumber());
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().getName());
+        surnameColumn.setCellValueFactory(cellData -> cellData.getValue().getSurename());
+        ssnColumn.setCellValueFactory(cellData -> cellData.getValue().getSsn());
+        nationalityColumn.setCellValueFactory(cellData -> cellData.getValue().getNationality());
         loginNameColumn.setCellValueFactory(cellData -> cellData.getValue().getLogin());
-        empNameColumn.setCellValueFactory(cellData -> cellData.getValue().getName());
-        empSurnameColumn.setCellValueFactory(cellData -> cellData.getValue().getSurename());
-
+        
         try {
-            this.employeeTable.setItems(AccountEmployeeVendorDAO.findEmployeeByNumberFuzzy(searchEmpNumberText.getText()));
+            this.personTV.setItems(AccountEmployeeVendorDAO.findPersonByVendorNumberFuzzy(searchPersonText.getText()));
         } catch (SQLException | ClassNotFoundException e) {
             Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
-    @FXML
     public void index(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("view/VendorPerson.fxml"));

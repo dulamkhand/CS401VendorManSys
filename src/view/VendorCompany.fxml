@@ -40,15 +40,14 @@
       </VBox>
       <Separator layoutY="17.0" prefHeight="2.0" prefWidth="807.0" />
       <Separator layoutX="233.0" layoutY="14.0" orientation="VERTICAL" prefHeight="490.0" prefWidth="11.0" />
-      <TableView fx:id="employeeTable" editable="true" layoutX="252.0" layoutY="102.0" prefHeight="400.0" prefWidth="562.0" tableMenuButtonVisible="true">
+      <TableView fx:id="vendorTV" editable="true" layoutX="252.0" layoutY="102.0" prefHeight="400.0" prefWidth="562.0" tableMenuButtonVisible="true">
         <columns>
-            <TableColumn fx:id="empNumberColumn" prefWidth="68.0" text="number" />
-          <TableColumn fx:id="empAccNumberColumn" prefWidth="79.0" text="acc_number" />
+            <TableColumn fx:id="numberColumn" prefWidth="68.0" text="number" />
+          <TableColumn fx:id="accNumberColumn" prefWidth="79.0" text="acc_number" />
           <TableColumn fx:id="loginNameColumn" prefWidth="76.0" text="login" />
-            <TableColumn fx:id="empNameColumn" prefWidth="76.0" text="name" />
-            <TableColumn fx:id="empSurnameColumn" prefWidth="74.0" text="surename" />
-            <TableColumn fx:id="empNumberColumn1" prefWidth="91.0" text="ssn" />
-            <TableColumn fx:id="empNumberColumn11" prefWidth="91.0" text="nationality" />
+            <TableColumn fx:id="nameColumn" prefWidth="94.0" text="name" />
+            <TableColumn fx:id="regNumberColumn" prefWidth="98.0" text="reg number" />
+            <TableColumn fx:id="representativeColumn" prefWidth="129.0" text="representative" />
         </columns>
       </TableView>
       <Region layoutX="544.0" layoutY="70.0" prefHeight="25.0" prefWidth="217.0" />

@@ -18,28 +18,28 @@ public class CompanyResult {
     private StringProperty accNumber;
     private StringProperty login;
     private StringProperty name;
-    private StringProperty surename;
     private StringProperty password;
-    private StringProperty ssn;
-    private StringProperty nationality;
+    private StringProperty companyRep;
+    private StringProperty companyRegNum;
 
     public CompanyResult() {
         this.number = new SimpleStringProperty();
         this.accNumber = new SimpleStringProperty();
         this.login = new SimpleStringProperty();
         this.name = new SimpleStringProperty();
-        this.surename = new SimpleStringProperty();
+        this.companyRep = new SimpleStringProperty();
         this.password = new SimpleStringProperty();
-        this.ssn = new SimpleStringProperty();
-        this.nationality = new SimpleStringProperty();
+        this.companyRegNum = new SimpleStringProperty();
     }
 
-    public CompanyResult(StringProperty number, StringProperty accNumber, StringProperty login, StringProperty name, StringProperty surename) {
+    public CompanyResult(StringProperty number, StringProperty accNumber, StringProperty login, StringProperty name, StringProperty password, StringProperty companyRep, StringProperty companyRegNum) {
         this.number = number;
         this.accNumber = accNumber;
         this.login = login;
         this.name = name;
-        this.surename = surename;
+        this.password = password;
+        this.companyRep = companyRep;
+        this.companyRegNum = companyRegNum;
     }
 
     public StringProperty getNumber() {
@@ -74,14 +74,6 @@ public class CompanyResult {
         this.name.set(name);
     }
 
-    public StringProperty getSurename() {
-        return surename;
-    }
-
-    public void setSurename(String surename) {
-        this.surename.set(surename);
-    }
-
     public StringProperty getPassword() {
         return password;
     }
@@ -89,4 +81,22 @@ public class CompanyResult {
     public void setPassword(String password) {
         this.password.set(password);
     }
+
+    public StringProperty getCompanyRep() {
+        return companyRep;
+    }
+
+    public void setCompanyRep(String companyRep) {
+        this.companyRep.set(companyRep);
+    }
+
+    public StringProperty getCompanyRegNum() {
+        return companyRegNum;
+    }
+
+    public void setCompanyRegNum(String companyRegNum) {
+        this.companyRegNum.set(companyRegNum);
+    }
+    
+    
 }

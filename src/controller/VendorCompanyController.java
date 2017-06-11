@@ -29,6 +29,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.account.AccountEmployeeVendorDAO;
+import model.account.CompanyResult;
 import model.account.EmployeeResult;
 import util.DBUtil;
 
@@ -52,24 +53,7 @@ public class VendorCompanyController implements Initializable {
     @FXML
     private PasswordField passwordText;
     @FXML
-    private TableView<EmployeeResult> employeeTable;
-    @FXML
-    private TableColumn<EmployeeResult, String> empNameColumn;
-    @FXML
     private Label errorMessage;
-    private TextField searchEmpNumberText;
-    @FXML
-    private TableColumn<EmployeeResult, String> empNumberColumn;
-    @FXML
-    private TableColumn<EmployeeResult, String> empAccNumberColumn;
-    @FXML
-    private TableColumn<EmployeeResult, String> loginNameColumn;
-    @FXML
-    private TableColumn<EmployeeResult, String> empSurnameColumn;
-    @FXML
-    private TableColumn<?, ?> empNumberColumn1;
-    @FXML
-    private TableColumn<?, ?> empNumberColumn11;
     @FXML
     private TextField searchVendorNumberText;
     @FXML
@@ -80,6 +64,20 @@ public class VendorCompanyController implements Initializable {
     private TextField compRepText;
     @FXML
     private Button searchVendorButton;
+    @FXML
+    private TableColumn<CompanyResult, String> numberColumn;
+    @FXML
+    private TableColumn<CompanyResult, String> accNumberColumn;
+    @FXML
+    private TableColumn<CompanyResult, String> nameColumn;
+    @FXML
+    private TableColumn<CompanyResult, String> regNumberColumn;
+    @FXML
+    private TableColumn<CompanyResult, String> representativeColumn;
+    @FXML
+    private TableView<CompanyResult> vendorTV;
+    @FXML
+    private TableColumn<CompanyResult, String> loginNameColumn;
 
     /**
      * Initializes the controller class.
@@ -184,14 +182,15 @@ public class VendorCompanyController implements Initializable {
 
     @FXML
     private void handleSearchVendorButton(ActionEvent event) {
-        empNumberColumn.setCellValueFactory(cellData -> cellData.getValue().getNumber());
-        empAccNumberColumn.setCellValueFactory(cellData -> cellData.getValue().getAccNumber());
+        numberColumn.setCellValueFactory(cellData -> cellData.getValue().getNumber());
+        accNumberColumn.setCellValueFactory(cellData -> cellData.getValue().getAccNumber());
         loginNameColumn.setCellValueFactory(cellData -> cellData.getValue().getLogin());
-        empNameColumn.setCellValueFactory(cellData -> cellData.getValue().getName());
-        empSurnameColumn.setCellValueFactory(cellData -> cellData.getValue().getSurename());
+        nameColumn.setCellValueFactory(cellData -> cellData.getValue().getName());
+        representativeColumn.setCellValueFactory(cellData -> cellData.getValue().getCompanyRep());
+        regNumberColumn.setCellValueFactory(cellData -> cellData.getValue().getCompanyRegNum());
 
         try {
-            this.employeeTable.setItems(AccountEmployeeVendorDAO.findEmployeeByNumberFuzzy(searchEmpNumberText.getText()));
+            this.vendorTV.setItems(AccountEmployeeVendorDAO.findCompanyByVendorNumberFuzzy(searchVendorNumberText.getText()));
         } catch (SQLException | ClassNotFoundException e) {
             Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, e);
         }

@@ -34,14 +34,27 @@ public class PersonResult {
         this.nationality = new SimpleStringProperty();
     }
 
-    public PersonResult(StringProperty number, StringProperty accNumber, StringProperty login, StringProperty name, StringProperty surename) {
+    public PersonResult(StringProperty number, StringProperty accNumber, StringProperty login, StringProperty name, StringProperty surename, StringProperty password, StringProperty ssn, StringProperty nationality) {
         this.number = number;
         this.accNumber = accNumber;
         this.login = login;
         this.name = name;
         this.surename = surename;
+        this.password = password;
+        this.ssn = ssn;
+        this.nationality = nationality;
     }
 
+    public PersonResult(StringProperty number, StringProperty accNumber, StringProperty login, StringProperty name, StringProperty surename, StringProperty ssn, StringProperty nationality) {
+        this.number = number;
+        this.accNumber = accNumber;
+        this.login = login;
+        this.name = name;
+        this.surename = surename;
+        this.ssn = ssn;
+        this.nationality = nationality;
+    }
+    
     public StringProperty getNumber() {
         return number;
     }
@@ -89,4 +102,22 @@ public class PersonResult {
     public void setPassword(String password) {
         this.password.set(password);
     }
+
+    public StringProperty getSsn() {
+        return ssn;
+    }
+
+    public void setSsn(String ssn) {
+        this.ssn.set(ssn);
+    }
+
+    public StringProperty getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality.set(nationality);
+    }
+    
+    
 }
