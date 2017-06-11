@@ -117,11 +117,11 @@ public class ProjectsController implements Initializable {
        
        idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
        titleTC.setCellValueFactory(cellData -> cellData.getValue().getTitle());
-       serviceTC.setCellValueFactory(cellData -> cellData.getValue().getServiceName());
+       //serviceTC.setCellValueFactory(cellData -> cellData.getValue().getServiceName());
        amountTC.setCellValueFactory(cellData -> cellData.getValue().getAmount().asObject());
        currencyTC.setCellValueFactory(cellData -> cellData.getValue().getCurrency());
        //vendorTC.setCellValueFactory(cellData -> cellData.getValue().getVendor());
-       statusTC.setCellValueFactory(cellData -> cellData.getValue().getProjectStatus().getStatus());
+       //statusTC.setCellValueFactory(cellData -> cellData.getValue().getProjectStatus().getStatus());
        
         try {
             this.projectsTV.setItems(ProjectDAO.list());

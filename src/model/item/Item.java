@@ -5,7 +5,9 @@
  */
 package model.item;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -20,6 +22,7 @@ public class Item {
     private IntegerProperty id;
     private Project project;
     private StringProperty name;
+    private DoubleProperty rate;
     private IntegerProperty numberWords;
     private ServiceType serviceType;
 	
@@ -27,6 +30,7 @@ public class Item {
         this.id = new SimpleIntegerProperty();
         this.name = new SimpleStringProperty();
         this.numberWords = new SimpleIntegerProperty();
+        this.rate = new SimpleDoubleProperty();
     }
     public IntegerProperty getId() {
         return id;
@@ -52,7 +56,15 @@ public class Item {
         this.name.set(name);
     }
     
-    public IntegerProperty getNumberWords() {
+    public DoubleProperty getRate() {
+        return rate;
+    }
+
+    public void setRate(Double rate) {
+        this.rate.set(rate);
+    }
+    
+     public IntegerProperty getNumberWords() {
         return numberWords;
     }
 

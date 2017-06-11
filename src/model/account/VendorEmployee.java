@@ -14,6 +14,9 @@ import java.util.Date;
 public abstract class VendorEmployee {
 
     private Account account;
+    
+    public VendorEmployee() {
+    }
 
     VendorEmployee(Account acc) {
         this.account = acc;

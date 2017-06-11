@@ -20,6 +20,9 @@ public abstract class Vendor extends VendorEmployee {
     private StringProperty number;
     //optional (0..1) we could add it later
     private ListProperty<ServiceType> services;
+    
+    public Vendor() {
+    }
 
     Vendor(Account acc, StringProperty number) {
         super(acc);

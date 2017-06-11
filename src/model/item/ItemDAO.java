@@ -45,6 +45,7 @@ public class ItemDAO {
                 i.setId(rs.getInt("ID"));
                 //i.setProjectId(rs.getInt("PROJECT_ID"));
                 i.setName(rs.getString("NAME"));
+                i.setRate(rs.getDouble("RATE"));
                 i.setNumberWords(rs.getInt("NB_WORDS"));
             }
             return i;
@@ -127,6 +128,20 @@ public class ItemDAO {
                 "      SET PROJECT_ID = " + projectId + "\n" +
                 "      , NAME = '" + name + "'\n" +
                 "      , NB_WORDS = " + numberWords + "\n" +
+                "    WHERE ID = " + id + "\n";
+        try {
+            DBUtil.dbExecuteUpdate(updateStmt);
+        } catch (SQLException e) {
+            System.out.print("Error occurred while UPDATE Operation: " + e);
+            throw e;
+        }
+    }
+    
+     public static void updateProject (Integer id, Integer projectId) 
+            throws SQLException, ClassNotFoundException {
+        String updateStmt =
+                "   UPDATE item\n" +
+                "      SET PROJECT_ID = " + projectId + "\n" +
                 "    WHERE ID = " + id + "\n";
         try {
             DBUtil.dbExecuteUpdate(updateStmt);

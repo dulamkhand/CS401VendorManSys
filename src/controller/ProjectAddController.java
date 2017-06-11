@@ -27,6 +27,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import model.account.Company;
+import model.account.CompanyDAO;
+import model.account.Person;
+import model.account.PersonDAO;
 import model.item.Item;
 import model.item.ItemDAO;
 import model.project.ProjectDAO;
@@ -59,10 +63,16 @@ public class ProjectAddController implements Initializable {
     ComboBox itemCB;
     
     /**
-     * Vendor Combo Box.
+     * Company Combo Box.
      */
     @FXML
-    ComboBox vendorCB;
+    ComboBox companyCB;
+    
+    /**
+     * Person Combo Box.
+     */
+    @FXML
+    ComboBox personCB;
     
     /**
      * Words TextField.
@@ -128,15 +138,29 @@ public class ProjectAddController implements Initializable {
      @FXML
     private void handleConfirmButtonAction(ActionEvent event) throws Exception {
         Item item = null;
+        String vendor = null;
+        String vendorType = null;
         
         if (validateForm()) {
-            ProjectDAO.insert(titleTF.getText(), null, null, null);
             
+            // Searches Item.
             item = ItemDAO.find((String) itemCB.getSelectionModel().getSelectedItem());
+            
+            // Create Project.
+            if (companyCB.getSelectionModel().getSelectedItem() != null && !companyCB.getSelectionModel().getSelectedItem().equals("")) {
+                vendor = (String) companyCB.getSelectionModel().getSelectedItem();
+                vendorType = "C";
+            } else {
+                vendor = (String) personCB.getSelectionModel().getSelectedItem();
+                vendorType = "P";
+            }
+            
+            ProjectDAO.insert(titleTF.getText(), (item.getNumberWords().getValue() * item.getRate().getValue()), "USD", vendor, vendorType);
+            
+            // Update Item.
             item.setProject(ProjectDAO.find(titleTF.getText()));
             
-            ItemDAO.update(item.getId().getValue(), item.getProject().getId().intValue(),
-                       item.getName().getValue(), item.getNumberWords().getValue());
+            ItemDAO.updateProject(item.getId().getValue(), item.getProject().getId().getValue());
             
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getClassLoader().getResource("view/Projects.fxml"));  
@@ -151,6 +175,8 @@ public class ProjectAddController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        // Service combobox.
         List<String> serviceNameList = new ArrayList<String>();
         ObservableList<ServiceType> serviceOL = null;
         
@@ -165,5 +191,37 @@ public class ProjectAddController implements Initializable {
         }
         
         serviceCB.getItems().addAll(serviceNameList);
+        
+        // Company combobox.
+        List<String> companyNameList = new ArrayList<String>();
+        ObservableList<Company> companyOL = null;
+        
+        try {
+            companyOL = FXCollections.observableList(CompanyDAO.list());
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        for (Company company : companyOL) {
+            companyNameList.add(company.getName().getValue());
+        }
+        
+        companyCB.getItems().addAll(companyNameList);
+        
+        // Person combobox.
+        List<String> personNameList = new ArrayList<String>();
+        ObservableList<Person> personOL = null;
+        
+        try {
+            personOL = FXCollections.observableList(PersonDAO.list());
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+        for (Person person : personOL) {
+            personNameList.add(person.getFirstName().getValue());
+        }
+        
+        personCB.getItems().addAll(personNameList);
     }
 }

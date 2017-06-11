@@ -12,9 +12,9 @@
       <Label layoutX="364.0" layoutY="43.0" text="Add a Project" />
       <Label layoutX="247.0" layoutY="142.0" text="Service" />
       <ComboBox fx:id="serviceCB" layoutX="295.0" layoutY="138.0" onAction="#handleServiceComboBoxAction" prefHeight="25.0" prefWidth="265.0" />
-      <Label layoutX="246.0" layoutY="222.0" text="Vendor" />
-      <ComboBox fx:id="vendorCB" layoutX="295.0" layoutY="217.0" prefHeight="25.0" prefWidth="265.0" />
-      <Button fx:id="confirmB" layoutX="371.0" layoutY="276.0" mnemonicParsing="false" onAction="#handleConfirmButtonAction" text="Confirm" />
+      <Label layoutX="184.0" layoutY="221.0" text="Vendor - Company" />
+      <ComboBox fx:id="companyCB" layoutX="295.0" layoutY="217.0" prefHeight="25.0" prefWidth="265.0" />
+      <Button fx:id="confirmB" layoutX="371.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleConfirmButtonAction" text="Confirm" />
       <Label fx:id="messageL" layoutX="292.0" layoutY="437.0" textFill="RED">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -24,5 +24,7 @@
       <TextField fx:id="titleTF" layoutX="295.0" layoutY="98.0" prefHeight="25.0" prefWidth="265.0" />
       <ComboBox fx:id="itemCB" layoutX="296.0" layoutY="178.0" prefHeight="25.0" prefWidth="265.0" />
       <Label layoutX="262.0" layoutY="182.0" text="Item" />
+      <Label layoutX="182.0" layoutY="259.0" text="Vendor - Freelancer" />
+      <ComboBox fx:id="personCB" layoutX="295.0" layoutY="255.0" prefHeight="25.0" prefWidth="265.0" />
    </children>
 </AnchorPane>

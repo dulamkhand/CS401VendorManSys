@@ -73,7 +73,7 @@ public class ProjectDAO {
                 p.setTitle(rs.getString("TITLE"));
                 p.setAmount(rs.getDouble("AMOUNT"));
                 p.setCurrency(rs.getString("CURRENCY"));
-                //p.setVendorId(rs.getInt("VENDOR_ID"));              
+                //p.setVendorId(rs.getInt("VENDOR_ID"));
                 list.add(p);
             }
             return list;
@@ -83,12 +83,12 @@ public class ProjectDAO {
         }
     }
     
-    public static void insert(String title, Double amount, String currency, Integer vendorId) 
+    public static void insert(String title, Double amount, String currency, String vendorId, String vendorType) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
                 "INSERT INTO project\n" +
-                "(TITLE, AMOUNT, CURRENCY, VENDOR_ID)\n" +
-                "VALUES('"+title+"', "+amount+", '"+currency+"', "+vendorId+")\n";
+                "(TITLE, AMOUNT, CURRENCY, VENDOR_ID, VENDOR_TYPE)\n" +
+                "VALUES('"+title+"', "+amount+", '"+currency+"', '"+vendorId+"', '"+vendorType+"')\n";
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
         } catch (SQLException e) {

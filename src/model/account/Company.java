@@ -5,8 +5,6 @@
  */
 package model.account;
 
-import java.util.Date;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 
 /**
@@ -18,6 +16,9 @@ public class Company extends Vendor {
     private StringProperty compRegNumber;
     private StringProperty name;
     private StringProperty companyRepresentative;
+    
+    public Company() {
+    }
 
     public Company(StringProperty compRegNumber, StringProperty name, StringProperty companyRepresentative, Account acc, StringProperty number) {
         super(acc, number);
@@ -26,4 +27,11 @@ public class Company extends Vendor {
         this.companyRepresentative = companyRepresentative;
     }
     
+    public void setName(StringProperty name) {
+        this.name = name;
+    }
+    
+    public StringProperty getName() {
+        return name;
+    }
 }
