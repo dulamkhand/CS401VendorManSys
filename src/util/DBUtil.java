@@ -2,6 +2,7 @@ package util;
 
 import java.sql.*;
 import com.sun.rowset.CachedRowSetImpl;
+import java.util.List;
 
 /**
  *
@@ -30,6 +31,33 @@ public class DBUtil {
         } catch (SQLException e) {
             System.out.println("Connection Failed! Check output console" + e);
             throw e;
+        }
+    }
+    
+     public static Connection getDbConnect() throws SQLException, ClassNotFoundException {
+        Connection conn1;
+         try {
+            Class.forName(JDBC_DRIVER);
+        } catch (ClassNotFoundException e) {
+            System.out.println("Could not locate jdbc driver");
+            throw e;
+        }
+ 
+        //Establish the connection using connection string
+        try {
+            conn1 = DriverManager.getConnection(connStr);
+            //System.out.println("Database connection is established");
+        } catch (SQLException e) {
+            System.out.println("Connection Failed! Check output console" + e);
+            throw e;
+        }
+        return conn1;
+    }
+    
+    public static void setAutoCommitOff() throws SQLException, ClassNotFoundException{
+        if(conn != null){
+            dbConnect();
+            conn.setAutoCommit(false);
         }
     }
  

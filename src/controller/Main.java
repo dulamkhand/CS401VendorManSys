@@ -15,6 +15,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.account.EmployeeAccount;
+import model.account.VendorAccount;
 
 /**
  * Vendor Management System.
@@ -28,6 +30,10 @@ public class Main extends Application {
     
     // static member will be used in other controllers to switch between controllers/pages
     public static RootLayoutController rootLayoutController;
+    public static SuperUserController superUserController;
+    public static String userType;
+    public static EmployeeAccount employee;
+    public static VendorAccount vendor;
 
     @Override
     public void start(Stage stage) throws Exception {

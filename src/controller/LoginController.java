@@ -17,11 +17,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import model.account.AccountDAO;
+import model.account.AccountEmployeeVendorDAO;
 import model.account.AccountTypeEnum;
 import model.account.EmployeeAccount;
 import model.account.VendorAccount;
@@ -54,14 +55,8 @@ public class LoginController implements Initializable {
     /**
      * User Type - String.
      */
-    private String userType = "E";
-    private EmployeeAccount employee = null;
-    private VendorAccount vendor = null;
 
     public LoginController() {
-        this.setEmployee(null);
-        this.setVendor(null);
-        this.setUserType("");
     }
     
     
@@ -92,9 +87,9 @@ public class LoginController implements Initializable {
      */
     private Boolean validateUser() throws SQLException {
         try {
-            employee = AccountDAO.findEmployee(usernameTF.getText());
-            if (employee == null) {
-                vendor = AccountDAO.findVendor(usernameTF.getText());
+            Main.employee = AccountEmployeeVendorDAO.findEmployee(usernameTF.getText());
+            if (Main.employee == null) {
+                Main.vendor = AccountEmployeeVendorDAO.findVendor(usernameTF.getText());
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -102,21 +97,21 @@ public class LoginController implements Initializable {
         Boolean retValue = false;
 
         // validate user on database.
-        if (employee == null && vendor == null) {
-            System.out.println("FALSE");
+        if (Main.employee == null && Main.vendor == null) {
+            System.out.println("NULL NULL");
             return false;
         }
-        if (employee != null) {
-            System.out.println("Employee employee");
-            userType = employee.getAccount().getAccountType().get();
-            boolean password = passwordPF.getText().equals(employee.getAccount().getPassword().get());
+        if (Main.employee != null) {
+            System.out.println("SUPER_SUPER");
+            Main.userType = Main.employee.getAccount().getAccountType().get();
+            boolean password = passwordPF.getText().equals(Main.employee.getAccount().getPassword().get());
             if(!password)
                 messageL.setText("incorrect password");
             return password;
         }
-        if (vendor != null) {
-            userType = vendor.getAccount().getAccountType().get();
-            return passwordPF.getText().equals(vendor.getAccount().getPassword());
+        if (Main.vendor != null) {
+            Main.userType = Main.vendor.getAccount().getAccountType().get();
+            return passwordPF.getText().equals(Main.vendor.getAccount().getPassword());
         }
         return retValue;
     }
@@ -140,13 +135,15 @@ public class LoginController implements Initializable {
     @FXML
     private void handleLoginButtonAction(ActionEvent event) throws Exception {
         if (validateForm() && validateUser()) {
-            if (userType.equals(AccountTypeEnum.EMPLOYEE.toString())) {
+            if (Main.userType.equals(AccountTypeEnum.EMPLOYEE.toString())) {
                 //root = FXMLLoader.load(getClass().getResource("view/Employee.fxml"));
                 Main.rootLayoutController = new RootLayoutController();
                 Main.rootLayoutController.go2homepage(event); // redirects to homepage once logged in
-            } else if (userType.equals(AccountTypeEnum.SUPER_USER.toString())) {
-                //root = FXMLLoader.load(getClass().getResource("view/Vendor.fxml"));
-            } else if (userType.equals(AccountTypeEnum.COMPANY.toString()) || userType.equals(AccountTypeEnum.PERSON.toString())) {
+            } else if (Main.userType.equals(AccountTypeEnum.SUPER_USER.toString())) {
+                Main.superUserController = new SuperUserController();
+                Main.superUserController.go2homepage(event);
+                
+            } else if (Main.userType.equals(AccountTypeEnum.COMPANY.toString()) || Main.userType.equals(AccountTypeEnum.PERSON.toString())) {
 
             }
         }
@@ -154,31 +151,9 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }
-
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
-    public EmployeeAccount getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(EmployeeAccount employee) {
-        this.employee = employee;
-    }
-
-    public VendorAccount getVendor() {
-        return vendor;
-    }
-
-    public void setVendor(VendorAccount vendor) {
-        this.vendor = vendor;
+        Main.employee = null;
+        Main.userType = "";
+        Main.vendor = null;
     }
     
     

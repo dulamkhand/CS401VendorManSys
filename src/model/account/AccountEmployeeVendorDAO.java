@@ -12,7 +12,7 @@ import java.sql.SQLException;
  *
  * @author bek
  */
-public class AccountDAO {
+public class AccountEmployeeVendorDAO {
     
     public static EmployeeAccount findEmployee(String login) throws SQLException, ClassNotFoundException {
         String selectStmt = "SELECT * FROM account WHERE login_name = '"+login +"'";
@@ -25,7 +25,7 @@ public class AccountDAO {
                 String type = rs.getString("TYPE");
                 System.out.println("TYPE: " + type);
                 
-                if(type.equals(AccountTypeEnum.SUPER_USER)){
+                if(type.equals(AccountTypeEnum.SUPER_USER.toString())){
                     o = EmployeeAccountFactory.createSuperUser(rs.getString("NUMBER"), rs.getString("vend_emp_id"), rs.getString("login_name"), rs.getString("password"));
                 }else if(type.equals(AccountTypeEnum.EMPLOYEE.toString())){
                     System.out.println(rs.getString("number"));
@@ -76,20 +76,22 @@ public class AccountDAO {
         }
     }
     
-//    public static void insert(String name, Double amount, String currency, Integer statusId) 
-//            throws SQLException, ClassNotFoundException {
-//        String updateStmt =
-//            "INSERT INTO Account (NAME, AMOUNT, CURRENCY, STATUS) "
-//            + " VALUES(" + name + ", " + amount + ", '" + currency + "', " + statusId + ");";
-//
-//        try {
-//            DBUtil.dbExecuteUpdate(updateStmt);
-//        } catch (SQLException e) {
-//            System.out.print("Error occurred while INSERT Operation: " + e);
-//            throw e;
-//        }
-//    }
-//   
+    public static void insert(String accNumber, String login, String password, String empId, String firstName, String lastName) 
+            throws SQLException, ClassNotFoundException {
+        String updateStmt1 =
+            "INSERT INTO `account` (`number`, `login_name`, `password`, `type`, `vend_emp_id`) "
+            + " VALUES ('" + accNumber + "', '" + login + "', '" + password + "', '" + AccountTypeEnum.EMPLOYEE.toString() + "', '" + empId + "')";
+        String updateStmt2 = " INSERT INTO `employee` (`number`, `first_name`, `last_name`, `acc_number`) "
+                + " VALUES ('" + empId + "', '" + firstName + "', '" + lastName +  "', '" + accNumber + "')";
+        try {
+            DBUtil.dbExecuteUpdate(updateStmt1);
+            DBUtil.dbExecuteUpdate(updateStmt2);
+        } catch (SQLException e) {
+            System.out.print("Error occurred while INSERT Operation: " + e);
+            throw e;
+        }
+    }
+   
 //    public static void update (String id, String amount, Integer currency) 
 //            throws SQLException, ClassNotFoundException {
 //        String updateStmt =
