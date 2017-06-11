@@ -12,11 +12,12 @@
          <font><Font name="System Bold" /></font>
       </Button>
 	  
-      <TableView fx:id="projectsTV" prefHeight="401.0" prefWidth="800.0" AnchorPane.bottomAnchor="199.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="itemsTV" prefHeight="401.0" prefWidth="800.0" AnchorPane.bottomAnchor="199.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
-          <TableColumn fx:id="itemTC" prefWidth="190.0" text="Item" />
-          <TableColumn fx:id="numberWordsTC" minWidth="0.0" prefWidth="195.0" text="Number of Words" />
-            <TableColumn prefWidth="91.0" text="Actions" />
+          <TableColumn fx:id="idTC" prefWidth="149.0" text="ID" />
+          <TableColumn fx:id="nameTC" minWidth="0.0" prefWidth="320.0" text="Name" />
+            <TableColumn fx:id="rateTC" prefWidth="175.0" text="Rate" />
+            <TableColumn fx:id="numberWordsTC" prefWidth="155.0" text="Number of Words" />
         </columns>
       </TableView>
 	 

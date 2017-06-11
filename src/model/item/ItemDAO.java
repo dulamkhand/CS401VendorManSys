@@ -70,6 +70,7 @@ public class ItemDAO {
                 //i.setProjectId(rs.getInt("PROJECT_ID"));
                 i.setName(rs.getString("NAME"));
                 i.setNumberWords(rs.getInt("NB_WORDS"));
+                i.setRate(rs.getDouble("RATE"));
                 list.add(i);
             }
             return list;

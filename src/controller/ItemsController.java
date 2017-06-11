@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +23,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import model.project.Project;
+import model.item.Item;
+import model.item.ItemDAO;
 
 /**
  * Projects Scene Controller.
@@ -31,28 +34,34 @@ import model.project.Project;
 public class ItemsController implements Initializable {
     
     /**
-     * Projects Table View.
+     * Item Table View.
      */
     @FXML
-    private TableView<Project> projectsTV;
+    private TableView<Item> itemsTV;
     
     /**
-     * Project Table Column.
+     * ID Table Column.
      */
     @FXML
-    private TableColumn<Project, String> projectTC;
+    private TableColumn<Item, Integer> idTC;
     
     /**
-     * Item Table Column.
+     * Name Table Column.
      */
     @FXML
-    private TableColumn itemTC;
+    private TableColumn<Item, String> nameTC;
     
     /**
-     * Status Table Column.
+     * Rate Table Column.
      */
     @FXML
-    private TableColumn statusTC;
+    private TableColumn<Item, Double> rateTC;
+    
+    /**
+     * Number Words Table Column.
+     */
+    @FXML
+    private TableColumn<Item, Integer> numberWordsTC;
     
     @FXML
     public void index(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
@@ -82,5 +91,18 @@ public class ItemsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
+       nameTC.setCellValueFactory(cellData -> cellData.getValue().getName());
+       //serviceTC.setCellValueFactory(cellData -> cellData.getValue().getServiceName());
+       rateTC.setCellValueFactory(cellData -> cellData.getValue().getRate().asObject());
+       numberWordsTC.setCellValueFactory(cellData -> cellData.getValue().getNumberWords().asObject());
+       //vendorTC.setCellValueFactory(cellData -> cellData.getValue().getVendor());
+       //statusTC.setCellValueFactory(cellData -> cellData.getValue().getProjectStatus().getStatus());
+       
+        try {
+            this.itemsTV.setItems(ItemDAO.list());
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
