@@ -27,13 +27,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import model.account.Company;
-import model.account.CompanyDAO;
-import model.account.Person;
-import model.account.PersonDAO;
-import model.item.Item;
 import model.item.ItemDAO;
-import model.project.ProjectDAO;
 import model.servicetype.ServiceType;
 import model.servicetype.ServiceTypeDAO;
 
@@ -45,40 +39,28 @@ import model.servicetype.ServiceTypeDAO;
 public class ItemAddController implements Initializable {
     
     /**
-     * Words TextField.
+     * Name TextField.
      */
     @FXML
-    TextField titleTF;
+    TextField nameTF;
+    
+    /**
+     * Rate TextField.
+     */
+    @FXML
+    TextField rateTF;
+    
+    /**
+     * Number Words TextField.
+     */
+    @FXML
+    TextField numberWordsTF;
     
     /**
      * Service Combo Box.
      */
     @FXML
     ComboBox serviceCB;
-    
-    /**
-     * Item Combo Box.
-     */
-    @FXML
-    ComboBox itemCB;
-    
-    /**
-     * Company Combo Box.
-     */
-    @FXML
-    ComboBox companyCB;
-    
-    /**
-     * Person Combo Box.
-     */
-    @FXML
-    ComboBox personCB;
-    
-    /**
-     * Words TextField.
-     */
-    //@FXML
-    //TextField wordsTF;
     
     /**
      * Words TextField.
@@ -89,45 +71,19 @@ public class ItemAddController implements Initializable {
     private Boolean validateForm() {
         Boolean retValue = false;
         
-        if (titleTF.getCharacters().length() == 0) {
-            messageL.setText("Please, inform the title");
+        if (nameTF.getCharacters().length() == 0) {
+            messageL.setText("Please, inform the name");
+        } if (rateTF.getCharacters().length() == 0) {
+            messageL.setText("Please, inform the rate");
+        } if (numberWordsTF.getCharacters().length() == 0) {
+            messageL.setText("Please, inform the number of words");
         } else if (serviceCB.getSelectionModel().isEmpty()) {
-            messageL.setText("Please, select the item");
-        /*} else if (wordsTF.getCharacters().length() == 0) {
-            messageL.setText("Please, inform the words quantity");
-        } else if (!wordsTF.getCharacters().toString().matches("[0-9]*")) {
-            messageL.setText("Please, inform just numbers in words field");
-        } else if (vendorCB.getSelectionModel().isEmpty()) {
-            messageL.setText("Please, select the vendor");*/
+            messageL.setText("Please, select the service");
         } else {
             retValue = true;
         }
         
         return retValue;
-    }
-    
-    /**
-     * Handle Item Combo Box Action.
-     * 
-     * @param event - ActionEvent
-     */
-     @FXML
-    private void handleServiceComboBoxAction(ActionEvent event) throws Exception {
-        List<String> itemNameList = new ArrayList<String>();
-        ObservableList<Item> itemOL = null;
-        
-        try {
-            itemOL = FXCollections.observableList(ItemDAO.listAvailable((String) serviceCB.getSelectionModel().getSelectedItem()));
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         
-        for (Item item : itemOL) {
-            itemNameList.add(item.getName().getValue());
-        }
-        
-        itemCB.getItems().clear();
-        itemCB.getItems().addAll(itemNameList);
     }
     
     /**
@@ -137,33 +93,13 @@ public class ItemAddController implements Initializable {
      */
      @FXML
     private void handleConfirmButtonAction(ActionEvent event) throws Exception {
-        Item item = null;
-        String vendor = null;
-        String vendorType = null;
-        
         if (validateForm()) {
             
-            // Searches Item.
-            item = ItemDAO.find((String) itemCB.getSelectionModel().getSelectedItem());
-            
-            // Create Project.
-            if (companyCB.getSelectionModel().getSelectedItem() != null && !companyCB.getSelectionModel().getSelectedItem().equals("")) {
-                vendor = (String) companyCB.getSelectionModel().getSelectedItem();
-                vendorType = "C";
-            } else {
-                vendor = (String) personCB.getSelectionModel().getSelectedItem();
-                vendorType = "P";
-            }
-            
-            ProjectDAO.insert(titleTF.getText(), (item.getNumberWords().getValue() * item.getRate().getValue()), "USD", vendor, vendorType);
-            
-            // Update Item.
-            item.setProject(ProjectDAO.find(titleTF.getText()));
-            
-            ItemDAO.updateProject(item.getId().getValue(), item.getProject().getId().getValue());
+            ItemDAO.insert(nameTF.getText(), new Double(rateTF.getText()), new Integer(numberWordsTF.getText()),
+                    ((String) serviceCB.getSelectionModel().getSelectedItem()));
             
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getClassLoader().getResource("view/Projects.fxml"));  
+            loader.setLocation(getClass().getClassLoader().getResource("view/Items.fxml"));  
             AnchorPane achorPane = (AnchorPane) loader.load();
 
             RootLayoutController.borderPane.setCenter(achorPane);

@@ -83,7 +83,7 @@ public class ItemDAO {
     public static ObservableList<Item> listAvailable(String serviceName) throws SQLException, 
             ClassNotFoundException {
         String selectStmt = "SELECT * FROM item "
-                + "INNER JOIN service ON service.id = item.service_id "
+                + "INNER JOIN service ON service.name = item.service_id "
                 + "WHERE item.project_id IS NULL and service.name = '" + serviceName + "'";
         try {
             ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
@@ -105,14 +105,12 @@ public class ItemDAO {
         }
     }
     
-    public static void insert(Integer projectId, String name, Integer numberWords) 
+    public static void insert(String name, Double rate, Integer numberWords, String servicename) 
             throws SQLException, ClassNotFoundException {
         String updateStmt =
-            "BEGIN\n" +
                 "INSERT INTO item\n" +
-                "(PROJECT_ID, NAME, NB_WORDS)\n" +
-                "VALUES('"+projectId+"', '"+name+"', "+numberWords+");\n" +
-                "END;";
+                "(PROJECT_ID, NAME, RATE, NB_WORDS, SERVICE_ID)\n" +
+                "VALUES(NULL, '"+name+"', "+rate+", "+numberWords+", '"+servicename+"')\n";
 
         try {
             DBUtil.dbExecuteUpdate(updateStmt);
