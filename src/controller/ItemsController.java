@@ -93,11 +93,8 @@ public class ItemsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
        idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
        nameTC.setCellValueFactory(cellData -> cellData.getValue().getName());
-       //serviceTC.setCellValueFactory(cellData -> cellData.getValue().getServiceName());
        rateTC.setCellValueFactory(cellData -> cellData.getValue().getRate().asObject());
        numberWordsTC.setCellValueFactory(cellData -> cellData.getValue().getNumberWords().asObject());
-       //vendorTC.setCellValueFactory(cellData -> cellData.getValue().getVendor());
-       //statusTC.setCellValueFactory(cellData -> cellData.getValue().getProjectStatus().getStatus());
        
         try {
             this.itemsTV.setItems(ItemDAO.list());
