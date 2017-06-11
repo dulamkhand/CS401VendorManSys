@@ -16,9 +16,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import model.account.AccountTypeEnum;
 import model.invoice.Invoice;
 import model.invoice.InvoiceDAO;
 
@@ -41,9 +43,16 @@ public class InvoicesController implements Initializable  {
     private TableColumn<Invoice, String> currencyTC;
     @FXML
     private TableColumn<Invoice, String> statusTC;
+    @FXML
+    private Button newB;
+    @FXML
+    private TableColumn<Invoice, String> approvalStatusTC;
    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if(Main.userType.equals(AccountTypeEnum.EMPLOYEE.toString()))
+           newB.setVisible(false);
+        
         idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
         nameTC.setCellValueFactory(cellData -> cellData.getValue().getName());
         ordersTC.setCellValueFactory(cellData -> cellData.getValue().getOrderids());
@@ -59,7 +68,6 @@ public class InvoicesController implements Initializable  {
         }
     }
     
-    @FXML
     public void index(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("view/Invoices.fxml"));  

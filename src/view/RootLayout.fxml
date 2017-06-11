@@ -9,13 +9,13 @@
    <top>
       <ButtonBar buttonMinWidth="0.0" BorderPane.alignment="TOP_LEFT">
 		<buttons>
+			<Button fx:id="itemsButton" mnemonicParsing="false" onAction="#go2items" text="Items" />
 			<Button mnemonicParsing="false" onAction="#go2projects" text="Projects" />
-			<Button mnemonicParsing="false" onAction="#go2items" text="Items" />
 			<Button mnemonicParsing="false" onAction="#go2orders" text="Orders" />
 			<Button mnemonicParsing="false" onAction="#go2invoices" text="Invoice" />
 			<Button mnemonicParsing="false" onAction="#go2payments" text="Payment" />
-			<Button mnemonicParsing="false" onAction="#go2vendors" text="Vendors" />
-			<Button mnemonicParsing="false" onAction="#go2persons" text="Freelancers" />
+			<Button fx:id="vendorsButton" mnemonicParsing="false" onAction="#go2vendors" text="Vendors" />
+			<Button fx:id="freelancersButton" mnemonicParsing="false" onAction="#go2persons" text="Freelancers" />
 			<Button mnemonicParsing="false" onAction="#logout" text="Logout" />
 		</buttons>
          <BorderPane.margin>

@@ -20,9 +20,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import model.account.AccountTypeEnum;
 import model.project.Project;
 import model.project.ProjectDAO;
 
@@ -80,8 +82,9 @@ public class ProjectsController implements Initializable {
      */
     @FXML
     private TableColumn<Project, String> statusTC;
-    
     @FXML
+    private Button addB;
+    
     public void index(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("view/Projects.fxml"));  
@@ -109,6 +112,9 @@ public class ProjectsController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       if(Main.userType.equals(AccountTypeEnum.COMPANY.toString()) || Main.userType.equals(AccountTypeEnum.PERSON.toString()))
+           addB.setVisible(false);
+       
        idTC.setCellValueFactory(cellData -> cellData.getValue().getId().asObject());
        titleTC.setCellValueFactory(cellData -> cellData.getValue().getTitle());
        serviceTC.setCellValueFactory(cellData -> cellData.getValue().getServiceName());

@@ -5,23 +5,28 @@
  */
 package controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.account.AccountTypeEnum;
 
 /**
  *
  * @author Khandaa
  */
-public class RootLayoutController {
+public class RootLayoutController implements Initializable {
 
     // static member will be used in other controllers
     static public BorderPane borderPane;
@@ -36,6 +41,12 @@ public class RootLayoutController {
     private InvoiceAddController invoiceAddController;
     private VendorPersonController personController;
     private VendorCompanyController companyController;
+    @FXML
+    private Button itemsButton;
+    @FXML
+    private Button vendorsButton;
+    @FXML
+    private Button freelancersButton;
     
     public RootLayoutController() {
         this.projectsController = new ProjectsController();
@@ -125,6 +136,15 @@ public class RootLayoutController {
         alert.setHeaderText("");
         alert.setContentText("");
         alert.show();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if(Main.userType.equals(AccountTypeEnum.COMPANY.toString()) || Main.userType.equals(AccountTypeEnum.PERSON.toString())){
+            itemsButton.setVisible(false);
+            freelancersButton.setVisible(false);
+            vendorsButton.setVisible(false);
+        }
     }
     
 }
