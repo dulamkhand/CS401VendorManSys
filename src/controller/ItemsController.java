@@ -73,17 +73,17 @@ public class ItemsController implements Initializable {
     }
     
     /**
-     * Handle New Button Action.
+     * Handle Add Button Action.
      * 
      * @param event - ActionEvent
      */
      @FXML
-    private void handleAdd(ActionEvent event) throws Exception {/*
+    private void handleAddButtonAction(ActionEvent event) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getClassLoader().getResource("view/ProjectAdd.fxml"));  
+        loader.setLocation(getClass().getClassLoader().getResource("view/ItemAdd.fxml"));  
         AnchorPane achorPane = (AnchorPane) loader.load();
 
-        RootLayoutController.borderPane.setCenter(achorPane);*/
+        RootLayoutController.borderPane.setCenter(achorPane);
     }
   
     /**
