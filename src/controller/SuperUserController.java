@@ -25,6 +25,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import model.account.AccountEmployeeVendorDAO;
+import model.account.EmployeeResult;
+import util.DBUtil;
 
 /**
  * FXML Controller class
@@ -35,12 +37,6 @@ public class SuperUserController implements Initializable {
 
     // static member will be used in other controllers
     static public AnchorPane ancorPane;
-    @FXML
-    private Button searchEmpBtn;
-    @FXML
-    private Button deleteEmpBtn;
-    @FXML
-    private Button updateEmpBtn;
     @FXML
     private Button addEmployeeButton;
     @FXML
@@ -56,23 +52,23 @@ public class SuperUserController implements Initializable {
     @FXML
     private PasswordField passwordText;
     @FXML
-    private TableView<?> employeeTable;
+    private TableView<EmployeeResult> employeeTable;
     @FXML
-    private TableColumn<?, ?> empIdColumn;
-    @FXML
-    private TableColumn<?, ?> empNameColumn;
-    @FXML
-    private TableColumn<?, ?> empLastNameColumn;
-    @FXML
-    private TableColumn<?, ?> empEmailColumn;
-    @FXML
-    private TableColumn<?, ?> empPhoneNumberColumn;
-    @FXML
-    private TableColumn<?, ?> empHireDateColumn;
-    @FXML
-    private Button searchEmpsBtn;
+    private TableColumn<EmployeeResult, String> empNameColumn;
     @FXML
     private Label errorMessage;
+    @FXML
+    private TextField searchEmpNumberText;
+    @FXML
+    private TableColumn<EmployeeResult, String> empNumberColumn;
+    @FXML
+    private TableColumn<EmployeeResult, String> empAccNumberColumn;
+    @FXML
+    private TableColumn<EmployeeResult, String> loginNameColumn;
+    @FXML
+    private TableColumn<EmployeeResult, String> empSurnameColumn;
+    @FXML
+    private Button searchEmployeeBtn;
 
     /**
      * Initializes the controller class.
@@ -106,7 +102,7 @@ public class SuperUserController implements Initializable {
         errorMessage.setText("");
         if (validateForm()) {
             try {
-                AccountEmployeeVendorDAO.insert(accNumberText.getText(), loginText.getText(), passwordText.getText(), numberText.getText() , nameText.getText(), surnameText.getText());
+                AccountEmployeeVendorDAO.insert(accNumberText.getText(), loginText.getText(), passwordText.getText(), numberText.getText(), nameText.getText(), surnameText.getText());
                 clearEmpAddForm();
                 errorMessage.setText("Successfully added");
             } catch (ClassNotFoundException ex) {
@@ -129,22 +125,23 @@ public class SuperUserController implements Initializable {
         errorMessage.setText("");
         return true;
     }
-    
+
     private Boolean employeeNumberValidation() {
         Pattern p = Pattern.compile("E[0-9]{5}");
         Matcher m = p.matcher(numberText.getText());
-        if(!m.matches()){
+        if (!m.matches()) {
             errorMessage.setText("Employee number must be:\n Capital E followed by 5-digits");
             return false;
         }
         return m.matches();
     }
-    
+
     private Boolean loginValidation() {
-        Pattern p = Pattern.compile("[a-z]+");
+        Pattern p = Pattern.compile("[a-z]{1}[a-z_]+");
         Matcher m = p.matcher(loginText.getText());
-        if(!m.matches())
+        if (!m.matches()) {
             errorMessage.setText("login must contain:\n Only small letters");
+        }
         return m.matches();
     }
 
@@ -161,14 +158,29 @@ public class SuperUserController implements Initializable {
         }
         return isNumber && accNumberText.getCharacters().length() == 5;
     }
-    
-    private void clearEmpAddForm(){
+
+    private void clearEmpAddForm() {
         nameText.setText("");
         surnameText.setText("");
         numberText.setText("");
         accNumberText.setText("");
         loginText.setText("");
         passwordText.setText("");
+    }
+
+    @FXML
+    private void handleSearchEmployeeButton(ActionEvent event) {
+        empNumberColumn.setCellValueFactory(cellData -> cellData.getValue().getNumber());
+        empAccNumberColumn.setCellValueFactory(cellData -> cellData.getValue().getAccNumber());
+        loginNameColumn.setCellValueFactory(cellData -> cellData.getValue().getLogin());
+        empNameColumn.setCellValueFactory(cellData -> cellData.getValue().getName());
+        empSurnameColumn.setCellValueFactory(cellData -> cellData.getValue().getSurename());
+
+        try {
+            this.employeeTable.setItems(AccountEmployeeVendorDAO.findEmployeeByNumberFuzzy(searchEmpNumberText.getText()));
+        } catch (SQLException | ClassNotFoundException e) {
+            Logger.getLogger(ProjectsController.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 
 }

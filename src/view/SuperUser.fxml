@@ -13,11 +13,8 @@
 
 <AnchorPane prefHeight="519.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SuperUserController">
    <children>
-      <TextField layoutX="251.0" layoutY="38.0" prefHeight="25.0" prefWidth="99.0" promptText="number" />
-      <Label layoutX="251.0" layoutY="20.0" text="Employee Number" />
-      <Button fx:id="searchEmpBtn" layoutX="252.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="Search" />
-      <Button fx:id="deleteEmpBtn" layoutX="381.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="Delete" />
-      <Button fx:id="updateEmpBtn" layoutX="317.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="Update" />
+      <TextField fx:id="searchEmpNumberText" layoutX="251.0" layoutY="38.0" prefHeight="25.0" prefWidth="127.0" promptText="number" />
+      <Label layoutX="251.0" layoutY="20.0" prefHeight="17.0" prefWidth="127.0" text="Employee number" />
       <Button fx:id="addEmployeeButton" layoutX="103.0" layoutY="253.0" mnemonicParsing="false" onAction="#handleAddEmployeeButton" prefHeight="25.0" prefWidth="127.0" text="Add Employee" />
       <VBox layoutX="103.0" layoutY="24.0" prefHeight="183.0" prefWidth="127.0" spacing="4.0">
          <children>
@@ -43,16 +40,15 @@
       <Separator layoutX="233.0" layoutY="14.0" orientation="VERTICAL" prefHeight="490.0" prefWidth="11.0" />
       <TableView fx:id="employeeTable" editable="true" layoutX="252.0" layoutY="102.0" prefHeight="400.0" prefWidth="509.0" tableMenuButtonVisible="true">
         <columns>
-            <TableColumn fx:id="empIdColumn" prefWidth="57.0" text="Id" />
-          <TableColumn fx:id="empNameColumn" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="empLastNameColumn" prefWidth="73.0" text="LastName" />
-            <TableColumn fx:id="empEmailColumn" prefWidth="79.0" text="Email" />
-            <TableColumn fx:id="empPhoneNumberColumn" prefWidth="73.0" text="Phone" />
-            <TableColumn fx:id="empHireDateColumn" prefWidth="93.0" text="Hire Date" />
+            <TableColumn fx:id="empNumberColumn" prefWidth="68.0" text="number" />
+          <TableColumn fx:id="empAccNumberColumn" prefWidth="79.0" text="acc_number" />
+          <TableColumn fx:id="loginNameColumn" prefWidth="76.0" text="login" />
+            <TableColumn fx:id="empNameColumn" prefWidth="132.0" text="name" />
+            <TableColumn fx:id="empSurnameColumn" prefWidth="152.0" text="surename" />
         </columns>
       </TableView>
-      <Button fx:id="searchEmpsBtn" layoutX="445.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="139.0" text="Search All Employees" />
       <Region layoutX="544.0" layoutY="70.0" prefHeight="25.0" prefWidth="217.0" />
       <Label fx:id="errorMessage" layoutX="14.0" layoutY="199.0" prefHeight="45.0" prefWidth="217.0" />
+      <Button fx:id="searchEmployeeBtn" layoutX="251.0" layoutY="70.0" mnemonicParsing="false" onAction="#handleSearchEmployeeButton" prefHeight="25.0" prefWidth="127.0" text="Search" />
    </children>
 </AnchorPane>

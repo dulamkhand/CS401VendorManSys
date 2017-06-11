@@ -44,6 +44,35 @@ public class AccountEmployeeVendorDAO {
         }
     }
     
+    public static ObservableList findEmployeeByNumberFuzzy(String number) throws SQLException, ClassNotFoundException {
+        number = "%" + number + "%";
+        String selectStmt = "SELECT employee.number as number, employee.acc_number as accNumber, account.login_name as login, employee.first_name as name, employee.last_name as surname" + 
+" FROM employee " +
+"INNER JOIN account ON employee.number=account.vend_emp_id and employee.number like '" + number + "'";
+        try {
+            ResultSet rs = DBUtil.dbExecuteQuery(selectStmt);
+          
+            ObservableList<EmployeeResult> list = FXCollections.observableArrayList();
+            
+            EmployeeResult empRes;
+            int k = 1;
+            while (rs.next()) {
+                empRes = new EmployeeResult();
+                empRes.setNumber(rs.getString("number"));
+                empRes.setAccNumber(rs.getString("acc_number"));
+                empRes.setLogin(rs.getString("login_name"));
+                empRes.setName(rs.getString("first_name"));
+                empRes.setSurename(rs.getString("last_name"));
+                list.add(empRes);
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println("While searching a order with " + 
+                    number + " number, an error occurred: " + e);
+            throw e;
+        }
+    }
+    
     public static VendorAccount findVendor(String login) throws SQLException, ClassNotFoundException {
         String selectStmt = "SELECT * FROM account WHERE login_name = '"+login + "'";
         try {
