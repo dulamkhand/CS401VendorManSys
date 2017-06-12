@@ -41,6 +41,7 @@ public class RootLayoutController implements Initializable {
     private InvoiceAddController invoiceAddController;
     private VendorPersonController personController;
     private VendorCompanyController companyController;
+    private PaymentController paymentController;
     @FXML
     private Button itemsButton;
     @FXML
@@ -58,6 +59,7 @@ public class RootLayoutController implements Initializable {
         this.invoiceAddController = new InvoiceAddController();
         this.personController = new VendorPersonController();
         this.companyController = new VendorCompanyController();
+        this.paymentController = new PaymentController();
     }
  
     public void go2homepage(ActionEvent event)  {
@@ -104,7 +106,7 @@ public class RootLayoutController implements Initializable {
     
     @FXML
     public void go2payments(ActionEvent event) throws Exception {
-        //this.ordersController.index(event);
+        this.paymentController.index(event);
     }
         
     @FXML
