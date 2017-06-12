@@ -5,17 +5,14 @@
  */
 package controller;
 
-import model.EmployeeDAO;
-import model.Employee;
-import model.Project;
-import model.ProjectDAO;
-import java.sql.Date;
+import model.account.Employee;
+import model.project.Project;
+import model.project.ProjectDAO;
 import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -40,7 +37,7 @@ public class ProjectController {
     private void getList(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
         try {
             //Get all Employees information
-            ObservableList<Project> projects = ProjectDAO.getList();
+            ObservableList<Project> projects = ProjectDAO.list();
             //Populate Employees on TableView
             populate(projects);
         } catch (SQLException e){

@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package util;
+package model.account;
 
 /**
  *
- * @author Rafael
+ * @author bek
  */
-public class CustomUtil {
-   
+public interface VendorAccount {
+
+    public Vendor getVendor();
+
+    public Account getAccount();
 }

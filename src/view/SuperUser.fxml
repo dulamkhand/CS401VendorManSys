@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="519.0" prefWidth="777.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SuperUserController">
+   <children>
+      <TextField fx:id="searchEmpNumberText" layoutX="251.0" layoutY="38.0" prefHeight="25.0" prefWidth="127.0" promptText="number" />
+      <Label layoutX="251.0" layoutY="20.0" prefHeight="17.0" prefWidth="127.0" text="Employee number" />
+      <Button fx:id="addEmployeeButton" layoutX="103.0" layoutY="253.0" mnemonicParsing="false" onAction="#handleAddEmployeeButton" prefHeight="25.0" prefWidth="127.0" text="Add Employee" />
+      <VBox layoutX="103.0" layoutY="24.0" prefHeight="183.0" prefWidth="127.0" spacing="4.0">
+         <children>
+            <TextField fx:id="nameText" prefHeight="25.0" prefWidth="79.0" promptText="Name" />
+            <TextField fx:id="surnameText" prefHeight="25.0" prefWidth="79.0" promptText="Surname" />
+            <TextField fx:id="numberText" prefHeight="25.0" prefWidth="79.0" promptText="number" />
+            <TextField fx:id="accNumberText" layoutX="10.0" layoutY="68.0" prefHeight="25.0" prefWidth="120.0" promptText="5digits" />
+            <TextField fx:id="loginText" layoutX="10.0" layoutY="97.0" prefHeight="25.0" prefWidth="96.0" promptText="only letters &amp; digits" />
+            <PasswordField fx:id="passwordText" promptText="password" />
+         </children>
+      </VBox>
+      <VBox layoutX="14.0" layoutY="24.0" prefHeight="183.0" prefWidth="83.0" spacing="12.0">
+         <children>
+            <Label text="Name" />
+            <Label text="Surname" />
+            <Label prefWidth="42.0" text="number" />
+            <Label text="acc number" />
+            <Label layoutX="10.0" layoutY="97.0" text="login" />
+            <Label layoutX="10.0" layoutY="126.0" text="password" />
+         </children>
+      </VBox>
+      <Separator layoutY="14.0" prefHeight="0.0" prefWidth="765.0" />
+      <Separator layoutX="233.0" layoutY="14.0" orientation="VERTICAL" prefHeight="490.0" prefWidth="11.0" />
+      <TableView fx:id="employeeTable" editable="true" layoutX="252.0" layoutY="102.0" prefHeight="400.0" prefWidth="509.0" tableMenuButtonVisible="true">
+        <columns>
+            <TableColumn fx:id="empNumberColumn" prefWidth="68.0" text="number" />
+          <TableColumn fx:id="empAccNumberColumn" prefWidth="79.0" text="acc_number" />
+          <TableColumn fx:id="loginNameColumn" prefWidth="76.0" text="login" />
+            <TableColumn fx:id="empNameColumn" prefWidth="132.0" text="name" />
+            <TableColumn fx:id="empSurnameColumn" prefWidth="152.0" text="surename" />
+        </columns>
+      </TableView>
+      <Region layoutX="544.0" layoutY="70.0" prefHeight="25.0" prefWidth="217.0" />
+      <Label fx:id="errorMessage" layoutX="14.0" layoutY="199.0" prefHeight="45.0" prefWidth="217.0" />
+      <Button fx:id="searchEmployeeBtn" layoutX="251.0" layoutY="70.0" mnemonicParsing="false" onAction="#handleSearchEmployeeButton" prefHeight="25.0" prefWidth="127.0" text="Search" />
+      <Button fx:id="logoutBtn" layoutX="678.0" layoutY="38.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="83.0" text="Log out" />
+   </children>
+</AnchorPane>

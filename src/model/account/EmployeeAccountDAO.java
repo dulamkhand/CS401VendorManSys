@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package util;
+package model.account;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import util.DBUtil;
 
 /**
  *
- * @author Rafael
+ * @author bek
  */
-public class CustomUtil {
+public class EmployeeAccountDAO {
    
 }
