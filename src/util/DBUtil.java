@@ -13,8 +13,7 @@ public class DBUtil {
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     private static Connection conn = null;
  
-    private static final String connStr = "jdbc:mysql://107.180.56.180:3306/"
-            + "vendormansys?user=vendor_dbuser&password=vendor_dbpa$$";
+    private static final String connStr = "";
  
     public static void dbConnect() throws SQLException, ClassNotFoundException {
         try {
